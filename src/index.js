@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import "./components/AudioPlayer.css";
+import "./components/NavMenu.css";
 import App from './App';
 import "./App.css";
 
