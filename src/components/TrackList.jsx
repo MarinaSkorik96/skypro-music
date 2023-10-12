@@ -1,8 +1,17 @@
 import React from "react";
 import TracksBlock from "./TracksBlock";
-
+import { useEffect, useState } from 'react';
 
 const TrackList = () => {
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
+
   return (
     <div className="main__centerblock centerblock">
       <div className="centerblock__search search">
@@ -27,7 +36,7 @@ const TrackList = () => {
         </div>
         <div className="filter__button button-genre _btn-text">жанру</div>
       </div>
-      <TracksBlock />
+      {loading ? null : <TracksBlock />}
     </div>
   );
 };

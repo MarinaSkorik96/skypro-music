@@ -1,6 +1,6 @@
 import React from "react";
 
-const SideBar = () => {
+const PlayList = () => {
   return (
     <div className="sidebar__item">
       <a className="sidebar__link" href="#">
@@ -14,4 +14,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default PlayList;
