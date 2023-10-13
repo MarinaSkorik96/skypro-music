@@ -1,3 +1,17 @@
+@keyframes pulsate-fwd {
+  0% {
+    background-color: rgba(64, 65, 65, 1);
+
+  }
+  50% {
+    background-color: #a7a7a7;
+  }
+  100% {
+    background-color: rgba(64, 65, 65, 1);
+
+  }
+}
+
 .bar {
   position: absolute;
   bottom: 0;
@@ -261,4 +275,18 @@
   height: 13px;
   fill: transparent;
   stroke: #696969;
+}
+
+.track-play__image-skeleton{
+  width: 51px;
+  height: 51px;
+  border-radius: 2px;
+  animation: pulsate-fwd 3s linear infinite both;
+}
+
+.track-play-skeleton{
+  width: 51px;
+  height: 18px;
+  border-radius: 2px;
+  animation: pulsate-fwd 3s linear infinite both;
 }

@@ -1,16 +1,12 @@
 import React from "react";
 import AudioPlayerLoad from "./AudioPlayerLoad";
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import LoadingContext from './context';
+
 
 const AudioPlayer = () => {
 
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [])
+const {loading, setLoading} = useContext(LoadingContext)
 
   return (
     <div className="bar">
@@ -48,40 +44,57 @@ const AudioPlayer = () => {
 
             <div className="player__track-play track-play">
 
-            {loading ? null :  <AudioPlayerLoad />} 
+              {loading ? <AudioPlayerLoad /> :
+                <div className="track-play__contain">
+                  <div className="track-play__image">
+                    <svg className="track-play__svg" alt="music">
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    </svg>
+                  </div>
+                  <div className="track-play__author">
+                    <a className="track-play__author-link" xlinkHref="http://">
+                      Ты та...
+                    </a>
+                  </div>
+                  <div className="track-play__album">
+                    <a className="track-play__album-link" xlinkHref="http://">
+                      Баста
+                    </a>
+                  </div>
+                </div>}
 
-            <div className="track-play__like-dis">
-              <div className="track-play__like _btn-icon">
-                <svg className="track-play__like-svg" alt="like">
-                  <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                </svg>
-              </div>
-              <div className="track-play__dislike _btn-icon">
-                <svg className="track-play__dislike-svg" alt="dislike">
-                  <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
-                </svg>
+              <div className="track-play__like-dis">
+                <div className="track-play__like _btn-icon">
+                  <svg className="track-play__like-svg" alt="like">
+                    <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                  </svg>
+                </div>
+                <div className="track-play__dislike _btn-icon">
+                  <svg className="track-play__dislike-svg" alt="dislike">
+                    <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="bar__volume-block volume">
-          <div className="volume__content">
-            <div className="volume__image">
-              <svg className="volume__svg" alt="volume">
-                <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-              </svg>
-            </div>
-            <div className="volume__progress _btn">
-              <input
-                className="volume__progress-line _btn"
-                type="range"
-                name="range"
-              />
+          <div className="bar__volume-block volume">
+            <div className="volume__content">
+              <div className="volume__image">
+                <svg className="volume__svg" alt="volume">
+                  <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
+                </svg>
+              </div>
+              <div className="volume__progress _btn">
+                <input
+                  className="volume__progress-line _btn"
+                  type="range"
+                  name="range"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </div >
   );
 };

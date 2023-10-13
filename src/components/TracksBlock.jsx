@@ -1,8 +1,14 @@
 import React from "react";
 import Track from "./Track";
+import TrackSkeleton from "./TrackSkeleton";
+import { useContext } from 'react';
+import LoadingContext from './context';
 
 
 const TracksBlock = () => {
+
+  const {loading, setLoading} = useContext(LoadingContext)
+
   return (
     <div className="centerblock__content">
       <div className="content__title playlist-title">
@@ -16,8 +22,8 @@ const TracksBlock = () => {
         </div>
       </div>
       <div className="content__playlist playlist">
-        <Track />
-        <div className="playlist__item">
+        {loading ? <TrackSkeleton /> : <Track />}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -48,8 +54,8 @@ const TracksBlock = () => {
               <span className="track__time-text">2:22</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -80,8 +86,8 @@ const TracksBlock = () => {
               <span className="track__time-text">2:22</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -113,8 +119,8 @@ const TracksBlock = () => {
               <span className="track__time-text">4:12</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -146,8 +152,8 @@ const TracksBlock = () => {
               <span className="track__time-text">2:54</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -181,8 +187,8 @@ const TracksBlock = () => {
               <span className="track__time-text">5:20</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -216,8 +222,8 @@ const TracksBlock = () => {
               <span className="track__time-text">3:41</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -249,8 +255,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -282,8 +288,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -315,8 +321,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -348,8 +354,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -381,8 +387,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -414,8 +420,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -447,8 +453,8 @@ const TracksBlock = () => {
               <span className="track__time-text">1:48</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -480,8 +486,8 @@ const TracksBlock = () => {
               <span className="track__time-text">3:32</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -512,8 +518,8 @@ const TracksBlock = () => {
               <span className="track__time-text">3:36</span>
             </div>
           </div>
-        </div>
-        <div className="playlist__item">
+        </div>}
+        {loading ? <TrackSkeleton /> :<div className="playlist__item">
           <div className="playlist__track track">
             <div className="track__title">
               <div className="track__title-image">
@@ -540,7 +546,7 @@ const TracksBlock = () => {
               <span className="track__time-text" />
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

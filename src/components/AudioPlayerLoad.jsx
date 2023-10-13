@@ -4,20 +4,11 @@ const AudioPlayerLoad = () => {
   return (
 
     <div className="track-play__contain">
-      <div className="track-play__image">
-        <svg className="track-play__svg" alt="music">
-          <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-        </svg>
+      <div className="track-play__image track-play__image-skeleton">
       </div>
-      <div className="track-play__author">
-        <a className="track-play__author-link" xlinkHref="http://">
-          Ты та...
-        </a>
+      <div className="track-play-skeleton">
       </div>
-      <div className="track-play__album">
-        <a className="track-play__album-link" xlinkHref="http://">
-          Баста
-        </a>
+      <div className="track-play-skeleton">
       </div>
     </div>
 

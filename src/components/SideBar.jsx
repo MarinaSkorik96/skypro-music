@@ -1,16 +1,7 @@
 import React from "react";
 import PlayLists from "./PlayLists";
-import { useEffect, useState } from 'react';
 
 const SideBar = () => {
-  
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [])
 
   return (
     <div className="main__sidebar sidebar">
@@ -23,7 +14,7 @@ const SideBar = () => {
         </div>
       </div>
       <div className="sidebar__block">
-      {loading ? null : <PlayLists />} 
+        <PlayLists />
       </div>
     </div>
   );
