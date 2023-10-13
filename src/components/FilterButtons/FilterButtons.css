@@ -6,15 +6,29 @@
   border: 1px solid #ffffff;
   border-radius: 60px;
   padding: 6px 20px;
-}
-
-.filter__button:hover {
-  border-color: #B672FF;
-  color: #B672FF;
+  color: #ffffff;
   cursor: pointer;
+  background-color: transparent;
 }
 
-.filter__button:not(:last-child) {
+.filter__button-default{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+  color: #ffffff;
+  cursor: pointer;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+
+
+.filter__button:not(:last-child),
+.filter__button-default:not(:last-child) {
   margin-right: 10px;
 }
 
@@ -89,5 +103,11 @@
 .filter__item:hover {
   color: #B672FF;
   text-decoration-line: underline;
+}
+
+._btn-text_active {
+  border-color: #ad61ff;
+  color: #ad61ff;
+  cursor: pointer;
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import PlayLists from "./PlayLists";
+import PlayLists from "../PlayLists/PlayLists";
 
 const SideBar = () => {
 

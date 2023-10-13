@@ -1,6 +1,6 @@
 import React from "react";
-import TracksBlock from "./TracksBlock";
-import FilterButtons from "./FilterButtons";
+import TracksBlock from "../TracksBlock/TracksBlock";
+import FilterButtons from "../FilterButtons/FilterButtons";
 
 
 const TrackList = () => {

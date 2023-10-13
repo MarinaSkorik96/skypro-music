@@ -1,12 +1,12 @@
 import React from "react";
-import AudioPlayerLoad from "./AudioPlayerLoad";
+import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
 import { useContext } from 'react';
-import LoadingContext from './context';
+import LoadingContext from '../context';
 
 
 const AudioPlayer = () => {
 
-const {loading, setLoading} = useContext(LoadingContext)
+  const { loading, setLoading } = useContext(LoadingContext)
 
   return (
     <div className="bar">

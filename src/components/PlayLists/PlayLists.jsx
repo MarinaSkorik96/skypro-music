@@ -1,11 +1,11 @@
 import React from "react";
-import PlayList from "./PlayList";
+import PlayList from "../PlayList/PlayList";
 import { useContext } from 'react';
-import LoadingContext from './context';
+import LoadingContext from '../context';
 
 const PlayLists = () => {
 
-  const {loading, setLoading} = useContext(LoadingContext)
+  const { loading, setLoading } = useContext(LoadingContext)
 
   return (
     <div className="sidebar__list">
