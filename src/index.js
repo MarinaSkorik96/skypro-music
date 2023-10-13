@@ -8,6 +8,7 @@ import "./components/TracksBlock.css";
 import "./components/Track.css";
 import "./components/SideBar.css";
 import "./components/PlayLists.css";
+import "./components/FilterButtons.css";
 import App from './App';
 import "./App.css";
 
