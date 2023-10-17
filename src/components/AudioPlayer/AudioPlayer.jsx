@@ -2,6 +2,7 @@ import React from "react";
 import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
 import { useContext } from 'react';
 import LoadingContext from '../context';
+import * as S from "./AudioPlayerStyles"
 
 
 const AudioPlayer = () => {
@@ -9,75 +10,75 @@ const AudioPlayer = () => {
   const { loading, setLoading } = useContext(LoadingContext)
 
   return (
-    <div className="bar">
-      <div className="bar__content">
-        <div className="bar__player-progress"></div>
-        <div className="bar__player-block">
-          <div className="bar__player player">
-            <div className="player__controls">
-              <div className="player__btn-prev">
-                <svg className="player__btn-prev-svg" alt="prev">
+    <S.Bar>
+      <S.BarContent>
+        <S.BarPlayerProgress></S.BarPlayerProgress>
+        <S.BarPlayerBlock>
+          <S.BarPlayer>
+            <S.PlayerControls>
+              <S.PlayerBtnPrev>
+                <S.PlayerBtnPrevSvg alt="prev">
                   <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
-                </svg>
-              </div>
+                </S.PlayerBtnPrevSvg>
+              </S.PlayerBtnPrev>
               <div className="player__btn-play _btn">
-                <svg className="player__btn-play-svg" alt="play">
+                <S.PlayerBtnPlaySvg alt="play">
                   <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
-                </svg>
+                </S.PlayerBtnPlaySvg>
               </div>
-              <div className="player__btn-next">
-                <svg className="player__btn-next-svg" alt="next">
+              <S.PlayerBtnNext>
+                <S.PlayerBtnNextSvg alt="next">
                   <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
-                </svg>
-              </div>
+                </S.PlayerBtnNextSvg>
+              </S.PlayerBtnNext>
               <div className="player__btn-repeat _btn-icon">
-                <svg className="player__btn-repeat-svg" alt="repeat">
+                <S.PlayerBtnRepeatSvg alt="repeat">
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-                </svg>
+                </S.PlayerBtnRepeatSvg>
               </div>
               <div className="player__btn-shuffle _btn-icon">
-                <svg className="player__btn-shuffle-svg" alt="shuffle">
+                <S.PlayerBtnShuffleSvg  alt="shuffle">
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-                </svg>
+                </S.PlayerBtnShuffleSvg>
               </div>
-            </div>
+            </S.PlayerControls>
 
-            <div className="player__track-play track-play">
+            <S.PlayerTrackPlay>
 
               {loading ? <AudioPlayerLoad /> :
-                <div className="track-play__contain">
-                  <div className="track-play__image">
-                    <svg className="track-play__svg" alt="music">
+                <S.TrackPlayContain>
+                  <S.TrackPlayImage>
+                    <S.TrackPlaySvg alt="music">
                       <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                    </svg>
-                  </div>
-                  <div className="track-play__author">
-                    <a className="track-play__author-link" xlinkHref="http://">
+                    </S.TrackPlaySvg>
+                  </S.TrackPlayImage>
+                  <S.TrackPlayAuthor>
+                    <S.TrackPlayAuthorLink xlinkHref="http://">
                       Ты та...
-                    </a>
-                  </div>
-                  <div className="track-play__album">
-                    <a className="track-play__album-link" xlinkHref="http://">
+                    </S.TrackPlayAuthorLink>
+                  </S.TrackPlayAuthor>
+                  <S.TrackPlayAlbum>
+                    <S.TrackPlayAlbumLink xlinkHref="http://">
                       Баста
-                    </a>
-                  </div>
-                </div>}
+                    </S.TrackPlayAlbumLink>
+                  </S.TrackPlayAlbum>
+                </S.TrackPlayContain>}
 
-              <div className="track-play__like-dis">
+              <S.TrackPlayLikeDis>
                 <div className="track-play__like _btn-icon">
-                  <svg className="track-play__like-svg" alt="like">
+                  <S.TrackPlayLikeSvg alt="like">
                     <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                  </svg>
+                  </S.TrackPlayLikeSvg>
                 </div>
                 <div className="track-play__dislike _btn-icon">
-                  <svg className="track-play__dislike-svg" alt="dislike">
+                  <S.TrackPlayDislikeSvg alt="dislike">
                     <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
-                  </svg>
+                  </S.TrackPlayDislikeSvg>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="bar__volume-block volume">
+              </S.TrackPlayLikeDis>
+            </S.PlayerTrackPlay>
+          </S.BarPlayer>
+          <S.BarVolumeBlock>
             <div className="volume__content">
               <div className="volume__image">
                 <svg className="volume__svg" alt="volume">
@@ -92,10 +93,10 @@ const AudioPlayer = () => {
                 />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div >
+          </S.BarVolumeBlock>
+        </S.BarPlayerBlock>
+      </S.BarContent>
+    </S.Bar >
   );
 };
 

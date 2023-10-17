@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import "./components/AudioPlayer/AudioPlayer.css";
-import "./components/NavMenu/NavMenu.css";
-import "./components/BurgerMenu/BurgerMenu.css";
 import "./components/TrackList/TrackList.css";
 import "./components/TracksBlock/TracksBlock.css";
 import "./components/Track/Track.css";
