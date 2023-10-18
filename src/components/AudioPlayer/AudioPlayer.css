@@ -10,11 +10,29 @@
 
   }
 }
+._btn {
+  cursor: pointer;
+}
 
+._btn-icon:hover svg {
+  fill: transparent;
+  stroke: #acacac;
+  cursor: pointer;
+}
 
+._btn-icon:active svg {
+  fill: transparent;
+  stroke: #ffffff;
+  cursor: pointer;
+}
 
-.player__btn-play,
-.player__btn-next,
+._btn-icon:active .track-play__like-svg,
+._btn-icon:active .track-play__dislike-svg {
+  fill: #696969;
+  stroke: #ffffff;
+  cursor: pointer;
+}
+
 .player__btn-repeat,
 .player__btn-shuffle {
   padding: 5px;
@@ -73,3 +91,11 @@
   margin-left: 28.5px;
 }
 
+
+.volume__progress {
+  width: 109px;
+}
+
+.volume__progress-line {
+  width: 109px;
+}

@@ -18,8 +18,7 @@ a:visited {
   cursor: pointer;
 }
 
-button,
-._btn {
+button {
   cursor: pointer;
 }
 
@@ -59,24 +58,7 @@ body {
   background-color: #181818;
 }
 
-._btn-icon:hover svg {
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
-}
 
-._btn-icon:active svg {
-  fill: transparent;
-  stroke: #ffffff;
-  cursor: pointer;
-}
-
-._btn-icon:active .track-play__like-svg,
-._btn-icon:active .track-play__dislike-svg {
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
-}
 
 .main {
   -webkit-box-flex: 1;
@@ -92,38 +74,5 @@ body {
   justify-content: space-between;
 }
 
-.volume__content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: end;
-}
 
-.volume__image {
-  width: 13px;
-  height: 18px;
-  margin-right: 17px;
-}
 
-.volume__svg {
-  width: 13px;
-  height: 18px;
-  fill: transparent;
-}
-
-.volume__progress {
-  width: 109px;
-}
-
-.volume__progress-line {
-  width: 109px;
-}

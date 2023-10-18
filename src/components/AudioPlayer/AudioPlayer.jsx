@@ -21,21 +21,21 @@ const AudioPlayer = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                 </S.PlayerBtnPrevSvg>
               </S.PlayerBtnPrev>
-              <div className="player__btn-play _btn">
+              <S.PlayerBtnPlay >
                 <S.PlayerBtnPlaySvg alt="play">
                   <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
                 </S.PlayerBtnPlaySvg>
-              </div>
+              </S.PlayerBtnPlay>
               <S.PlayerBtnNext>
                 <S.PlayerBtnNextSvg alt="next">
                   <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
                 </S.PlayerBtnNextSvg>
               </S.PlayerBtnNext>
-              <div className="player__btn-repeat _btn-icon">
+              <S.PlayerBtnRepeat>
                 <S.PlayerBtnRepeatSvg alt="repeat">
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
                 </S.PlayerBtnRepeatSvg>
-              </div>
+              </S.PlayerBtnRepeat>
               <div className="player__btn-shuffle _btn-icon">
                 <S.PlayerBtnShuffleSvg  alt="shuffle">
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
@@ -79,12 +79,12 @@ const AudioPlayer = () => {
             </S.PlayerTrackPlay>
           </S.BarPlayer>
           <S.BarVolumeBlock>
-            <div className="volume__content">
-              <div className="volume__image">
-                <svg className="volume__svg" alt="volume">
+            <S.VolumeContent>
+              <S.VolumeImage>
+                <S.VolumeSvg alt="volume">
                   <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-                </svg>
-              </div>
+                </S.VolumeSvg>
+              </S.VolumeImage>
               <div className="volume__progress _btn">
                 <input
                   className="volume__progress-line _btn"
@@ -92,7 +92,7 @@ const AudioPlayer = () => {
                   name="range"
                 />
               </div>
-            </div>
+            </S.VolumeContent>
           </S.BarVolumeBlock>
         </S.BarPlayerBlock>
       </S.BarContent>

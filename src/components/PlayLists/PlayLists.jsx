@@ -12,11 +12,11 @@ const PlayLists = () => {
   return (
     <S.SidebarList>
       {loading ?
-        <div className="sidebar__item-skeleton"></div>
+        <S.SidebarItemSkeleton></S.SidebarItemSkeleton>
         :
         <PlayList />}
       {loading ?
-        <div className="sidebar__item-skeleton"></div>
+        <S.SidebarItemSkeleton></S.SidebarItemSkeleton>
         :
         <S.SidebarItem>
           <S.SidebarLink href="#">
@@ -28,7 +28,7 @@ const PlayLists = () => {
         </S.SidebarItem>
       }
       {loading ?
-        <div className="sidebar__item-skeleton"></div>
+        <S.SidebarItemSkeleton></S.SidebarItemSkeleton>
         :
         <S.SidebarItem>
           <S.SidebarLink href="#">

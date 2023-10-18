@@ -225,16 +225,75 @@ export const TrackPlayDislikeSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
+export const VolumeContent = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: end;
+`
 
+export const VolumeImage  = styled.div`
+  width: 13px;
+  height: 18px;
+  margin-right: 17px;
+`
+export const VolumeSvg = styled.svg`
+  width: 13px;
+  height: 18px;
+  fill: transparent;
+`
 
+export const Btn  = styled.div`
+  cursor: pointer;
+`
+export const BtnIcon  = styled.div`
+  &:hover svg {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
+  &:active svg {
+    fill: transparent;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+  &:active .track-play__dislike-svg {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+  &:active .track-play__like-svg {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
+`
 
+export const PlayerBtn  = styled.div`
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+`
+export const PlayerBtnPlay = styled(PlayerBtn, Btn)`
+  margin-right: 23px;
+`
 
-
-
-
-
-
-
+export const PlayerBtnRepeat = styled(PlayerBtn, BtnIcon)`
+  margin-right: 24px;
+`
 
 
 
