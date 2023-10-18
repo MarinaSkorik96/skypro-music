@@ -1,4 +1,7 @@
 import React from "react";
+import * as S from "./FilterButtonsStyles"
+
+
 const { useState } = React;
 
 
@@ -28,71 +31,62 @@ const FilterButtons = () => {
 
   return (
     <>
-      {visibleAuthor ?
-        <div onClick={toggleVisibilityAuthor} className="filter__button button-author _btn-text_active">
+      <S.FilterButtonBox onClick={toggleVisibilityAuthor} >
+        <S.FilterButton $props={visibleAuthor}>
           исполнителю
-          <div className="filter__box filter__box-author ">
-            <ul className="filter__list">
-              <li className="filter__item">Исполнитель 1</li>
-              <li className="filter__item">Исполнитель 2</li>
-              <li className="filter__item">Исполнитель 3</li>
-              <li className="filter__item">Исполнитель 4</li>
-              <li className="filter__item">Исполнитель 5</li>
-              <li className="filter__item">Исполнитель 6</li>
-              <li className="filter__item">Исполнитель 7</li>
-              <li className="filter__item">Исполнитель 8</li>
-            </ul>
-          </div>
-        </div>
-        :
-        <button onClick={toggleVisibilityAuthor} className="filter__button button-author _btn-text">
-          исполнителю
-        </button>
-      }
+        </S.FilterButton>
+        {visibleAuthor &&
+          (<S.FilterBox>
+            <S.FilterList>
+              <S.FilterItem>Исполнитель 1</S.FilterItem>
+              <S.FilterItem>Исполнитель 2</S.FilterItem>
+              <S.FilterItem>Исполнитель 3</S.FilterItem>
+              <S.FilterItem>Исполнитель 4</S.FilterItem>
+              <S.FilterItem>Исполнитель 5</S.FilterItem>
+              <S.FilterItem>Исполнитель 6</S.FilterItem>
+              <S.FilterItem>Исполнитель 7</S.FilterItem>
+              <S.FilterItem>Исполнитель 8</S.FilterItem>
+            </S.FilterList>
+          </S.FilterBox>)}
+      </S.FilterButtonBox>
 
-      {visibleYear ?
-        <div onClick={toggleVisibilityYear} className="filter__button button-year _btn-text_active">
+      <S.FilterButtonBox onClick={toggleVisibilityYear}>
+        <S.FilterButton $props={visibleYear}>
           году выпуска
-          <div className="filter__box filter__box-year">
-            <ul className="filter__list">
-              <li className="filter__item">2016</li>
-              <li className="filter__item">2017</li>
-              <li className="filter__item">2018</li>
-              <li className="filter__item">2019</li>
-              <li className="filter__item">2020</li>
-              <li className="filter__item">2021</li>
-              <li className="filter__item">2022</li>
-              <li className="filter__item">2023</li>
-            </ul>
-          </div>
-        </div>
-        :
-        <button onClick={toggleVisibilityYear} className="filter__button button-year  _btn-text">
-          году выпуска
-        </button>
-      }
+        </S.FilterButton>
+        {visibleYear &&
+          (<S.FilterBox>
+            <S.FilterList>
+              <S.FilterItem>2016</S.FilterItem>
+              <S.FilterItem>2017</S.FilterItem>
+              <S.FilterItem>2018</S.FilterItem>
+              <S.FilterItem>2019</S.FilterItem>
+              <S.FilterItem>2020</S.FilterItem>
+              <S.FilterItem>2021</S.FilterItem>
+              <S.FilterItem>2022</S.FilterItem>
+              <S.FilterItem>2023</S.FilterItem>
+            </S.FilterList>
+          </S.FilterBox>)}
+      </S.FilterButtonBox>
 
-      {visibleGenre ?
-        <div onClick={toggleVisibilityGenre} className="filter__button button-genre _btn-text_active">
+      <S.FilterButtonBox onClick={toggleVisibilityGenre}>
+        <S.FilterButton $props={visibleGenre}>
           жанру
-          <div className="filter__box filter__box-genre">
-            <ul className="filter__list">
-              <li className="filter__item">Жанр 1</li>
-              <li className="filter__item">Жанр 2</li>
-              <li className="filter__item">Жанр 3</li>
-              <li className="filter__item">Жанр 4</li>
-              <li className="filter__item">Жанр 5</li>
-              <li className="filter__item">Жанр 6</li>
-              <li className="filter__item">Жанр 7</li>
-              <li className="filter__item">Жанр 8</li>
-            </ul>
-          </div>
-        </div>
-        :
-        <button onClick={toggleVisibilityGenre} className="filter__button button-genre _btn-text">
-          жанру
-        </button>
-      }
+        </S.FilterButton>
+        {visibleGenre && (
+          <S.FilterBox>
+            <S.FilterList>
+              <S.FilterItem>Жанр 1</S.FilterItem>
+              <S.FilterItem>Жанр 2</S.FilterItem>
+              <S.FilterItem>Жанр 3</S.FilterItem>
+              <S.FilterItem>Жанр 4</S.FilterItem>
+              <S.FilterItem>Жанр 5</S.FilterItem>
+              <S.FilterItem>Жанр 6</S.FilterItem>
+              <S.FilterItem>Жанр 7</S.FilterItem>
+              <S.FilterItem>Жанр 8</S.FilterItem>
+            </S.FilterList>
+          </S.FilterBox>)}
+      </S.FilterButtonBox>
     </>
   );
 };

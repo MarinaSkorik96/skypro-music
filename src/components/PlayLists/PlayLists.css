@@ -20,5 +20,10 @@
   animation: pulsate-fwd 3s linear infinite both;
 }
 
+.sidebar__item-skeleton:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+
 
 

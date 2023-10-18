@@ -1,16 +1,17 @@
 import React from "react";
+import * as S from "./PlayListStyles"
+
 
 const PlayList = () => {
   return (
-    <div className="sidebar__item">
-      <a className="sidebar__link" href="#">
-        <img
-          className="sidebar__img"
+    <S.SidebarItem>
+      <S.SidebarLink href="#">
+        <S.SidebarImg
           src="img/playlist01.png"
           alt="day's playlist"
         />
-      </a>
-    </div>
+      </S.SidebarLink>
+    </S.SidebarItem>
   );
 };
 
