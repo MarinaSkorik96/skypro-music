@@ -21,8 +21,8 @@ const AudioPlayer = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                 </S.PlayerBtnPrevSvg>
               </S.PlayerBtnPrev>
-              <S.PlayerBtnPlay >
-                <S.PlayerBtnPlaySvg alt="play">
+              <S.PlayerBtnPlay>
+                <S.PlayerBtnPlaySvg as="svg" alt="play">
                   <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
                 </S.PlayerBtnPlaySvg>
               </S.PlayerBtnPlay>
@@ -36,11 +36,11 @@ const AudioPlayer = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
                 </S.PlayerBtnRepeatSvg>
               </S.PlayerBtnRepeat>
-              <div className="player__btn-shuffle _btn-icon">
-                <S.PlayerBtnShuffleSvg  alt="shuffle">
+              <S.PlayerBtnShuffle>
+                <S.PlayerBtnShuffleSvg alt="shuffle">
                   <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
                 </S.PlayerBtnShuffleSvg>
-              </div>
+              </S.PlayerBtnShuffle>
             </S.PlayerControls>
 
             <S.PlayerTrackPlay>
@@ -65,16 +65,16 @@ const AudioPlayer = () => {
                 </S.TrackPlayContain>}
 
               <S.TrackPlayLikeDis>
-                <div className="track-play__like _btn-icon">
+                <S.TrackPlayLike>
                   <S.TrackPlayLikeSvg alt="like">
                     <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                   </S.TrackPlayLikeSvg>
-                </div>
-                <div className="track-play__dislike _btn-icon">
+                </S.TrackPlayLike>
+                <S.TrackPlayDislike>
                   <S.TrackPlayDislikeSvg alt="dislike">
                     <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
                   </S.TrackPlayDislikeSvg>
-                </div>
+                </S.TrackPlayDislike>
               </S.TrackPlayLikeDis>
             </S.PlayerTrackPlay>
           </S.BarPlayer>
@@ -85,13 +85,12 @@ const AudioPlayer = () => {
                   <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
                 </S.VolumeSvg>
               </S.VolumeImage>
-              <div className="volume__progress _btn">
-                <input
-                  className="volume__progress-line _btn"
+              <S.VolumeProgress>
+                <S.VolumeProgressLine as="input"
                   type="range"
                   name="range"
                 />
-              </div>
+              </S.VolumeProgress>
             </S.VolumeContent>
           </S.BarVolumeBlock>
         </S.BarPlayerBlock>

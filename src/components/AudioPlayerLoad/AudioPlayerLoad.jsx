@@ -4,16 +4,14 @@ import * as S from "../AudioPlayer/AudioPlayerStyles.jsx"
 
 const AudioPlayerLoad = () => {
   return (
-
     <S.TrackPlayContain>
-      <div className="track-play__image track-play__image-skeleton">
-      </div>
-      <div className="track-play-skeleton">
-      </div>
-      <div className="track-play-skeleton">
-      </div>
+      <S.TrackPlayImageSkeleton>
+      </S.TrackPlayImageSkeleton>
+      <S.TrackPlaySkeleton>
+      </S.TrackPlaySkeleton>
+      <S.TrackPlaySkeleton>
+      </S.TrackPlaySkeleton>
     </S.TrackPlayContain>
-
   );
 };
 

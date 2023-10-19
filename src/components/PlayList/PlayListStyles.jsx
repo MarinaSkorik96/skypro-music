@@ -1,15 +1,14 @@
-import styled from 'styled-components'
-import { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components'
 
 const SkeletonAnim = keyframes`
     0%   {
-        background-color: transparent;
+        background-color: #313131;
     }
     50%  {
-        background-color: #fff;
+        background-color: rgb(167, 167, 167);
     }
     100%  {
-        background-color: transparent;
+        background-color: #313131;
     }
 `;
 
@@ -47,7 +46,7 @@ export const SidebarItemSkeleton = styled.div`
   height: 150px;
   border-radius: 2px;
   background-color: aquamarine;
-  animation: ${SkeletonAnim} pulsate-fwd 3s linear infinite both;
+  animation: ${SkeletonAnim} 3s linear infinite both;
   &:not(:last-child) {
     margin-bottom: 30px;
   } 

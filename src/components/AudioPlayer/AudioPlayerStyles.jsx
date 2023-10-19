@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const Bar = styled.div`
   position: absolute;
@@ -212,14 +212,23 @@ export const TrackPlayLikeDis = styled.div`
   margin-left: 26%;
 `
 
-export const TrackPlayLikeSvg = styled.svg`
+
+
+export const LikeDislikeSvg  = styled.svg`
+  &&:active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+}
+`
+export const TrackPlayLikeSvg = styled(LikeDislikeSvg)`
   width: 14px;
   height: 12px;
   fill: transparent;
   stroke: #696969;
 `
 
-export const TrackPlayDislikeSvg = styled.svg`
+export const TrackPlayDislikeSvg = styled(LikeDislikeSvg)`
   width: 14.34px;
   height: 13px;
   fill: transparent;
@@ -251,49 +260,73 @@ export const VolumeSvg = styled.svg`
   height: 18px;
   fill: transparent;
 `
-
 export const Btn  = styled.div`
   cursor: pointer;
 `
-export const BtnIcon  = styled.div`
+
+export const BtnIcon  = styled(Btn)`
   &:hover svg {
     fill: transparent;
     stroke: #acacac;
-    cursor: pointer;
   }
   &:active svg {
     fill: transparent;
     stroke: #ffffff;
-    cursor: pointer;
   }
-  &:active .track-play__dislike-svg {
-    fill: #696969;
-    stroke: #ffffff;
-    cursor: pointer;
-  }
-  &:active .track-play__like-svg {
-    fill: #696969;
-    stroke: #ffffff;
-    cursor: pointer;
-  }
+`
+export const TrackPlayLike  = styled(BtnIcon)`
+  padding: 5px;
+`
+export const TrackPlayDislike  = styled(TrackPlayLike)`
+  margin-left: 28.5px;
 `
 
-export const PlayerBtn  = styled.div`
+export const PlayerBtnsSvg  = styled(BtnIcon)`
   padding: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 `
-export const PlayerBtnPlay = styled(PlayerBtn, Btn)`
+
+export const PlayerBtnPlay = styled(PlayerBtnsSvg)`
   margin-right: 23px;
 `
 
-export const PlayerBtnRepeat = styled(PlayerBtn, BtnIcon)`
+export const PlayerBtnRepeat = styled(PlayerBtnsSvg)`
   margin-right: 24px;
 `
+
+export const PlayerBtnShuffle  = styled(PlayerBtnsSvg)`
+`
+
+export const VolumeProgress  = styled(Btn) `
+  width: 109px;
+`
+export const VolumeProgressLine  = styled(Btn) `
+  width: 109px;
+`
+
+//Часть для скелетонов
+
+const SkeletonAnim = keyframes`
+    0%   {
+        background-color: #313131;
+    }
+    50%  {
+        background-color: rgb(167, 167, 167);
+    }
+    100%  {
+        background-color: #313131;
+    }
+`
+export const TrackPlayImageSkeleton = styled(TrackPlayImage)`
+  animation: ${SkeletonAnim} 3s linear infinite both;
+`
+export const TrackPlaySkeleton  = styled.div`
+  width: 59px;
+  height: 15px;
+  animation: ${SkeletonAnim} 3s linear infinite both;
+`
+
 
 
 
