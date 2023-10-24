@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import * as S from "./pages/main/components/mainStyles"
-import AudioPlayer from "./pages/main/components/AudioPlayer/AudioPlayer";
-import NavMenu from "./pages/main/components/NavMenu/NavMenu";
-import TrackList from "./pages/main/components/TrackList/TrackList";
-import SideBar from "./pages/main/components/SideBar/SideBar";
 import LoadingContext from './pages/main/components/context';
 import { AppRoutes } from "./routes";
 
@@ -58,21 +54,15 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false)
-    }, 5000);
-    return () => clearTimeout(timeout);
-  }, [])
-
   return (
-
-    <LoadingContext.Provider value={{ loading, setLoading }}>
+    <>
       <GlobalStyle />
-      <AppRoutes />
-    </LoadingContext.Provider>
+      <S.Wrapper>
+        <S.Container>
+          <AppRoutes />
+        </S.Container>
+      </S.Wrapper>
+    </>
   );
 }
 
