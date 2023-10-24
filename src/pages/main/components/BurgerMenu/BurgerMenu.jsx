@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as S from "./BurgerMenuStyles"
 
 const { useState } = React;
@@ -26,7 +27,7 @@ const BurgerMenu = () => {
               </S.MenuLink>
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink href="#">
+              <S.MenuLink to="/MyPlaylist">
                 Мой плейлист
               </S.MenuLink>
             </S.MenuItem>

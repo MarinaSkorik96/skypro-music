@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import * as S from "./pages/main/components/mainStyles"
-import AudioPlayer from "./pages/main/components/AudioPlayer/AudioPlayer";
-import NavMenu from "./pages/main/components/NavMenu/NavMenu";
-import TrackList from "./pages/main/components/TrackList/TrackList";
-import SideBar from "./pages/main/components/SideBar/SideBar";
-import LoadingContext from './pages/main/components/context';
-import { AppRoutes } from "./routes";
+import * as S from "./mainStyles"
+import AudioPlayer from "../components/AudioPlayer/AudioPlayer";
+import NavMenu from "../components/NavMenu/NavMenu";
+import TrackList from "../components/TrackList/TrackList";
+import SideBar from "../components/SideBar/SideBar";
+import LoadingContext from '../components/context';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -56,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 
-function App() {
+export function Main() {
 
   const [loading, setLoading] = useState(true)
 
@@ -71,9 +70,21 @@ function App() {
 
     <LoadingContext.Provider value={{ loading, setLoading }}>
       <GlobalStyle />
-      <AppRoutes />
+      <div>
+        <S.Wrapper>
+          <S.Container>
+            <S.Main className="main">
+              <NavMenu />
+              <TrackList />
+              <SideBar />
+            </S.Main>
+            <AudioPlayer />
+            <footer className="footer" />
+          </S.Container>
+        </S.Wrapper>
+
+      </div>
     </LoadingContext.Provider>
   );
 }
 
-export default App;
