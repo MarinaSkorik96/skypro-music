@@ -35,7 +35,6 @@ export function Main() {
             <footer className="footer" />
           </S.Container>
         </S.Wrapper>
-
       </div>
     </LoadingContext.Provider>
   );

@@ -1,10 +1,19 @@
 import React from "react";
+import * as S from "../login/LoginStyles"
+import { Link } from "react-router-dom";
 
 
 export const Registration = () => {
   return (
-    <div>
-      <h1>Регистрация</h1>
-    </div>
+    <S.LoginBox>
+      <S.LoginImg src="img/logo_modal.png" alt="" />
+      <S.LoginInputEmail placeholder="Почта" type="text" />
+      <S.LoginInputPassword placeholder="Пароль" type="text" />
+      <S.LoginInputPasswordRepeat placeholder="Повторите пароль" type="text" />
+      <Link>
+        <S.LoginButtonIn>Зарегестрироваться</S.LoginButtonIn>
+      </Link>
+    </S.LoginBox>
+
   );
 };

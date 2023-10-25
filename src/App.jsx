@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import * as S from "./pages/main/components/mainStyles"
-import LoadingContext from './pages/main/components/context';
 import { AppRoutes } from "./routes";
+
+let user = localStorage.getItem('login');
+
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -59,7 +60,7 @@ function App() {
       <GlobalStyle />
       <S.Wrapper>
         <S.Container>
-          <AppRoutes />
+          <AppRoutes user={user} />
         </S.Container>
       </S.Wrapper>
     </>

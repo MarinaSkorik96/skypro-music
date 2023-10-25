@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
+
 
 export const MainSidebar = styled.div`
   max-width: 418px;
@@ -20,7 +22,7 @@ export const SidebarPersonalName = styled.p`
   color: #ffffff;
   margin-right: 16px;
 `
-export const SidebarIcon = styled.div`
+export const SidebarIcon = styled(Link)`
   width: 43px;
   height: 43px;
   background-color: #313131;

@@ -5,11 +5,12 @@ import * as S from "./SideBarStyles"
 
 const SideBar = () => {
 
+
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>Marina.Skorik</S.SidebarPersonalName>
-        <S.SidebarIcon>
+        <S.SidebarIcon to="/login">
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>
