@@ -10,10 +10,9 @@ export const Registration = () => {
       <S.LoginInputEmail placeholder="Почта" type="text" />
       <S.LoginInputPassword placeholder="Пароль" type="text" />
       <S.LoginInputPasswordRepeat placeholder="Повторите пароль" type="text" />
-      <Link>
+      <Link to="/login">
         <S.LoginButtonIn>Зарегестрироваться</S.LoginButtonIn>
       </Link>
     </S.LoginBox>
-
   );
 };

@@ -7,11 +7,11 @@ import { Main } from "./pages/main/components/main.jsx";
 import { Error } from "./pages/error/Error.jsx";
 import { ProtectedRoute } from "./pages/ProtectedRoute.jsx";
 
+export const AppRoutes = ({ user, onClick }) => {
 
-export const AppRoutes = ({ user }) => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login onClick={onClick} />} />
       <Route path="/registration" element={<Registration />} />
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>

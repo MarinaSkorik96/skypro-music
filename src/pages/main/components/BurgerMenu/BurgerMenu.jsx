@@ -7,9 +7,14 @@ const { useState } = React;
 
 
 const BurgerMenu = () => {
+
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => setVisible(!visible);
+
+  const handleLogOut = () => {
+    localStorage.removeItem('login')
+  }
 
   return (
     <>
@@ -32,8 +37,8 @@ const BurgerMenu = () => {
               </S.MenuLink>
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink to="/registration">
-                Войти
+              <S.MenuLink onClick={handleLogOut} to="/login">
+                Выйти
               </S.MenuLink>
             </S.MenuItem>
           </S.MenuList>

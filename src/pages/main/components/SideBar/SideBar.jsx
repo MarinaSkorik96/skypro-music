@@ -1,16 +1,21 @@
 import React from "react";
 import PlayLists from "../PlayLists/PlayLists";
 import * as S from "./SideBarStyles"
-
+import { useState } from "react";
 
 const SideBar = () => {
 
+
+
+  const handleLogOut = () =>  {
+    localStorage.removeItem('login')
+  }
 
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>Marina.Skorik</S.SidebarPersonalName>
-        <S.SidebarIcon to="/login">
+        <S.SidebarIcon onClick={handleLogOut} to="/login">
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
           </svg>

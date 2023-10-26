@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 
-export const Login = () => {
+export const Login = ({onClick}) => {
 
   const [user, setUser] = useState(null);
 
@@ -18,11 +18,11 @@ export const Login = () => {
       <S.LoginImg src="img/logo_modal.png" alt="" />
       <S.LoginInputEmail placeholder="Почта" type="text" />
       <S.LoginInputPassword placeholder="Пароль" type="text" />
-      <S.LinkS to="/">
-        <S.LoginButtonIn onClick={handleLogin}>Войти</S.LoginButtonIn>
+      <S.LinkS onClick={onClick} to="/">
+        <S.LoginButtonIn >Войти</S.LoginButtonIn>
         {console.log(user)}
       </S.LinkS>
-      <Link>
+      <Link to="/registration">
         <S.LoginButtonReg>Зарегестрироваться</S.LoginButtonReg>
       </Link>
     </S.LoginBox>

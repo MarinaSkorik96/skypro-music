@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import * as S from "./pages/main/components/mainStyles"
 import { AppRoutes } from "./routes";
+import { useState } from "react";
 
-let user = localStorage.getItem('login');
 
 
 const GlobalStyle = createGlobalStyle`
@@ -51,16 +51,23 @@ const GlobalStyle = createGlobalStyle`
     color: #ffffff;
   }
 `
-
-
 function App() {
 
+
+  const [user, setUser] = useState(null);
+
+  const handleLogin = () =>  {
+    localStorage.setItem('login', 'SetLogin');
+    const getuser = localStorage.getItem('login');
+    setUser(getuser);
+  }
+  
   return (
     <>
       <GlobalStyle />
       <S.Wrapper>
         <S.Container>
-          <AppRoutes user={user} />
+          <AppRoutes user={user} onClick={handleLogin} />
         </S.Container>
       </S.Wrapper>
     </>
