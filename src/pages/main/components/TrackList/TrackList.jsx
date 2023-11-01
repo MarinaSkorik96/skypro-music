@@ -22,7 +22,7 @@ const TrackList = () => {
         <S.FilterTitle>Искать по:</S.FilterTitle>
         <FilterButtons />
       </S.CenterblockFilter>
-      <TracksBlock />
+      <TracksBlock/>
     </S.MainCenterblock>
   );
 };

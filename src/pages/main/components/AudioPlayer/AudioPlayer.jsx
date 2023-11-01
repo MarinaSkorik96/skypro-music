@@ -7,7 +7,7 @@ import * as S from "./AudioPlayerStyles"
 
 const AudioPlayer = () => {
 
-  const { loading, setLoading } = useContext(LoadingContext)
+  const { loading, currentTrack } = useContext(LoadingContext)
 
   return (
     <S.Bar>
@@ -54,12 +54,12 @@ const AudioPlayer = () => {
                   </S.TrackPlayImage>
                   <S.TrackPlayAuthor>
                     <S.TrackPlayAuthorLink xlinkHref="http://">
-                      Ты та...
+                      {currentTrack.name}
                     </S.TrackPlayAuthorLink>
                   </S.TrackPlayAuthor>
                   <S.TrackPlayAlbum>
                     <S.TrackPlayAlbumLink xlinkHref="http://">
-                      Баста
+                    {currentTrack.author}
                     </S.TrackPlayAlbumLink>
                   </S.TrackPlayAlbum>
                 </S.TrackPlayContain>}

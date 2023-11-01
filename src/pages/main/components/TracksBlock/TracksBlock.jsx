@@ -19,7 +19,7 @@ const TracksBlock = () => {
         </S.Col04>
       </S.ContentTitle>
       <S.ContentPlaylist>
-         <Track />
+        <Track/>
       </S.ContentPlaylist>
     </S.CenterblockContent>
   );

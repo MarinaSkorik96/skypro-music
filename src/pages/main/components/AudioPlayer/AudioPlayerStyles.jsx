@@ -127,6 +127,8 @@ export const TrackPlaySvg = styled.svg`
 export const TrackPlayAuthor = styled.div`
   grid-area: author;
   min-width: 49px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 export const TrackPlayAuthorLink = styled.a`
   font-style: normal;
@@ -140,6 +142,8 @@ export const TrackPlayAuthorLink = styled.a`
 export const TrackPlayAlbum = styled.div`
   grid-area: album;
   min-width: 49px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 
 export const TrackPlayAlbumLink = styled.a`
@@ -148,6 +152,7 @@ export const TrackPlayAlbumLink = styled.a`
   font-size: 13px;
   line-height: 24px;
   color: #ffffff;
+  white-space: nowrap;
 `
 
 export const TrackPlayLikeDis = styled.div`
