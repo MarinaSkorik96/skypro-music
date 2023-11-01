@@ -9,9 +9,6 @@ export const Login = ({onClick}) => {
 
   const [user, setUser] = useState(null);
 
-  const handleLogin = () => setUser({ login: "SetLogin" },
-  localStorage.setItem('login', 'SetLogin')
-  );
 
   return (
     <S.LoginBox>
