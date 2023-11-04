@@ -18,7 +18,8 @@ const AudioPlayer = () => {
     ref.current.play();
   };
 
-  useEffect(handleStart, ref)
+  useEffect(handleStart, [currentTrack])
+
 
   const handleStop = () => {
     ref.current.pause();
@@ -29,6 +30,8 @@ const AudioPlayer = () => {
     s = (s % 60) + ''
     return m.padStart(2, 0) + ':' + Math.floor(s.padStart(2, 0))
   }
+
+
 
   const handleRepeat = () => {
     ref.current.loop = !isRepeat;
@@ -51,7 +54,7 @@ const AudioPlayer = () => {
   //   duration = ref.current.duration;
   // }
   // if (ref != null) {
-    console.log(ref.current.duration)
+  console.log(ref.current.duration)
   // }
 
   return (
@@ -66,7 +69,7 @@ const AudioPlayer = () => {
       ></audio>
       <S.Bar>
         <S.BarContent>
-          <S.TimeCode>2:25 / {sToStr(ref.current.duration)}</S.TimeCode>
+          <S.TimeCode>{sToStr(ref.current.currentTime)} / {sToStr(ref.current.duration)}</S.TimeCode>
           <S.BarPlayerProgress></S.BarPlayerProgress>
           <S.BarPlayerBlock>
             <S.BarPlayer>
