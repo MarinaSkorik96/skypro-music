@@ -26,7 +26,7 @@ const Track = () => {
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
-              <S.TrackTitle  onClick={() =>setCurrentTrack(track)}>
+              <S.TrackTitle onClick={() => setCurrentTrack(track)}>
                 <S.TrackTitleImage>
                   <S.TrackTitleSvg alt="music">
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />

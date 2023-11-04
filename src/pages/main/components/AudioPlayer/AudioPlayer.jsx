@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
-import { useContext } from 'react';
+import { useContext, useState, useRef } from 'react';
 import LoadingContext from '../context';
 import * as S from "./AudioPlayerStyles"
 
@@ -8,38 +8,112 @@ import * as S from "./AudioPlayerStyles"
 const AudioPlayer = () => {
 
   const { loading, currentTrack } = useContext(LoadingContext)
+  const [isPlaying, setPlaying] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
+
+
+  const ref = useRef(0);
+
+  const handleStart = () => {
+    ref.current.play();
+  };
+
+  useEffect(handleStart, ref)
+
+  const handleStop = () => {
+    ref.current.pause();
+  };
+
+  function sToStr(s) {
+    let m = Math.trunc(s / 60) + ''
+    s = (s % 60) + ''
+    return m.padStart(2, 0) + ':' + Math.floor(s.padStart(2, 0))
+  }
+
+  const handleRepeat = () => {
+    ref.current.loop = !isRepeat;
+    setIsRepeat(!isRepeat)
+  };
+
+  const awaitImplementation = () => {
+    alert('Функционал еще не реализован');
+  };
+
+  // const detTrackLenght = () => {
+  //   setTrackLenght(ref.current.duration)
+  //   return trackLenght
+  // }
+
+  const [trackLenght, setTrackLenght] = useState(0);
+
+  // let duration = 0;
+  // if (ref?.current.duration) {
+  //   duration = ref.current.duration;
+  // }
+  // if (ref != null) {
+    console.log(ref.current.duration)
+  // }
 
   return (
     <>
-    <audio controls="controls" src={currentTrack.track_file}></audio>
+      <audio
+        ref={ref}
+        controls="controls"
+        // {isRepeat ? loop = "loop" : null}
+        src={currentTrack.track_file}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      ></audio>
       <S.Bar>
         <S.BarContent>
+          <S.TimeCode>2:25 / {sToStr(ref.current.duration)}</S.TimeCode>
           <S.BarPlayerProgress></S.BarPlayerProgress>
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.PlayerControls>
                 <S.PlayerBtnPrev>
-                  <S.PlayerBtnPrevSvg alt="prev">
+                  <S.PlayerBtnPrevSvg onClick={awaitImplementation} alt="prev">
                     <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
-                <S.PlayerBtnPlay>
-                  <S.PlayerBtnPlaySvg as="svg" alt="play">
-                    <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
-                  </S.PlayerBtnPlaySvg>
-                </S.PlayerBtnPlay>
+                {isPlaying ?
+                  <S.PlayerBtnPlay onClick={handleStop}>
+                    <S.PlayerBtnPlaySvg as="svg" alt="play">
+                      <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="5" height="19" fill="#D9D9D9" />
+                        <rect x="10" width="5" height="19" fill="#D9D9D9" />
+                      </svg>
+                    </S.PlayerBtnPlaySvg>
+                  </S.PlayerBtnPlay>
+                  :
+                  <S.PlayerBtnPlay onClick={handleStart}>
+                    <S.PlayerBtnPlaySvg as="svg" alt="play">
+                      <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+                    </S.PlayerBtnPlaySvg>
+                  </S.PlayerBtnPlay>
+
+                }
                 <S.PlayerBtnNext>
-                  <S.PlayerBtnNextSvg alt="next">
+                  <S.PlayerBtnNextSvg onClick={awaitImplementation} alt="next">
                     <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
                   </S.PlayerBtnNextSvg>
                 </S.PlayerBtnNext>
-                <S.PlayerBtnRepeat>
-                  <S.PlayerBtnRepeatSvg alt="repeat">
-                    <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
-                  </S.PlayerBtnRepeatSvg>
-                </S.PlayerBtnRepeat>
+                {isRepeat ?
+                  <S.PlayerBtnRepeat onClick={handleRepeat}>
+                    <S.PlayerBtnRepeatActiveSvg alt="repeat">
+                      <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                    </S.PlayerBtnRepeatActiveSvg>
+                  </S.PlayerBtnRepeat>
+
+                  :
+                  <S.PlayerBtnRepeat onClick={handleRepeat}>
+                    <S.PlayerBtnRepeatSvg alt="repeat">
+                      <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                    </S.PlayerBtnRepeatSvg>
+                  </S.PlayerBtnRepeat>
+                }
                 <S.PlayerBtnShuffle>
-                  <S.PlayerBtnShuffleSvg alt="shuffle">
+                  <S.PlayerBtnShuffleSvg onClick={awaitImplementation} alt="shuffle">
                     <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
                   </S.PlayerBtnShuffleSvg>
                 </S.PlayerBtnShuffle>
@@ -67,12 +141,12 @@ const AudioPlayer = () => {
                   </S.TrackPlayContain>}
 
                 <S.TrackPlayLikeDis>
-                  <S.TrackPlayLike>
+                  <S.TrackPlayLike onClick={awaitImplementation}>
                     <S.TrackPlayLikeSvg alt="like">
                       <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                     </S.TrackPlayLikeSvg>
                   </S.TrackPlayLike>
-                  <S.TrackPlayDislike>
+                  <S.TrackPlayDislike onClick={awaitImplementation}>
                     <S.TrackPlayDislikeSvg alt="dislike">
                       <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
                     </S.TrackPlayDislikeSvg>

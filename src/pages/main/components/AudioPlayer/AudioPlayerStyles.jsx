@@ -1,15 +1,13 @@
 import styled, { keyframes } from 'styled-components'
 
 export const Bar = styled.div`
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   left: 0;
   width: 100%;
   background: rgba(28, 28, 28, 0.5);
 `
 export const BarContent = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   flex-direction: column;
 `
@@ -33,15 +31,11 @@ export const BarPlayer = styled.div`
 `
 export const BarVolumeBlock = styled.div`
   width: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   align-items: center;
   padding: 0 92px 0 0;
 `
 export const PlayerControls = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   flex-direction: row;
   padding: 0 27px 0 31px;
@@ -49,8 +43,6 @@ export const PlayerControls = styled.div`
 
 export const StylesPrevPlayNextRepeatShuffle = styled.div`
   padding: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   align-items: center;
 `
@@ -86,6 +78,8 @@ export const PlayerBtnRepeatSvg = styled.svg`
   fill: transparent;
   stroke: #696969;
 `
+
+
 
 export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
@@ -164,7 +158,7 @@ export const TrackPlayLikeDis = styled.div`
 
 
 
-export const LikeDislikeSvg  = styled.svg`
+export const LikeDislikeSvg = styled.svg`
   &&:active {
     fill: #696969;
     stroke: #ffffff;
@@ -191,7 +185,7 @@ export const VolumeContent = styled.div`
   justify-content: end;
 `
 
-export const VolumeImage  = styled.div`
+export const VolumeImage = styled.div`
   width: 13px;
   height: 18px;
   margin-right: 17px;
@@ -201,11 +195,11 @@ export const VolumeSvg = styled.svg`
   height: 18px;
   fill: transparent;
 `
-export const Btn  = styled.div`
+export const Btn = styled.div`
   cursor: pointer;
 `
 
-export const BtnIcon  = styled(Btn)`
+export const BtnIcon = styled(Btn)`
   &:hover svg {
     fill: transparent;
     stroke: #acacac;
@@ -215,14 +209,14 @@ export const BtnIcon  = styled(Btn)`
     stroke: #ffffff;
   }
 `
-export const TrackPlayLike  = styled(BtnIcon)`
+export const TrackPlayLike = styled(BtnIcon)`
   padding: 5px;
 `
-export const TrackPlayDislike  = styled(TrackPlayLike)`
+export const TrackPlayDislike = styled(TrackPlayLike)`
   margin-left: 28.5px;
 `
 
-export const PlayerBtnsSvg  = styled(BtnIcon)`
+export const PlayerBtnsSvg = styled(BtnIcon)`
   padding: 5px;
   display: flex;
   align-items: center;
@@ -236,13 +230,13 @@ export const PlayerBtnRepeat = styled(PlayerBtnsSvg)`
   margin-right: 24px;
 `
 
-export const PlayerBtnShuffle  = styled(PlayerBtnsSvg)`
+export const PlayerBtnShuffle = styled(PlayerBtnsSvg)`
 `
 
-export const VolumeProgress  = styled(Btn) `
+export const VolumeProgress = styled(Btn)`
   width: 109px;
 `
-export const VolumeProgressLine  = styled(Btn) `
+export const VolumeProgressLine = styled(Btn)`
   width: 109px;
 `
 
@@ -262,10 +256,27 @@ const SkeletonAnim = keyframes`
 export const TrackPlayImageSkeleton = styled(TrackPlayImage)`
   animation: ${SkeletonAnim} 3s linear infinite both;
 `
-export const TrackPlaySkeleton  = styled.div`
+export const TrackPlaySkeleton = styled.div`
   width: 59px;
   height: 15px;
   animation: ${SkeletonAnim} 3s linear infinite both;
+`
+
+export const PlayerBtnRepeatActiveSvg = styled.svg`
+  width: 18px;
+  height: 12px;
+  fill: transparent;
+  stroke: #ffffff;
+  &:hover  {
+    fill: transparent;
+    stroke: #ffffff;
+  }
+`
+
+export const TimeCode = styled.div`
+    color: #696969;
+    text-align: end;
+    margin: 10px 50px 10px;
 `
 
 

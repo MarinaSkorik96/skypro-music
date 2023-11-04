@@ -46,6 +46,7 @@ export const ContentPlaylist = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  height: 800px;
 `
 
 
