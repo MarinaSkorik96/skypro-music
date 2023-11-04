@@ -3,6 +3,7 @@ import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
 import { useContext, useState, useRef } from 'react';
 import LoadingContext from '../context';
 import * as S from "./AudioPlayerStyles"
+// import ProgressBar from "../ProgresState";
 
 
 const AudioPlayer = () => {
@@ -28,15 +29,21 @@ const AudioPlayer = () => {
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''
     s = (s % 60) + ''
-    return m.padStart(2, 0) + ':' + Math.floor(s.padStart(2, 0))
+    let sec = Math.floor(s.padStart(2, 0))
+    if (sec < 10) {
+      sec = `0` + Math.floor(s.padStart(2, 0))
+    }
+    return m.padStart(2, 0) + ':' + `${sec}`
   }
 
   const [currentTime, setCurrentTime] = useState(0);
+  // const [currentTime, setCurrentTime] = useState(70);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentTime(sToStr(ref.current.currentTime))
     }, 1000);
+    return () => clearTimeout(interval);
   }, [currentTrack])
 
   const handleRepeat = () => {
@@ -61,7 +68,16 @@ const AudioPlayer = () => {
       <S.Bar>
         <S.BarContent>
           <S.TimeCode>{currentTime} / {sToStr(ref.current.duration)}</S.TimeCode>
-          <S.BarPlayerProgress></S.BarPlayerProgress>
+          {/* <S.BarPlayerProgress></S.BarPlayerProgress> */}
+          <S.StyledProgressInput
+            type="range"
+            min={0}
+            max={ref.current.duration}
+            value={currentTime}
+            step={0.01}
+            // onChange={(event) => setCurrentTime(event.target.value)}
+            color="#b672ff"
+          />
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.PlayerControls>
