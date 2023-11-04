@@ -75,6 +75,9 @@ const AudioPlayer = () => {
             max={ref.current.duration}
             value={currentTime}
             step={0.01}
+            onChange={(a) => {
+              ref.current.currentTime = a.target.value;
+            }}
             // onChange={(event) => setCurrentTime(event.target.value)}
             color="#b672ff"
           />
