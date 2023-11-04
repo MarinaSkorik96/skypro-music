@@ -31,7 +31,13 @@ const AudioPlayer = () => {
     return m.padStart(2, 0) + ':' + Math.floor(s.padStart(2, 0))
   }
 
+  const [currentTime, setCurrentTime] = useState(0);
 
+  useEffect(() => {
+    setInterval(() => {
+      setCurrentTime(sToStr(ref.current.currentTime))
+    }, 1000);
+  }, [currentTrack])
 
   const handleRepeat = () => {
     ref.current.loop = !isRepeat;
@@ -41,21 +47,6 @@ const AudioPlayer = () => {
   const awaitImplementation = () => {
     alert('Функционал еще не реализован');
   };
-
-  // const detTrackLenght = () => {
-  //   setTrackLenght(ref.current.duration)
-  //   return trackLenght
-  // }
-
-  const [trackLenght, setTrackLenght] = useState(0);
-
-  // let duration = 0;
-  // if (ref?.current.duration) {
-  //   duration = ref.current.duration;
-  // }
-  // if (ref != null) {
-  console.log(ref.current.duration)
-  // }
 
   return (
     <>
@@ -69,7 +60,7 @@ const AudioPlayer = () => {
       ></audio>
       <S.Bar>
         <S.BarContent>
-          <S.TimeCode>{sToStr(ref.current.currentTime)} / {sToStr(ref.current.duration)}</S.TimeCode>
+          <S.TimeCode>{currentTime} / {sToStr(ref.current.duration)}</S.TimeCode>
           <S.BarPlayerProgress></S.BarPlayerProgress>
           <S.BarPlayerBlock>
             <S.BarPlayer>
