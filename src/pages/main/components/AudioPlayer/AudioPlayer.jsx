@@ -78,15 +78,15 @@ const AudioPlayer = () => {
       <S.Bar>
         <S.BarContent>
           <S.TimeCode >{currentTime} / {duration}</S.TimeCode>
-          <ProgresInput duration={ref.current.duration} value={ref.current.currentTime} />
-          {/* <S.StyledProgressInput
+          {/* <ProgresInput duration={ref.current.duration} value={ref.current.currentTime} /> */}
+          <S.StyledProgressInput
             type="range"
             min={0}
             max={ref.current.duration}
             value={ref.current.currentTime}
             step={0.01}
              onChange={(a) => { ref.current.currentTime = a.target.value}}
-          /> */}
+          />
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.PlayerControls>
@@ -181,8 +181,8 @@ const AudioPlayer = () => {
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>
-                  <ProgresInput duration={1} value={ref.current.volume}/>
-                  {/* <S.VolumeProgressLine as="input"
+                  {/* <ProgresInput duration={1} value={ref.current.volume}/> */}
+                  <S.VolumeProgressLine as="input"
                     type="range"
                     min={0}
                     max={1}
@@ -191,7 +191,7 @@ const AudioPlayer = () => {
                     // onChange={(event) => setCurrentTime(event.target.value)}
                     onChange={(a) => { ref.current.volume = a.target.value}}
                     name="range"
-                  /> */}
+                  />
                 </S.VolumeProgress>
               </S.VolumeContent>
             </S.BarVolumeBlock>
