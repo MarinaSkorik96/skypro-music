@@ -70,7 +70,6 @@ const AudioPlayer = () => {
     <>
       <audio
         ref={ref}
-        controls="controls"
         // {isRepeat ? loop = "loop" : null}
         src={currentTrack.track_file}
         onPlay={() => setPlaying(true)}
