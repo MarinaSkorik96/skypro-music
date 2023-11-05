@@ -39,19 +39,25 @@ const AudioPlayer = () => {
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [currentTimeInSecconds, setCurrentTimeInSecconds] = useState(0);
+  const [durationInSecconds, setDurationInSecconds] = useState(0);
+
 
   // const [currentTime, setCurrentTime] = useState(70);
 
-  useEffect(() => {
-    const interval = setTimeout(() => {
-      setDuration(sToStr(ref.current.duration))
-    }, 1000);
-    return () => clearTimeout(interval);
-  }, [currentTrack])
+  // useEffect(() => {
+  //   const interval = setTimeout(() => {
+  //     setDuration(sToStr(ref.current.duration))
+  //   }, 1000);
+  //   return () => clearTimeout(interval);
+  // }, [currentTrack])
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(sToStr(ref.current.currentTime))
+      setDuration(sToStr(ref.current.duration))
+      setDurationInSecconds(ref.current.duration)
+      setCurrentTimeInSecconds(ref.current.currentTime)
     }, 1000);
     return () => clearTimeout(interval);
   }, [currentTrack])
@@ -78,7 +84,7 @@ const AudioPlayer = () => {
       <S.Bar>
         <S.BarContent>
           <S.TimeCode >{currentTime} / {duration}</S.TimeCode>
-          <ProgresInput duration={ref.current.duration} value={ref.current.currentTime} />
+          <ProgresInput duration={durationInSecconds} value={currentTimeInSecconds} />
           {/* <S.StyledProgressInput
             type="range"
             min={0}

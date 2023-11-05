@@ -2,6 +2,9 @@ import React from "react";
 import * as S from "./ProgressInputStyles"
 
 export const ProgresInput = ({duration, value}) => {
+  console.log(duration)
+  console.log(value)
+
   return (
     <S.ProgressInput
       type="range"
