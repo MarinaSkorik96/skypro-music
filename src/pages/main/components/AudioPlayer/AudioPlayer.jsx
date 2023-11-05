@@ -39,24 +39,14 @@ const AudioPlayer = () => {
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-
-  // const [currentTime, setCurrentTime] = useState(70);
-
-  useEffect(() => {
-    const interval = setTimeout(() => {
-      setDuration(sToStr(ref.current.duration))
-    }, 1000);
-    return () => clearTimeout(interval);
-  }, [currentTrack])
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
+      setDuration(sToStr(ref.current.duration))
       setCurrentTime(sToStr(ref.current.currentTime))
     }, 1000);
     return () => clearTimeout(interval);
   }, [currentTrack])
-
-
 
   const handleRepeat = () => {
     ref.current.loop = !isRepeat;
@@ -188,7 +178,6 @@ const AudioPlayer = () => {
                     max={1}
                     value={ref.current.volume}
                     step={0.01}
-                    // onChange={(event) => setCurrentTime(event.target.value)}
                     onChange={(a) => { ref.current.volume = a.target.value}}
                     name="range"
                   />
