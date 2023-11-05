@@ -4,6 +4,7 @@ import { useContext, useState, useRef } from 'react';
 import LoadingContext from '../context';
 import * as S from "./AudioPlayerStyles"
 import ProgressBar from "../ProgresState";
+import { ProgresInput } from "../ProgressInputs/ProgressInput";
 
 
 const AudioPlayer = () => {
@@ -70,7 +71,6 @@ const AudioPlayer = () => {
     <>
       <audio
         ref={ref}
-        // {isRepeat ? loop = "loop" : null}
         src={currentTrack.track_file}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
@@ -78,18 +78,15 @@ const AudioPlayer = () => {
       <S.Bar>
         <S.BarContent>
           <S.TimeCode >{currentTime} / {duration}</S.TimeCode>
-          {/* <S.BarPlayerProgress></S.BarPlayerProgress> */}
-          {/* <ProgressBar duration={ref.current.duration} currentTim={currentTime}/> */}
-          <S.StyledProgressInput
+          <ProgresInput duration={ref.current.duration} value={ref.current.currentTime} />
+          {/* <S.StyledProgressInput
             type="range"
             min={0}
             max={ref.current.duration}
             value={ref.current.currentTime}
             step={0.01}
-            // onChange={(event) => setCurrentTime(event.target.value)}
-            // onChange={(a) => { setCurrentTime(a.target.value) }}
              onChange={(a) => { ref.current.currentTime = a.target.value}}
-          />
+          /> */}
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.PlayerControls>
@@ -184,7 +181,8 @@ const AudioPlayer = () => {
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>
-                  <S.VolumeProgressLine as="input"
+                  <ProgresInput duration={1} value={ref.current.volume}/>
+                  {/* <S.VolumeProgressLine as="input"
                     type="range"
                     min={0}
                     max={1}
@@ -193,7 +191,7 @@ const AudioPlayer = () => {
                     // onChange={(event) => setCurrentTime(event.target.value)}
                     onChange={(a) => { ref.current.volume = a.target.value}}
                     name="range"
-                  />
+                  /> */}
                 </S.VolumeProgress>
               </S.VolumeContent>
             </S.BarVolumeBlock>
