@@ -1,7 +1,5 @@
 import React from "react";
 import * as S from "./TrackStyles"
-import { getTodos } from "../../../../api";
-import { useEffect, useState } from "react";
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
 import { useContext } from 'react';
 import LoadingContext from '../context';
@@ -10,7 +8,7 @@ import LoadingContext from '../context';
 
 const Track = () => {
 
-  const { tracks, loadings, addTracksError, currentTrack, setCurrentTrack } = useContext(LoadingContext)
+  const { tracks, loadings, addTracksError, setCurrentTrack } = useContext(LoadingContext)
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''

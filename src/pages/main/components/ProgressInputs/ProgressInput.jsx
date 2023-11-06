@@ -1,17 +1,28 @@
 import React from "react";
 import * as S from "./ProgressInputStyles"
+import { forwardRef } from 'react';
 
-export const ProgresInput = ({duration, value}) => {
-  console.log(duration)
-  console.log(value)
+export const ProgresInputTrack = forwardRef((props, ref) => {
 
   return (
     <S.ProgressInput
       type="range"
       min={0}
-      max={duration}
-      value={value}
+      max={ref.current.duration}
+      value={ref.current.currentTime}
       step={0.01}
-      onChange={(a) => {value = a.target.value }}
+      onChange={(a) => { ref.current.currentTime = a.target.value }}
     />)
-}
+});
+
+export const ProgresInputVolume = forwardRef((props, ref) => {
+  return (
+    <S.ProgressInput
+      type="range"
+      min={0}
+      max={1}
+      value={ref.current.volume}
+      step={0.01}
+      onChange={(a) => { ref.current.volume = a.target.value }}
+    />)
+});
