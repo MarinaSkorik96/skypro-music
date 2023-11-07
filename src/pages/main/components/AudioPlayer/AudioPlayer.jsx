@@ -3,7 +3,6 @@ import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
 import { useContext, useState, useRef } from 'react';
 import LoadingContext from '../context';
 import * as S from "./AudioPlayerStyles"
-import ProgressBar from "../ProgresState";
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
 
 
@@ -62,7 +61,7 @@ const AudioPlayer = () => {
       <audio
         ref={ref}
         src={currentTrack.track_file}
-        controls="controls"
+        // controls="controls"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       ></audio>
