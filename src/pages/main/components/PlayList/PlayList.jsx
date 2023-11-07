@@ -1,11 +1,11 @@
 import React from "react";
 import * as S from "./PlayListStyles"
-import LoadingContext from '../context';
+import LoadingContext from '../../../../context';
 import { useContext } from 'react';
-import {playLists} from "../../../../PlayListsArr.js"
+import { playLists } from "../../../../PlayListsArr.js"
 
 
- const PlayList = () => {
+const PlayList = () => {
   const { loading, setLoading } = useContext(LoadingContext)
 
   return (

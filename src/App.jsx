@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import * as S from "./pages/main/components/mainStyles"
 import { AppRoutes } from "./routes";
 import { useState } from "react";
+import Context from './context';
 
 
 
@@ -55,21 +56,28 @@ function App() {
 
 
   const [user, setUser] = useState(null);
+  const getuser = localStorage.getItem('login');
+  console.log(getuser)
 
-  const handleLogin = () =>  {
-    localStorage.setItem('login', 'SetLogin');
-    const getuser = localStorage.getItem('login');
-    setUser(getuser);
+  const handleLogin = () => {
+    // const getuser = localStorage.getItem('login');
+    // console.log(getuser)
+// return getuser
+    // setUser(getuser);
+    // console.log(user)
   }
-  
+
   return (
     <>
-      <GlobalStyle />
-      <S.Wrapper>
-        <S.Container>
-          <AppRoutes user={user} onClick={handleLogin} />
-        </S.Container>
-      </S.Wrapper>
+      <Context.Provider
+        value={getuser }>
+        <GlobalStyle />
+        <S.Wrapper>
+          <S.Container>
+            <AppRoutes user={user} onClick={handleLogin} />
+          </S.Container>
+        </S.Wrapper>
+      </Context.Provider>
     </>
   );
 }

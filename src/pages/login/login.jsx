@@ -2,9 +2,9 @@
 import { Link } from "react-router-dom";
 import * as S from "./LoginStyles.jsx"
 import { useEffect, useState } from "react";
-import { getAuthorization } from "../../api.js";
+import { getAuthorization, getLogin, getToken } from "../../api.js";
 
-export function Login() {
+export function Login({onClick}) {
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ export function Login() {
 
 
 
-  const handleLogin = async ({ email, password }) => {
+  const handleLogin = async () => {
     if (email === "") {
       setError("Не заполнен Email");
       return
@@ -23,14 +23,21 @@ export function Login() {
       setError("Не введен пароль");
       return
     }
-    alert(`Выполняется вход: ${email} ${password}`);
-    setError("Неизвестная ошибка входа");
+    getLogin({ email, password })
+      .then((user) => {
+        if (user.detail == "Пользователь с таким email или паролем не найден") {
+          setError(user.detail);
+          return
+        }
+        getToken({ email, password })
+          .then((token) => {
+            console.log(token)
+            localStorage.setItem('login', user.email);
+          })
+      })
   };
 
   const handleRegister = async () => {
-    console.log(email)
-    console.log(password)
-
     if (email === "") {
       setError("Не заполнен Email");
       return
@@ -63,6 +70,9 @@ export function Login() {
         setEmail("")
         setPassword("")
         setRepeatPassword("")
+      }).catch ((errora) => {
+        console.log(1)
+        console.log(errora)
       })
   };
 
@@ -105,9 +115,11 @@ export function Login() {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
+            <Link  to="/">
+              <S.PrimaryButton onClick={handleLogin}>
                 Войти
               </S.PrimaryButton>
+              </Link>
               <Link>
                 <S.SecondaryButton onClick={() => { setIsLoginMode(false) }}>Зарегистрироваться</S.SecondaryButton>
               </Link>
