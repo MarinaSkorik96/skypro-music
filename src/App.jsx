@@ -62,7 +62,6 @@ function App() {
   const handleLogin = () => {
     // const getuser = localStorage.getItem('login');
     // console.log(getuser)
-// return getuser
     // setUser(getuser);
     // console.log(user)
   }
@@ -70,7 +69,7 @@ function App() {
   return (
     <>
       <Context.Provider
-        value={getuser }>
+        value={{ getuser }}>
         <GlobalStyle />
         <S.Wrapper>
           <S.Container>

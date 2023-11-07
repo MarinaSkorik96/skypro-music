@@ -115,7 +115,7 @@ export function Login({onClick}) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-            <Link  to="/">
+            <Link onClick={onClick} to="/">
               <S.PrimaryButton onClick={handleLogin}>
                 Войти
               </S.PrimaryButton>

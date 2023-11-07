@@ -8,7 +8,7 @@ import Context from '../../../../context';
 const SideBar = () => {
 
   const { getuser } = useContext(Context)
-  console.log( getuser )
+  console.log(getuser)
 
   const handleLogOut = () => {
     localStorage.removeItem('login')
