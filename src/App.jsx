@@ -77,7 +77,7 @@ function App() {
         <GlobalStyle />
         <S.Wrapper>
           <S.Container>
-            <AppRoutes user={user} onClick={handleLogin} />
+            <AppRoutes  />
           </S.Container>
         </S.Wrapper>
       </Context.Provider>

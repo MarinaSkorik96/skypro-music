@@ -6,7 +6,7 @@ import { getAuthorization, getLogin, getToken } from "../../api.js";
 import Context from "../../contexts.jsx";
 
 
-export function Login({ onClick }) {
+export function Login() {
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -14,10 +14,14 @@ export function Login({ onClick }) {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
-
   const { addLogin } = useContext(Context)
 
-  console.log(addLogin)
+  const changeForm = (isLoginMode) => {
+    setIsLoginMode(!isLoginMode)
+    setEmail("")
+    setPassword("")
+    setRepeatPassword("")
+  }
 
   const handleLogin = async () => {
     setLoading(true)
@@ -45,10 +49,14 @@ export function Login({ onClick }) {
             // localStorage.setItem('login', user.email);
           })
       })
+      .catch((error) => {
+        setError(error)
+      }).finally(() => {
+        setLoading(false)
+      })
   };
 
   const handleRegister = async () => {
-    setLoading(true)
     if (email === "") {
       setError("Не заполнен Email");
       return
@@ -61,12 +69,12 @@ export function Login({ onClick }) {
       setError("Пароли не совпадают");
       return
     }
+    setLoading(true)
     getAuthorization({ email, password })
       .then((user) => {
         if (user.email !== email && user.email !== undefined) {
           setError(user.email);
           setLoading(false)
-
           return
         }
         if (user.password !== password && user.password !== undefined) {
@@ -74,11 +82,14 @@ export function Login({ onClick }) {
           setLoading(false)
           return
         }
-        setLoading(false)
         setIsLoginMode(true)
         setEmail("")
         setPassword("")
         setRepeatPassword("")
+      }).catch((error) => {
+        setError(error)
+      }).finally(() => {
+        setLoading(false)
       })
   };
 
@@ -125,7 +136,7 @@ export function Login({ onClick }) {
                 </S.PrimaryButton>
               </Link>
               <Link>
-                <S.SecondaryButton onClick={() => { setIsLoginMode(false) }}>Зарегистрироваться</S.SecondaryButton>
+                <S.SecondaryButton onClick={() => { changeForm(isLoginMode) }}>Зарегистрироваться</S.SecondaryButton>
               </Link>
             </S.Buttons>
           </>
@@ -165,7 +176,7 @@ export function Login({ onClick }) {
               <S.PrimaryButton disabled={loading} onClick={handleRegister}>
                 Зарегистрироваться
               </S.PrimaryButton>
-              <S.SecondaryButton onClick={() => { setIsLoginMode(true) }}>
+              <S.SecondaryButton onClick={() => { changeForm(isLoginMode) }}>
                 Войти
               </S.SecondaryButton>
             </S.Buttons>

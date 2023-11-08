@@ -10,7 +10,7 @@ export async function getTodos() {
   return tracks
 }
 
-export async function getAuthorization({ email, password}) {
+export async function getAuthorization({ email, password }) {
   const response = await fetch("https://skypro-music-api.skyeng.tech/user/signup/", {
     method: "POST",
     body: JSON.stringify({
@@ -23,11 +23,14 @@ export async function getAuthorization({ email, password}) {
       "content-type": "application/json",
     },
   })
+  if (response.status === 500) {
+    throw new Error("Сервер не отвечает")
+  }
   const user = await response.json();
   return user
 }
 
-export async function getLogin({ email, password}) {
+export async function getLogin({ email, password }) {
   const response = await fetch("https://skypro-music-api.skyeng.tech/user/login/", {
     method: "POST",
     body: JSON.stringify({
@@ -39,12 +42,14 @@ export async function getLogin({ email, password}) {
       "content-type": "application/json",
     },
   })
-
+  if (response.status === 500) {
+    throw new Error("Сервер не отвечает")
+  }
   const user = await response.json();
   return user
 }
 
-export async function getToken({ email, password}) {
+export async function getToken({ email, password }) {
   const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/", {
     method: "POST",
     body: JSON.stringify({
