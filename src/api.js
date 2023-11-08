@@ -23,12 +23,6 @@ export async function getAuthorization({ email, password}) {
       "content-type": "application/json",
     },
   })
-
-  if (response.status === 400) {
-    const errora = await response.json();
-    console.log(errora)
-    throw new Error (errora )
-  }
   const user = await response.json();
   return user
 }

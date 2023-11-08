@@ -83,6 +83,7 @@ export const PrimaryButton = styled(Button)`
     background-color: #271a58;
   }
 `;
+
 export const SecondaryButton = styled(Button)`
   color: #000000;
   background-color: transparent;

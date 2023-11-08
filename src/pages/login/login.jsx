@@ -1,20 +1,27 @@
 
 import { Link } from "react-router-dom";
 import * as S from "./LoginStyles.jsx"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getAuthorization, getLogin, getToken } from "../../api.js";
+import Context from "../../contexts.jsx";
 
-export function Login({onClick}) {
+
+export function Login({ onClick }) {
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [loading, setLoading] = useState(false);
 
+  const { addLogin } = useContext(Context)
 
+  console.log(addLogin)
 
   const handleLogin = async () => {
+    setLoading(true)
+
     if (email === "") {
       setError("Не заполнен Email");
       return
@@ -27,17 +34,21 @@ export function Login({onClick}) {
       .then((user) => {
         if (user.detail == "Пользователь с таким email или паролем не найден") {
           setError(user.detail);
+          setLoading(false)
           return
         }
         getToken({ email, password })
           .then((token) => {
             console.log(token)
-            localStorage.setItem('login', user.email);
+            addLogin(email)
+            window.location.href = '/'
+            // localStorage.setItem('login', user.email);
           })
       })
   };
 
   const handleRegister = async () => {
+    setLoading(true)
     if (email === "") {
       setError("Не заполнен Email");
       return
@@ -52,31 +63,24 @@ export function Login({onClick}) {
     }
     getAuthorization({ email, password })
       .then((user) => {
-
-        console.log(user)
-        console.log(user.email)
-
-        // console.log(user)
         if (user.email !== email && user.email !== undefined) {
           setError(user.email);
+          setLoading(false)
+
           return
         }
         if (user.password !== password && user.password !== undefined) {
           setError(user.password[0]);
+          setLoading(false)
           return
         }
-        console.log('q')
+        setLoading(false)
         setIsLoginMode(true)
         setEmail("")
         setPassword("")
         setRepeatPassword("")
-      }).catch ((errora) => {
-        console.log(1)
-        console.log(errora)
       })
   };
-
-
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
@@ -115,10 +119,10 @@ export function Login({onClick}) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-            <Link onClick={onClick} to="/">
-              <S.PrimaryButton onClick={handleLogin}>
-                Войти
-              </S.PrimaryButton>
+              <Link >
+                <S.PrimaryButton disabled={loading} onClick={handleLogin}>
+                  Войти
+                </S.PrimaryButton>
               </Link>
               <Link>
                 <S.SecondaryButton onClick={() => { setIsLoginMode(false) }}>Зарегистрироваться</S.SecondaryButton>
@@ -158,7 +162,7 @@ export function Login({onClick}) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={handleRegister}>
+              <S.PrimaryButton disabled={loading} onClick={handleRegister}>
                 Зарегистрироваться
               </S.PrimaryButton>
               <S.SecondaryButton onClick={() => { setIsLoginMode(true) }}>

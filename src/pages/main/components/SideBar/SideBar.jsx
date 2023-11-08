@@ -2,22 +2,22 @@ import React from "react";
 import PlayLists from "../PlayLists/PlayLists";
 import * as S from "./SideBarStyles"
 import { useContext } from 'react';
-import Context from '../../../../context';
+import Context from '../../../../contexts';
 
 
 const SideBar = () => {
 
-  const { getuser } = useContext(Context)
-  console.log(getuser)
+  const { handleLogin, user, setUser, handleLogOut } = useContext(Context)
+  handleLogin({ user, setUser })
 
-  const handleLogOut = () => {
-    localStorage.removeItem('login')
-  }
+  // const handleLogOut = () => {
+  //   localStorage.removeItem('login')
+  // }
 
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>{getuser}</S.SidebarPersonalName>
+        <S.SidebarPersonalName>{user}</S.SidebarPersonalName>
         <S.SidebarIcon onClick={handleLogOut} to="/login">
           <svg alt="logout">
             <use xlinkHref="img/icon/sprite.svg#logout" />
