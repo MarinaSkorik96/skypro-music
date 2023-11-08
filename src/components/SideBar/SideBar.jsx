@@ -2,7 +2,7 @@ import React from "react";
 import PlayLists from "../PlayLists/PlayLists";
 import * as S from "./SideBarStyles"
 import { useContext } from 'react';
-import Context from '../../../../contexts';
+import Context from '../../contexts';
 
 
 const SideBar = () => {

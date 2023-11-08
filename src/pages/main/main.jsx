@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import * as S from "./mainStyles"
-import AudioPlayer from "../components/AudioPlayer/AudioPlayer";
-import NavMenu from "../components/NavMenu/NavMenu";
-import TrackList from "../components/TrackList/TrackList";
-import SideBar from "../components/SideBar/SideBar";
-import LoadingContext from '../../../context';
-import { getTodos } from "../../../api.js";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer.jsx";
+import NavMenu from "../../components/NavMenu/NavMenu.jsx";
+import TrackList from "../../components/TrackList/TrackList.jsx";
+import SideBar from "../../components/SideBar/SideBar.jsx";
+import LoadingContext from '../../context';
+import { getTodos } from "../../api.js";
 
 
 

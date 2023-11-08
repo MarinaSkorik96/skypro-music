@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
 import { useContext, useState, useRef } from 'react';
-import LoadingContext from '../../../../context';
+import LoadingContext from '../../context';
 import * as S from "./AudioPlayerStyles"
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
 

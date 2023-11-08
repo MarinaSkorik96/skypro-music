@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import * as S from "./pages/main/components/mainStyles"
+import * as S from "./pages/main/mainStyles"
 import { AppRoutes } from "./routes";
 import { useState } from "react";
 import Context from './contexts';
@@ -73,11 +73,11 @@ function App() {
   return (
     <>
       <Context.Provider
-        value={{ handleLogin, user, setUser, addLogin, handleLogOut}}>
+        value={{ handleLogin, user, setUser, addLogin, handleLogOut }}>
         <GlobalStyle />
         <S.Wrapper>
           <S.Container>
-            <AppRoutes  />
+            <AppRoutes />
           </S.Container>
         </S.Wrapper>
       </Context.Provider>

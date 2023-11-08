@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as S from "./BurgerMenuStyles"
 import { useContext } from 'react';
-import Context from '../../../../contexts';
+import Context from '../../contexts';
 
 
 const { useState } = React;

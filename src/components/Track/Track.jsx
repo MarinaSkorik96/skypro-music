@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./TrackStyles"
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
 import { useContext } from 'react';
-import LoadingContext from '../../../../context';
+import LoadingContext from '../../context';
 
 
 
