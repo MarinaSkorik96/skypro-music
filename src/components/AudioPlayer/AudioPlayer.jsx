@@ -13,17 +13,17 @@ const AudioPlayer = () => {
   const [isRepeat, setIsRepeat] = useState(false);
 
 
-  const ref = useRef(0);
+  const aRef = useRef(0);
 
   const handleStart = () => {
-    ref.current.play();
+    aRef.current.play();
   };
 
   useEffect(handleStart, [currentTrack])
 
 
   const handleStop = () => {
-    ref.current.pause();
+    aRef.current.pause();
   };
 
   function sToStr(s) {
@@ -41,14 +41,14 @@ const AudioPlayer = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTime(sToStr(ref.current.currentTime))
-      setDuration(sToStr(ref.current.duration))
+      setCurrentTime(sToStr(aRef.current.currentTime))
+      setDuration(sToStr(aRef.current.duration))
     }, 1000);
     return () => clearTimeout(interval);
   }, [currentTrack])
 
   const handleRepeat = () => {
-    ref.current.loop = !isRepeat;
+    aRef.current.loop = !isRepeat;
     setIsRepeat(!isRepeat)
   };
 
@@ -59,7 +59,7 @@ const AudioPlayer = () => {
   return (
     <>
       <audio
-        ref={ref}
+        ref={aRef}
         src={currentTrack.track_file}
         // controls="controls"
         onPlay={() => setPlaying(true)}
@@ -68,7 +68,7 @@ const AudioPlayer = () => {
       <S.Bar>
         <S.BarContent>
           <S.TimeCode >{currentTime} / {duration}</S.TimeCode>
-          <ProgresInputTrack ref={ref} />
+          <ProgresInputTrack ref={aRef} />
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.PlayerControls>
@@ -163,7 +163,7 @@ const AudioPlayer = () => {
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>
-                  <ProgresInputVolume ref={ref} />
+                  <ProgresInputVolume ref={aRef} />
                 </S.VolumeProgress>
               </S.VolumeContent>
             </S.BarVolumeBlock>

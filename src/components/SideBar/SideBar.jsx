@@ -1,15 +1,17 @@
 import React from "react";
 import PlayLists from "../PlayLists/PlayLists";
 import * as S from "./SideBarStyles"
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Context from '../../contexts';
 
 
 const SideBar = () => {
 
   const { handleLogin, user, setUser, handleLogOut } = useContext(Context)
-  handleLogin({ user, setUser })
-
+  // handleLogin({ user, setUser })
+  useEffect(() => {
+    handleLogin({ user, setUser });
+  }, []);
   // const handleLogOut = () => {
   //   localStorage.removeItem('login')
   // }

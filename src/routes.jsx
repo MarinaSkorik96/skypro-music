@@ -6,13 +6,16 @@ import { MyPlaylist } from "./pages/myplaylist/MyPlaylist.jsx";
 import { Main } from "./pages/main/main.jsx";
 import { Error } from "./pages/error/Error.jsx";
 import { ProtectedRoute } from "./pages/ProtectedRoute.jsx";
-import { useContext } from 'react';
+import { useContext, useEffect} from 'react';
 import Context from "./contexts.jsx";
 
 export const AppRoutes = () => {
 
   const { handleLogin, user, setUser } = useContext(Context)
-  handleLogin({ user, setUser })
+  useEffect(() => {
+    handleLogin({ user, setUser });
+  }, []);
+  // handleLogin({ user, setUser })
   console.log(user)
 
 
