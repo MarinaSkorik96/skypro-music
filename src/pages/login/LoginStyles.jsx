@@ -82,6 +82,13 @@ export const PrimaryButton = styled(Button)`
   &:active {
     background-color: #271a58;
   }
+
+  &:disabled,
+  &[disabled] {
+    border: 1px solid #999;
+    background-color: grey;
+    color: white;
+  }
 `;
 
 export const SecondaryButton = styled(Button)`
