@@ -7,11 +7,13 @@ import TrackList from "../../components/TrackList/TrackList.jsx";
 import SideBar from "../../components/SideBar/SideBar.jsx";
 import LoadingContext from '../../context';
 import { getTodos } from "../../api.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllTracks } from '../../store/slices/track.js';
 
 
 
 export function Main() {
-
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true)
   const [tracks, setTracks] = useState([]);
   const [loadings, setLoadings] = useState(true)
@@ -26,14 +28,16 @@ export function Main() {
   }, [])
 
   useEffect(() => {
-    getTodos().then((tracks) => {
-      console.log(tracks)
-      setTracks(tracks);
-    }).catch(() => {
-      setAddTracksError(true);
-    }).finally(() => {
-      setLoadings(false);
-    })
+    getTodos()
+      .then((tracks) => {
+        dispatch(getAllTracks(tracks))
+        console.log(tracks)
+        setTracks(tracks);
+      }).catch(() => {
+        setAddTracksError(true);
+      }).finally(() => {
+        setLoadings(false);
+      })
   }, [])
 
   return (

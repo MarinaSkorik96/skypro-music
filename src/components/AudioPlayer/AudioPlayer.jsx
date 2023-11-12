@@ -4,9 +4,13 @@ import { useContext, useState, useRef } from 'react';
 import LoadingContext from '../../context';
 import * as S from "./AudioPlayerStyles"
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const AudioPlayer = () => {
+
+  const currentTrackS = useSelector(state => state.track.currentTrack)
+
 
   const { loading, currentTrack } = useContext(LoadingContext)
   const [isPlaying, setPlaying] = useState(false);
@@ -40,12 +44,21 @@ const AudioPlayer = () => {
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(sToStr(aRef.current.currentTime))
-      setDuration(sToStr(aRef.current.duration))
-    }, 1000);
-    return () => clearTimeout(interval);
-  }, [currentTrack])
+    const handleTimeUpdate = () => {
+      if (aRef.current.currentTime && aRef.current.duration) {
+        setCurrentTime(sToStr(aRef.current.currentTime))
+        setDuration(sToStr(aRef.current.duration))
+      } else {
+        setCurrentTime(0)
+        setDuration(0)
+      }
+    }
+    aRef.current.addEventListener('timeupdate', handleTimeUpdate)
+    return () => {
+      aRef.current.removeEventListener('timeupdate', handleTimeUpdate)
+      console.log('done')
+    }
+  }, [])
 
   const handleRepeat = () => {
     aRef.current.loop = !isRepeat;
@@ -131,12 +144,12 @@ const AudioPlayer = () => {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink xlinkHref="http://">
-                        {currentTrack.name}
+                        {currentTrackS.name}
                       </S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
                       <S.TrackPlayAlbumLink xlinkHref="http://">
-                        {currentTrack.author}
+                        {currentTrackS.author}
                       </S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>}

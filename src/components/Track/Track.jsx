@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./TrackStyles"
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
 import { useContext } from 'react';
 import LoadingContext from '../../context';
-
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentTrack } from "../../store/slices/track";
 
 
 const Track = () => {
+  const dispatch = useDispatch();
+
+  const curTrack = useSelector(state => state.track.currentTrack)
+
+  console.log(curTrack)
+
 
   const { tracks, loadings, addTracksError, setCurrentTrack } = useContext(LoadingContext)
 
@@ -25,8 +32,10 @@ const Track = () => {
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
               <S.TrackTitle onClick={() => setCurrentTrack(track)}>
+                <button onClick={()=>{dispatch(getCurrentTrack(track))}}>Click</button>
                 <S.TrackTitleImage>
                   <S.TrackTitleSvg alt="music">
+                  <S.BlinkingDot></S.BlinkingDot>
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>
                 </S.TrackTitleImage>

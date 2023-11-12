@@ -4,6 +4,7 @@ import { AppRoutes } from "./routes";
 import { useState } from "react";
 import Context from './contexts';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -53,6 +54,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 function App() {
+  const dispatch = useDispatch()
+  const curTrack = useSelector(state => state.track)
+  const allTracks = useSelector(state => state.track.allTracks)
+  console.log(curTrack)
+  console.log(allTracks)
 
 
   const [user, setUser] = useState(null);
