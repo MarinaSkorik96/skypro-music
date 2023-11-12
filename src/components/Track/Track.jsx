@@ -5,14 +5,20 @@ import { useContext } from 'react';
 import LoadingContext from '../../context';
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentTrack } from "../../store/slices/track";
+import { getIsPlaing } from "../../store/slices/track";
 
 
 const Track = () => {
   const dispatch = useDispatch();
 
   const curTrack = useSelector(state => state.track.currentTrack)
+  const isPlaing = useSelector(state => state.track.isPlaying)
+  const cutTrackId = useSelector(state => state.track.indexCurrentTrack)
+
 
   console.log(curTrack)
+  console.log(isPlaing)
+
 
 
   const { tracks, loadings, addTracksError, setCurrentTrack } = useContext(LoadingContext)
@@ -31,11 +37,14 @@ const Track = () => {
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
-              <S.TrackTitle onClick={() => setCurrentTrack(track)}>
-                <button onClick={()=>{dispatch(getCurrentTrack(track))}}>Click</button>
+              <S.TrackTitle onClick={() => {
+                dispatch(getCurrentTrack(track));
+                dispatch(getIsPlaing(true));
+              }}>
+                {/* <button onClick={()=>{dispatch(getCurrentTrack(track))}}>Click</button> */}
                 <S.TrackTitleImage>
+                  { isPlaing && track.id === cutTrackId  && <S.BlinkingDot></S.BlinkingDot>}
                   <S.TrackTitleSvg alt="music">
-                  <S.BlinkingDot></S.BlinkingDot>
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>
                 </S.TrackTitleImage>

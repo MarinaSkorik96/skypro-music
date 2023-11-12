@@ -12,11 +12,12 @@ const blinkAnimation = keyframes`
   }
 `;
 export const BlinkingDot = styled.div`
-  width: 150px;
-  height: 15px; 
-  background-color: purple;
+  width: 350px;
+  height: 15px;
+  background-color: #B672FF;
   border-radius: 50%;
-  animation: ${blinkAnimation} 1s infinite;
+  animation: ${blinkAnimation} 3s infinite;
+  margin-left: 3px;
 `;
 
 export const PlaylistItem = styled.div`
@@ -54,7 +55,7 @@ export const TrackTitleSvg = styled.svg`
   fill: transparent;
   stroke: #4e4e4e;
 `
-export const TrackTitleLink= styled.a`
+export const TrackTitleLink = styled.a`
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
@@ -68,7 +69,7 @@ export const TrackTitleSpan = styled.span`
   line-height: 24px;
   color: #4e4e4e;
 `
-export const TrackAuthorLink= styled.a`
+export const TrackAuthorLink = styled.a`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

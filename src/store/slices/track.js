@@ -20,11 +20,16 @@ const getCurrentTrackSlace = createSlice({
     getCurrentTrack(state, action) {
       state.currentTrack = action.payload;
       state.indexCurrentTrack = action.payload.id
+
     },
+    getIsPlaing(state, action) {
+      
+      state.isPlaying = action.payload
+    }
   }
 });
 
 
-export const { getAllTracks, getCurrentTrack } = getCurrentTrackSlace.actions;
+export const { getAllTracks, getCurrentTrack, getIsPlaing } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

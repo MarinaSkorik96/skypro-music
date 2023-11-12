@@ -5,14 +5,17 @@ import LoadingContext from '../../context';
 import * as S from "./AudioPlayerStyles"
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
 import { useDispatch, useSelector } from 'react-redux';
+import { getIsPlaing } from "../../store/slices/track";
 
 
 const AudioPlayer = () => {
+  const dispatch = useDispatch();
+
 
   const currentTrackS = useSelector(state => state.track.currentTrack)
 
 
-  const { loading, currentTrack } = useContext(LoadingContext)
+  const { loading } = useContext(LoadingContext)
   const [isPlaying, setPlaying] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
 
@@ -23,7 +26,7 @@ const AudioPlayer = () => {
     aRef.current.play();
   };
 
-  useEffect(handleStart, [currentTrack])
+  useEffect(handleStart, [currentTrackS])
 
 
   const handleStop = () => {
@@ -73,7 +76,7 @@ const AudioPlayer = () => {
     <>
       <audio
         ref={aRef}
-        src={currentTrack.track_file}
+        src={currentTrackS.track_file}
         // controls="controls"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
@@ -91,7 +94,10 @@ const AudioPlayer = () => {
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
                 {isPlaying ?
-                  <S.PlayerBtnPlay onClick={handleStop}>
+                  <S.PlayerBtnPlay onClick={()=>{
+                    handleStop();
+                    dispatch(getIsPlaing(false));
+                    }}>
                     <S.PlayerBtnPlaySvg as="svg" alt="play">
                       <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="5" height="19" fill="#D9D9D9" />
@@ -100,7 +106,10 @@ const AudioPlayer = () => {
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
                   :
-                  <S.PlayerBtnPlay onClick={handleStart}>
+                  <S.PlayerBtnPlay onClick={()=>{
+                    handleStart();
+                    dispatch(getIsPlaing(true));
+                    }}>
                     <S.PlayerBtnPlaySvg as="svg" alt="play">
                       <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
                     </S.PlayerBtnPlaySvg>

@@ -13,6 +13,8 @@ import { getAllTracks } from '../../store/slices/track.js';
 
 
 export function Main() {
+  const currentTrackS = useSelector(state => state.track.currentTrack)
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true)
   const [tracks, setTracks] = useState([]);
@@ -52,7 +54,7 @@ export function Main() {
               <TrackList />
               <SideBar />
             </S.Main>
-            {currentTrack ? <AudioPlayer /> : null}
+            {currentTrackS ? <AudioPlayer /> : null}
             <footer className="footer" />
           </S.Container>
         </S.Wrapper>
