@@ -23,13 +23,30 @@ const getCurrentTrackSlace = createSlice({
 
     },
     getIsPlaing(state, action) {
-      
       state.isPlaying = action.payload
+    },
+    nextTrack(state, action) {
+      const { allTracs, currentTrackS } = action.payload
+      if (allTracs.indexOf(currentTrackS) === allTracs.length - 1) {
+        alert('Треки закончились')
+        return
+      }
+      const indexOfNextTrack = allTracs.indexOf(currentTrackS) + 1
+      state.currentTrack = allTracs[indexOfNextTrack];
+    },
+    prevTrack(state, action) {
+      const { allTracs, currentTrackS } = action.payload
+      if (allTracs.indexOf(currentTrackS) === 0) {
+        alert('Это первый трек')
+        return
+      }
+      const indexOfNextTrack = allTracs.indexOf(currentTrackS) - 1
+      state.currentTrack = allTracs[indexOfNextTrack];
     }
   }
 });
 
 
-export const { getAllTracks, getCurrentTrack, getIsPlaing } = getCurrentTrackSlace.actions;
+export const { getAllTracks, getCurrentTrack, getIsPlaing, nextTrack, prevTrack } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

@@ -5,7 +5,7 @@ import LoadingContext from '../../context';
 import * as S from "./AudioPlayerStyles"
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsPlaing } from "../../store/slices/track";
+import { getIsPlaing, nextTrack, prevTrack } from "../../store/slices/track";
 
 
 const AudioPlayer = () => {
@@ -13,6 +13,7 @@ const AudioPlayer = () => {
 
 
   const currentTrackS = useSelector(state => state.track.currentTrack)
+  const allTracs = useSelector(state => state.track.allTracks)
 
 
   const { loading } = useContext(LoadingContext)
@@ -89,7 +90,7 @@ const AudioPlayer = () => {
             <S.BarPlayer>
               <S.PlayerControls>
                 <S.PlayerBtnPrev>
-                  <S.PlayerBtnPrevSvg onClick={awaitImplementation} alt="prev">
+                  <S.PlayerBtnPrevSvg onClick={()=> {dispatch(prevTrack({allTracs, currentTrackS}))}} alt="prev">
                     <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
@@ -117,7 +118,8 @@ const AudioPlayer = () => {
 
                 }
                 <S.PlayerBtnNext>
-                  <S.PlayerBtnNextSvg onClick={awaitImplementation} alt="next">
+                  <S.PlayerBtnNextSvg onClick={()=> {dispatch(nextTrack({allTracs, currentTrackS}))}
+                    } alt="next">
                     <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
                   </S.PlayerBtnNextSvg>
                 </S.PlayerBtnNext>
