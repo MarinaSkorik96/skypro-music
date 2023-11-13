@@ -43,7 +43,7 @@ const Track = () => {
               }}>
                 {/* <button onClick={()=>{dispatch(getCurrentTrack(track))}}>Click</button> */}
                 <S.TrackTitleImage>
-                  { isPlaing && track.id === cutTrackId  && <S.BlinkingDot></S.BlinkingDot>}
+                  { isPlaing && track === curTrack  && <S.BlinkingDot></S.BlinkingDot>}
                   <S.TrackTitleSvg alt="music">
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>

@@ -42,6 +42,8 @@ const getCurrentTrackSlace = createSlice({
       }
       const indexOfNextTrack = allTracs.indexOf(currentTrackS) - 1
       state.currentTrack = allTracs[indexOfNextTrack];
+      state.indexCurrentTrack = action.payload.id
+
     }
   }
 });
