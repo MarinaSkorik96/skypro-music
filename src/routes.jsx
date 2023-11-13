@@ -15,9 +15,6 @@ export const AppRoutes = () => {
   useEffect(() => {
     handleLogin({ user, setUser });
   }, []);
-  // handleLogin({ user, setUser })
-  console.log(user)
-
 
   return (
     <Routes>

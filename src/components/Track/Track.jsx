@@ -16,10 +16,6 @@ const Track = () => {
   // const cutTrackId = useSelector(state => state.track.indexCurrentTrack)
 
 
-  console.log(curTrack)
-  console.log(isPlaing)
-
-
 
   const { tracks, loadings, addTracksError, setCurrentTrack } = useContext(LoadingContext)
 

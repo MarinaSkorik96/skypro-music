@@ -31,8 +31,15 @@ const getCurrentTrackSlace = createSlice({
         alert('Треки закончились')
         return
       }
-      const indexOfNextTrack = allTracs.indexOf(currentTrackS) + 1
+      console.log(state.currentTrack)
+      const indexOfNextTrack = allTracs.indexOf(currentTrackS) + 1;
       state.currentTrack = allTracs[indexOfNextTrack];
+      state.indexCurrentTrack = currentTrackS.id +1;
+      state.isPlaying = true
+      console.log(currentTrackS)
+      console.log(state.currentTrack)
+
+
     },
     prevTrack(state, action) {
       const { allTracs, currentTrackS } = action.payload
@@ -45,7 +52,7 @@ const getCurrentTrackSlace = createSlice({
       state.indexCurrentTrack = action.payload.id
     },
     getShuffle(state, action) {
-      const allTracks = action.payload.allTracs
+      let allTracks = action.payload.allTracs
       console.log(allTracks)
       allTracks.sort(() => Math.random() - 0.5)
       console.log(allTracks)
