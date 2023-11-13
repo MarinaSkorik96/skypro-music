@@ -5,7 +5,7 @@ import LoadingContext from '../../context';
 import * as S from "./AudioPlayerStyles"
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsPlaing, nextTrack, prevTrack } from "../../store/slices/track";
+import { getIsPlaing, nextTrack, prevTrack, getShuffle } from "../../store/slices/track";
 
 
 const AudioPlayer = () => {
@@ -57,9 +57,14 @@ const AudioPlayer = () => {
         setDuration(0)
       }
     }
+    const nextTracka = () => {
+      dispatch(nextTrack({allTracs, currentTrackS}))
+    }
     aRef.current.addEventListener('timeupdate', handleTimeUpdate)
+    aRef.current.addEventListener('ended', nextTracka)
     return () => {
       aRef.current.removeEventListener('timeupdate', handleTimeUpdate)
+      aRef.current.addEventListener('ended', nextTracka)
       console.log('done')
     }
   }, [])
@@ -138,7 +143,7 @@ const AudioPlayer = () => {
                   </S.PlayerBtnRepeat>
                 }
                 <S.PlayerBtnShuffle>
-                  <S.PlayerBtnShuffleSvg onClick={awaitImplementation} alt="shuffle">
+                  <S.PlayerBtnShuffleSvg onClick={()=> {dispatch(getShuffle({allTracs}))}} alt="shuffle">
                     <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
                   </S.PlayerBtnShuffleSvg>
                 </S.PlayerBtnShuffle>

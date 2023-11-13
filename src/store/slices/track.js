@@ -43,12 +43,17 @@ const getCurrentTrackSlace = createSlice({
       const indexOfNextTrack = allTracs.indexOf(currentTrackS) - 1
       state.currentTrack = allTracs[indexOfNextTrack];
       state.indexCurrentTrack = action.payload.id
-
+    },
+    getShuffle(state, action) {
+      const allTracks = action.payload.allTracs
+      console.log(allTracks)
+      allTracks.sort(() => Math.random() - 0.5)
+      console.log(allTracks)
     }
   }
 });
 
 
-export const { getAllTracks, getCurrentTrack, getIsPlaing, nextTrack, prevTrack } = getCurrentTrackSlace.actions;
+export const { getAllTracks, getCurrentTrack, getIsPlaing, nextTrack, prevTrack, getShuffle } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

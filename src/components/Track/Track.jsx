@@ -13,7 +13,7 @@ const Track = () => {
 
   const curTrack = useSelector(state => state.track.currentTrack)
   const isPlaing = useSelector(state => state.track.isPlaying)
-  const cutTrackId = useSelector(state => state.track.indexCurrentTrack)
+  // const cutTrackId = useSelector(state => state.track.indexCurrentTrack)
 
 
   console.log(curTrack)
@@ -41,7 +41,6 @@ const Track = () => {
                 dispatch(getCurrentTrack(track));
                 dispatch(getIsPlaing(true));
               }}>
-                {/* <button onClick={()=>{dispatch(getCurrentTrack(track))}}>Click</button> */}
                 <S.TrackTitleImage>
                   { isPlaing && track === curTrack  && <S.BlinkingDot></S.BlinkingDot>}
                   <S.TrackTitleSvg alt="music">
