@@ -12,9 +12,12 @@ const AudioPlayer = () => {
   const dispatch = useDispatch();
 
 
-  const currentTrackS = useSelector(store => store.track.currentTrack)
-  const allTracs = useSelector(state => state.track.allTracks)
+  const currentTrack = useSelector(store => store.track.currentTrack)
+  const allTracks = useSelector(state => state.track.allTracks)
+  const shuffle = useSelector(state => state.track.shuffle)
+  const shuffleAllTracks = useSelector(state => state.track.shuffleAllTracks)
 
+  const arreyAllTracks = shuffle ? shuffleAllTracks : allTracks
 
   const { loading } = useContext(LoadingContext)
   const [isPlaying, setPlaying] = useState(false);
@@ -27,8 +30,7 @@ const AudioPlayer = () => {
     aRef.current.play();
   };
 
-  useEffect(handleStart, [currentTrackS])
-
+  useEffect(handleStart, [currentTrack])
 
   const handleStop = () => {
     aRef.current.pause();
@@ -48,6 +50,7 @@ const AudioPlayer = () => {
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
+
     const handleTimeUpdate = () => {
       if (aRef.current.currentTime && aRef.current.duration) {
         setCurrentTime(sToStr(aRef.current.currentTime))
@@ -58,22 +61,18 @@ const AudioPlayer = () => {
       }
     }
 
-    const nextTracka = () => {
-
-      console.log(currentTrackS)
-      console.log(allTracs)
- 
-      dispatch(nextTrack({allTracs, currentTrackS}));
-      console.log(currentTrackS)
-
+    const getNextTrack = () => {
+      dispatch(nextTrack({ arreyAllTracks, currentTrack }));
     }
+
     aRef.current.addEventListener('timeupdate', handleTimeUpdate)
-    aRef.current.addEventListener('ended', nextTracka)
+    aRef.current.addEventListener('ended', getNextTrack)
+
     return () => {
       aRef.current.removeEventListener('timeupdate', handleTimeUpdate)
-      console.log('done')
+      aRef.current.removeEventListener('ended', getNextTrack)
     }
-  }, [])
+  }, [currentTrack])
 
   const handleRepeat = () => {
     aRef.current.loop = !isRepeat;
@@ -88,7 +87,7 @@ const AudioPlayer = () => {
     <>
       <audio
         ref={aRef}
-        src={currentTrackS.track_file}
+        src={currentTrack.track_file}
         // controls="controls"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
@@ -101,15 +100,15 @@ const AudioPlayer = () => {
             <S.BarPlayer>
               <S.PlayerControls>
                 <S.PlayerBtnPrev>
-                  <S.PlayerBtnPrevSvg onClick={()=> {dispatch(prevTrack({allTracs, currentTrackS}))}} alt="prev">
+                  <S.PlayerBtnPrevSvg onClick={() => { dispatch(prevTrack({ arreyAllTracks, currentTrack })) }} alt="prev">
                     <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
                 {isPlaying ?
-                  <S.PlayerBtnPlay onClick={()=>{
+                  <S.PlayerBtnPlay onClick={() => {
                     handleStop();
                     dispatch(getIsPlaing(false));
-                    }}>
+                  }}>
                     <S.PlayerBtnPlaySvg as="svg" alt="play">
                       <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="5" height="19" fill="#D9D9D9" />
@@ -118,19 +117,18 @@ const AudioPlayer = () => {
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
                   :
-                  <S.PlayerBtnPlay onClick={()=>{
+                  <S.PlayerBtnPlay onClick={() => {
                     handleStart();
                     dispatch(getIsPlaing(true));
-                    }}>
+                  }}>
                     <S.PlayerBtnPlaySvg as="svg" alt="play">
                       <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
-
                 }
                 <S.PlayerBtnNext>
-                  <S.PlayerBtnNextSvg onClick={()=> {dispatch(nextTrack({allTracs, currentTrackS}))}
-                    } alt="next">
+                  <S.PlayerBtnNextSvg onClick={() => { dispatch(nextTrack({ arreyAllTracks, currentTrack })) }
+                  } alt="next">
                     <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
                   </S.PlayerBtnNextSvg>
                 </S.PlayerBtnNext>
@@ -148,8 +146,8 @@ const AudioPlayer = () => {
                     </S.PlayerBtnRepeatSvg>
                   </S.PlayerBtnRepeat>
                 }
-                <S.PlayerBtnShuffle onClick={()=> {dispatch(getShuffle({allTracs}))}}>
-                  <S.PlayerBtnShuffleSvg  alt="shuffle">
+                <S.PlayerBtnShuffle onClick={() => { dispatch(getShuffle(!shuffle)) }}>
+                  <S.PlayerBtnShuffleSvg alt="shuffle" $stroke={shuffle} >
                     <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
                   </S.PlayerBtnShuffleSvg>
                 </S.PlayerBtnShuffle>
@@ -166,12 +164,12 @@ const AudioPlayer = () => {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink xlinkHref="http://">
-                        {currentTrackS.name}
+                        {currentTrack.name}
                       </S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
                       <S.TrackPlayAlbumLink xlinkHref="http://">
-                        {currentTrackS.author}
+                        {currentTrack.author}
                       </S.TrackPlayAlbumLink>
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>}

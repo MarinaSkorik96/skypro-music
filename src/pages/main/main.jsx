@@ -33,7 +33,6 @@ export function Main() {
     getTodos()
       .then((tracks) => {
         dispatch(getAllTracks(tracks))
-        console.log(tracks)
         setTracks(tracks);
       }).catch(() => {
         setAddTracksError(true);
