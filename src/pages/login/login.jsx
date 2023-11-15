@@ -14,7 +14,7 @@ export function Login() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [loading, setLoading] = useState(false);
-  const { addLogin } = useContext(Context)
+  const { addLogin, setUser } = useContext(Context)
 
   const changeForm = (isLoginMode) => {
     setIsLoginMode(!isLoginMode)
@@ -25,7 +25,6 @@ export function Login() {
 
   const handleLogin = async () => {
     setLoading(true)
-
     if (email === "") {
       setError("Не заполнен Email");
       return
@@ -46,6 +45,8 @@ export function Login() {
             console.log(token)
             addLogin(email)
             window.location.href = '/'
+            setUser(user)
+
             // localStorage.setItem('login', user.email);
           })
       })

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Context from './contexts';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -66,6 +67,9 @@ function App() {
 
 
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   const handleLogin = ({ setUser }) => {
     const getuser = localStorage.getItem('login');

@@ -6,7 +6,6 @@ import  { useEffect, useState } from 'react'
 
 export const ProgresInputTrack = forwardRef((props, aRef) => {
 
-
   const [currentTime, setCurrentTime] = useState(0)
 
   const handleCurrentTime = (value) => {
@@ -23,7 +22,7 @@ export const ProgresInputTrack = forwardRef((props, aRef) => {
     <S.ProgressInput
       type="range"
       min={0}
-      max={aRef.current.duration}
+      max={aRef.current.duration ? aRef.current.duration : 0}
       value={currentTime}
       step={0.01}
       onChange={(e) => handleCurrentTime(e.target.value)}

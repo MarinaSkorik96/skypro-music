@@ -13,8 +13,9 @@ export const AppRoutes = () => {
 
   const { handleLogin, user, setUser } = useContext(Context)
   useEffect(() => {
-    handleLogin({ user, setUser });
-  }, []);
+  //   handleLogin({ user, setUser });
+  console.log(user)
+  }, [user]);
 
   return (
     <Routes>
@@ -22,7 +23,7 @@ export const AppRoutes = () => {
 
       {/* <Route path="/registration" element={<Registration />} /> */}
 
-      <Route element={<ProtectedRoute isAllowed={Boolean({ user })} />}>
+      <Route element={<ProtectedRoute isAllowed={Boolean( user )} />}>
         <Route path="/MyPlaylist" element={<MyPlaylist />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/" element={<Main />} />

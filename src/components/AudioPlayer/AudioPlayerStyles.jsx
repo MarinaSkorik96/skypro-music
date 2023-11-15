@@ -86,6 +86,12 @@ export const PlayerBtnShuffleSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: ${(props) => (props.$stroke ? '#D9D9D9' : '#696969')};
+
+  &:hover,
+  &[hover]{
+    stroke: ${(props) => (props.$stroke ? '#D9D9D9' : '#D9D9D9')};
+
+  }
 `
 
 export const PlayerTrackPlay = styled.div`
@@ -263,7 +269,8 @@ export const PlayerBtnRepeatActiveSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #ffffff;
-  &:hover  {
+  &:hover,
+  &[hover]  {
     fill: transparent;
     stroke: #ffffff;
   }
