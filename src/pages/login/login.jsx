@@ -41,16 +41,12 @@ export function Login() {
           setLoading(false)
           return
         }
+        setUser(user)
+        addLogin(email)
+        navigate("/");
         getToken({ email, password })
           .then((token) => {
             console.log(token)
-            addLogin(email)
-            console.log(6)
-            setUser(user)
-
-            window.location.href = '/'
-            // navigate("/", { replace: true });
-
           })
       })
       .catch((error) => {

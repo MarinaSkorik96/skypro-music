@@ -4,8 +4,10 @@ import { AppRoutes } from "./routes";
 import { useState } from "react";
 import Context from './contexts';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetCurrentTrack } from "./store/slices/track";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -55,7 +57,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 function App() {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   // const curTrack = useSelector(store => store.track.currentTrack)
   // const curTrack1 = useSelector(state => state.track.currentTrack)
 
@@ -66,7 +69,7 @@ function App() {
   // const allTracks = useSelector(state => state.track.allTracks)
 
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('login'));
 
   const handleLogin = ({ setUser }) => {
     const getuser = localStorage.getItem('login');
@@ -81,6 +84,7 @@ function App() {
 
   const handleLogOut = () => {
     localStorage.removeItem('login')
+    dispatch(resetCurrentTrack(null))
   }
 
   return (

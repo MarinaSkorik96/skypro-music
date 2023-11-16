@@ -52,7 +52,7 @@ const AudioPlayer = () => {
   useEffect(() => {
 
     const handleTimeUpdate = () => {
-      if (aRef.current?.currentTime && aRef.current.duration) {
+      if (aRef.current?.currentTime && aRef.current?.duration) {
         setCurrentTime(sToStr(aRef.current.currentTime))
         setDuration(sToStr(aRef.current.duration))
       } else {
