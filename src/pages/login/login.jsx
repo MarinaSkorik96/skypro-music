@@ -1,6 +1,6 @@
 
-import { Link } from "react-router-dom";
-import * as S from "./LoginStyles.jsx"
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import * as S from "./LoginStyles.js"
 import { useEffect, useState, useContext } from "react";
 import { getAuthorization, getLogin, getToken } from "../../api.js";
 import Context from "../../contexts.jsx";
@@ -8,7 +8,6 @@ import Context from "../../contexts.jsx";
 
 export function Login() {
   const [error, setError] = useState(null);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -22,8 +21,10 @@ export function Login() {
     setPassword("")
     setRepeatPassword("")
   }
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
+
     setLoading(true)
     if (email === "") {
       setError("Не заполнен Email");
@@ -44,10 +45,10 @@ export function Login() {
           .then((token) => {
             console.log(token)
             addLogin(email)
-            window.location.href = '/'
             setUser(user)
-
-            // localStorage.setItem('login', user.email);
+            console.log(6)
+            // window.location.href = '/'
+            navigate("/", { replace: true });
           })
       })
       .catch((error) => {

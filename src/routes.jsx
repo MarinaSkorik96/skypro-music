@@ -6,16 +6,18 @@ import { MyPlaylist } from "./pages/myplaylist/MyPlaylist.jsx";
 import { Main } from "./pages/main/main.jsx";
 import { Error } from "./pages/error/Error.jsx";
 import { ProtectedRoute } from "./pages/ProtectedRoute.jsx";
-import { useContext, useEffect} from 'react';
-import Context from "./contexts.jsx";
+import { useState } from 'react';
 
 export const AppRoutes = () => {
 
-  const { handleLogin, user, setUser } = useContext(Context)
-  useEffect(() => {
-  //   handleLogin({ user, setUser });
-  console.log(user)
-  }, [user]);
+  const [user, setUser] = useState(localStorage.getItem('login'));
+
+  // useEffect((user) => {
+  //   //   handleLogin({ user, setUser });
+  //   addLogin()
+
+  //   console.log(user)
+  // }, [user]);
 
   return (
     <Routes>
@@ -23,7 +25,7 @@ export const AppRoutes = () => {
 
       {/* <Route path="/registration" element={<Registration />} /> */}
 
-      <Route element={<ProtectedRoute isAllowed={Boolean( user )} />}>
+      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/MyPlaylist" element={<MyPlaylist />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/" element={<Main />} />
