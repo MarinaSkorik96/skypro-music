@@ -7,17 +7,20 @@ import { Main } from "./pages/main/main.jsx";
 import { Error } from "./pages/error/Error.jsx";
 import { ProtectedRoute } from "./pages/ProtectedRoute.jsx";
 import { useState } from 'react';
+import { useContext, useEffect } from 'react';
+import Context from "./contexts.jsx";
 
 export const AppRoutes = () => {
 
   const [user, setUser] = useState(localStorage.getItem('login'));
 
-  // useEffect((user) => {
-  //   //   handleLogin({ user, setUser });
-  //   addLogin()
-
-  //   console.log(user)
-  // }, [user]);
+  //   const { handleLogin, user, setUser, addLogin } = useContext(Context)
+  useEffect(() => {
+    // //  handleLogin({ user, setUser });
+    //     addLogin()
+    setUser(localStorage.getItem('login'))
+    //     console.log(user)
+  }, [user]);
 
   return (
     <Routes>

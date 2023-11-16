@@ -55,15 +55,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 function App() {
-  const dispatch = useDispatch()
-  const curTrack = useSelector(store => store.track.currentTrack)
-  const curTrack1 = useSelector(state => state.track.currentTrack)
+  // const dispatch = useDispatch()
+  // const curTrack = useSelector(store => store.track.currentTrack)
+  // const curTrack1 = useSelector(state => state.track.currentTrack)
 
-  // console.log(curTrack)
-  // console.log(curTrack1)
+  // // console.log(curTrack)
+  // // console.log(curTrack1)
 
 
-  const allTracks = useSelector(state => state.track.allTracks)
+  // const allTracks = useSelector(state => state.track.allTracks)
 
 
   const [user, setUser] = useState(null);
@@ -75,6 +75,8 @@ function App() {
 
   const addLogin = (email) => {
     localStorage.setItem('login', email);
+    setUser(email);
+
   }
 
   const handleLogOut = () => {

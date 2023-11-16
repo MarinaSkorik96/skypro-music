@@ -45,10 +45,12 @@ export function Login() {
           .then((token) => {
             console.log(token)
             addLogin(email)
-            setUser(user)
             console.log(6)
-            // window.location.href = '/'
-            navigate("/", { replace: true });
+            setUser(user)
+
+            window.location.href = '/'
+            // navigate("/", { replace: true });
+
           })
       })
       .catch((error) => {
