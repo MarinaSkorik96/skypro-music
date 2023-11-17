@@ -9,9 +9,9 @@ const SideBar = () => {
 
   const { handleLogin, user, setUser, handleLogOut } = useContext(Context)
   // handleLogin({ user, setUser })
-  useEffect(() => {
-    handleLogin({ user, setUser });
-  }, []);
+  // useEffect(() => {
+  //   handleLogin({ user, setUser });
+  // }, []);
   // const handleLogOut = () => {
   //   localStorage.removeItem('login')
   // }

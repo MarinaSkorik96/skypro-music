@@ -4,10 +4,10 @@ import { AppRoutes } from "./routes";
 import { useState } from "react";
 import Context from './contexts';
 import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetCurrentTrack } from "./store/slices/track";
+import { resetCurrentTrack, getAllTracks } from "./store/slices/track";
+import { getTodos } from './api';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -59,16 +59,6 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   const dispatch = useDispatch();
 
-  // const curTrack = useSelector(store => store.track.currentTrack)
-  // const curTrack1 = useSelector(state => state.track.currentTrack)
-
-  // // console.log(curTrack)
-  // // console.log(curTrack1)
-
-
-  // const allTracks = useSelector(state => state.track.allTracks)
-
-
   const [user, setUser] = useState(localStorage.getItem('login'));
 
   const handleLogin = ({ setUser }) => {
@@ -87,10 +77,27 @@ function App() {
     dispatch(resetCurrentTrack(null))
   }
 
+  const currentTrackS = useSelector(state => state.track.currentTrack)
+  const [loadings, setLoadings] = useState(true)
+  const [addTracksError, setAddTracksError] = useState(null)
+
+  useEffect(() => {
+    getTodos()
+      .then((tracks) => {
+        dispatch(getAllTracks(tracks))
+        // setTracks(tracks);
+      }).catch(() => {
+        setAddTracksError(true);
+      }).finally(() => {
+        setLoadings(false);
+      })
+  }, [])
+
+
   return (
     <>
       <Context.Provider
-        value={{ handleLogin, user, setUser, addLogin, handleLogOut }}>
+        value={{ handleLogin, user, setUser, addLogin, handleLogOut, loadings, addTracksError }}>
         <GlobalStyle />
         <S.Wrapper>
           <S.Container>

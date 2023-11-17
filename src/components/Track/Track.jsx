@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import * as S from "./TrackStyles"
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
 import { useContext } from 'react';
-import LoadingContext from '../../context';
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentTrack } from "../../store/slices/track";
 import { getIsPlaing } from "../../store/slices/track";
+import Context from "../../contexts";
 
 
 const Track = () => {
@@ -13,11 +13,8 @@ const Track = () => {
 
   const curTrack = useSelector(state => state.track.currentTrack)
   const isPlaing = useSelector(state => state.track.isPlaying)
-  // const cutTrackId = useSelector(state => state.track.indexCurrentTrack)
-
-
-
-  const { tracks, loadings, addTracksError, setCurrentTrack } = useContext(LoadingContext)
+  const allTracks = useSelector(state => state.track.allTracks)
+  const { loadings, addTracksError } = useContext(Context)
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''
@@ -29,7 +26,7 @@ const Track = () => {
     <>
       {loadings ? <TrackSkeleton /> : null}
       {addTracksError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
-      {tracks.map((track) => {
+      { allTracks.map((track) => {
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>

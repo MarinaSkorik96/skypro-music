@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import AudioPlayerLoad from "../AudioPlayerLoad/AudioPlayerLoad";
 import { useContext, useState, useRef } from 'react';
-import LoadingContext from '../../context';
 import * as S from "./AudioPlayerStyles"
 import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/ProgressInput";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentTrack, getIsPlaing, nextTrack, prevTrack, getShuffle } from "../../store/slices/track";
+import { getIsPlaing, nextTrack, prevTrack, getShuffle } from "../../store/slices/track";
+import Context from "../../contexts";
 
 
 const AudioPlayer = () => {
@@ -19,7 +19,7 @@ const AudioPlayer = () => {
 
   const arreyAllTracks = shuffle ? shuffleAllTracks : allTracks
 
-  const { loading } = useContext(LoadingContext)
+  const { loading } = useContext(Context)
   const [isPlaying, setPlaying] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
 
