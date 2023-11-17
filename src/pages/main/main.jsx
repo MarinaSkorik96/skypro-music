@@ -1,9 +1,11 @@
 import * as S from "./mainStyles"
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer.jsx";
 import NavMenu from "../../components/NavMenu/NavMenu.jsx";
-import TrackList from "../../components/TrackList/TrackList.jsx";
+import MainTrackList from "../../components/TrackList/MainTrackList.jsx";
 import SideBar from "../../components/SideBar/SideBar.jsx";
+import Search from "../../components/Search/Search.jsx"
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 
 
@@ -18,7 +20,11 @@ export function Main() {
         <S.Container>
           <S.Main className="main">
             <NavMenu />
-            <TrackList />
+            <S.MainCenterblock>
+              <Search />
+              <MainTrackList />
+              <Outlet />
+            </S.MainCenterblock>
             <SideBar />
           </S.Main>
           {currentTrackS ? <AudioPlayer /> : null}

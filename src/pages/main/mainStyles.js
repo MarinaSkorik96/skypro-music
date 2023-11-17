@@ -26,4 +26,9 @@ export const Main = styled.main`
   -ms-flex-pack: justify;
   justify-content: space-between;
 `
+export const MainCenterblock = styled.div`
+  width: auto;
+  flex-grow: 3;
+  padding: 20px 40px 20px 111px;
+`
 

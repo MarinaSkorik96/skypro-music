@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { playLists } from "../../PlayListsArr.js"
 import { useDispatch, useSelector } from "react-redux";
 import { NavMenu } from "../../components/BurgerMenu/BurgerMenuStyles.js";
-import TrackList from "../../components/TrackList/TrackList.jsx";
+import TrackList from "../../components/TrackList/MainTrackList.jsx";
 import SideBar from "../../components/SideBar/SideBar.jsx";
 import * as S from "../main/mainStyles.js"
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer.jsx";
