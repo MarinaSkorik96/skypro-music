@@ -28,6 +28,7 @@ export function Main() {
             <SideBar />
           </S.Main>
           {currentTrackS ? <AudioPlayer /> : null}
+          
           <footer className="footer" />
         </S.Container>
       </S.Wrapper>

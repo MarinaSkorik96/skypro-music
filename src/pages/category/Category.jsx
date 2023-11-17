@@ -13,28 +13,11 @@ export const Category = () => {
   const params = useParams();
   console.log(params)
   const playLista = playLists.find((playLista) => playLista.id === Number(params.id));
-  const currentTrackS = useSelector(state => state.track.currentTrack)
 
 
   return (
     <>
-      <S.Wrapper>
-        <S.Container>
-          <S.Main className="main">
-            <NavMenu />
-            {/* <TrackList /> */}
-            {/* <SideBar /> */}
-          </S.Main>
-          <h1>Подборкa {playLista.id}</h1>
-
-          {/* {currentTrackS ? <AudioPlayer /> : null} */}
-          <footer className="footer" />
-        </S.Container>
-      </S.Wrapper>
-
-      <div>
-      </div>
-
+      <h1>Подборкa {playLista.id}</h1>
     </>
   );
 };

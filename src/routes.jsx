@@ -1,19 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 import { Category } from "./pages/category/Category.jsx";
 import { Login } from "./pages/login/Login.jsx";
-// import { Registration } from "./pages/registration/registration.jsx";
 import { MyPlaylist } from "./pages/myplaylist/MyPlaylist.jsx";
 import { Main } from "./pages/main/main.jsx";
 import { Error } from "./pages/error/Error.jsx";
 import { ProtectedRoute } from "./pages/ProtectedRoute.jsx";
-import { useState } from 'react';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Context from "./contexts.jsx";
 import MainTrackList from "./components/TrackList/MainTrackList.jsx";
 
 export const AppRoutes = () => {
 
-  const { handleLogin, user, setUser, addLogin } = useContext(Context)
+  const {  user } = useContext(Context)
 
   return (
     <Routes>
