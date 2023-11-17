@@ -22,7 +22,7 @@ export function Main() {
             <NavMenu />
             <S.MainCenterblock>
               <Search />
-              <MainTrackList />
+              {/* <MainTrackList /> */}
               <Outlet />
             </S.MainCenterblock>
             <SideBar />

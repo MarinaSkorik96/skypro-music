@@ -9,10 +9,11 @@ import { ProtectedRoute } from "./pages/ProtectedRoute.jsx";
 import { useState } from 'react';
 import { useContext, useEffect } from 'react';
 import Context from "./contexts.jsx";
+import MainTrackList from "./components/TrackList/MainTrackList.jsx";
 
 export const AppRoutes = () => {
 
-    const { handleLogin, user, setUser, addLogin } = useContext(Context)
+  const { handleLogin, user, setUser, addLogin } = useContext(Context)
 
   return (
     <Routes>
@@ -21,9 +22,14 @@ export const AppRoutes = () => {
       {/* <Route path="/registration" element={<Registration />} /> */}
 
       <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-        <Route path="/MyPlaylist" element={<MyPlaylist />} />
+        <Route path="/" element={<Main />}>
+          <Route path="/MyPlaylist" element={<MyPlaylist />} />
+          <Route path="/category/:id" element={<Category />} />
+          <Route index element={<MainTrackList />} />
+        </Route>
+        {/* <Route path="/MyPlaylist" element={<MyPlaylist />} />
         <Route path="/category/:id" element={<Category />} />
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main />} /> */}
 
       </Route>
 
