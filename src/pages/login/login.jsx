@@ -43,11 +43,12 @@ export function Login() {
         }
         setUser(user)
         addLogin(email)
-        navigate("/");
         getToken({ email, password })
           .then((token) => {
             console.log(token)
           })
+        navigate("/");
+
       })
       .catch((error) => {
         setError(error)

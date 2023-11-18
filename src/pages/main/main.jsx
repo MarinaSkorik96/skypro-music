@@ -22,7 +22,6 @@ export function Main() {
             <NavMenu />
             <S.MainCenterblock>
               <Search />
-              {/* <MainTrackList /> */}
               <Outlet />
             </S.MainCenterblock>
             <SideBar />

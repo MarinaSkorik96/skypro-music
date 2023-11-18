@@ -1,13 +1,18 @@
 import React from "react";
 import * as S from "./PlayListStyles"
 import { playLists } from "../../PlayListsArr.js"
+import { useContext } from 'react';
+import Context from '../../contexts';
 
 
 const PlayList = () => {
+  const { isMainPage } = useContext(Context)
 
   return (
     <>
-      {playLists.map((playLista) => (
+      <S.SidebarList>
+
+        {playLists.map((playLista) => (
           <S.SidebarItem key={playLista.id}>
             <S.SidebarLink to={`/category/${playLista.id}`}>
               <S.SidebarImg
@@ -16,7 +21,10 @@ const PlayList = () => {
               />
             </S.SidebarLink>
           </S.SidebarItem>
-      ))}
+
+        ))}
+      </S.SidebarList>
+
     </>
   );
 };

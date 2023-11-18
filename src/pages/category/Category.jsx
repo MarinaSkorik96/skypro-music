@@ -1,15 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-// import * as S from "./PlayListStyles"
 import { playLists } from "../../PlayListsArr.js"
-import { useDispatch, useSelector } from "react-redux";
-import { NavMenu } from "../../components/BurgerMenu/BurgerMenuStyles.js";
-import TrackList from "../../components/TrackList/MainTrackList.jsx";
-import SideBar from "../../components/SideBar/SideBar.jsx";
-import * as S from "../main/mainStyles.js"
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer.jsx";
+import { useContext } from 'react';
+import Context from '../../contexts';
 
 export const Category = () => {
+
+  const { setIsMainPage } = useContext(Context)
+  setIsMainPage(false)
   const params = useParams();
   console.log(params)
   const playLista = playLists.find((playLista) => playLista.id === Number(params.id));

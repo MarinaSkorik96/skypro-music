@@ -1,20 +1,13 @@
 import React from "react";
-import PlayLists from "../PlayLists/PlayLists";
+import PlayList from "../PlayList/PlayList";
 import * as S from "./SideBarStyles"
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Context from '../../contexts';
 
 
 const SideBar = () => {
 
-  const { handleLogin, user, setUser, handleLogOut } = useContext(Context)
-  // handleLogin({ user, setUser })
-  // useEffect(() => {
-  //   handleLogin({ user, setUser });
-  // }, []);
-  // const handleLogOut = () => {
-  //   localStorage.removeItem('login')
-  // }
+  const { user, handleLogOut, isMainPage } = useContext(Context)
 
   return (
     <S.MainSidebar>
@@ -26,8 +19,8 @@ const SideBar = () => {
           </svg>
         </S.SidebarIcon>
       </S.SidebarPersonal>
-      <S.SidebarBlock>
-        <PlayLists />
+      <S.SidebarBlock  $display={isMainPage}>
+        <PlayList />
       </S.SidebarBlock>
     </S.MainSidebar>
   );

@@ -58,7 +58,6 @@ const GlobalStyle = createGlobalStyle`
 `
 function App() {
   const dispatch = useDispatch();
-
   const [user, setUser] = useState(localStorage.getItem('login'));
 
   const handleLogin = ({ setUser }) => {
@@ -80,6 +79,7 @@ function App() {
   const currentTrackS = useSelector(state => state.track.currentTrack)
   const [loadings, setLoadings] = useState(true)
   const [addTracksError, setAddTracksError] = useState(null)
+  const [isMainPage, setIsMainPage] = useState(true)
 
   useEffect(() => {
     getTodos()
@@ -97,7 +97,7 @@ function App() {
   return (
     <>
       <Context.Provider
-        value={{ handleLogin, user, setUser, addLogin, handleLogOut, loadings, addTracksError }}>
+        value={{ handleLogin, user, setUser, addLogin, handleLogOut, loadings, addTracksError, isMainPage, setIsMainPage }}>
         <GlobalStyle />
         <S.Wrapper>
           <S.Container>

@@ -1,3 +1,4 @@
+
 export async function getTodos() {
   const response = await fetch('https://skypro-music-api.skyeng.tech/catalog/track/all/');
 
@@ -61,8 +62,24 @@ export async function getToken({ email, password }) {
       "content-type": "application/json",
     },
   })
-
+  
   const token = await response.json();
   return token
+}
+
+export async function getFreshToken(refreshToken) {
+  const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/", {
+    method: "POST",
+    body: JSON.stringify({
+      refresh: `${refreshToken}`,
+        }),
+    headers: {
+      // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+      "content-type": "application/json",
+    },
+  })
+
+  const accessToken = await response.json();
+  return accessToken
 }
 
