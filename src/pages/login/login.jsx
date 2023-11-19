@@ -4,9 +4,13 @@ import * as S from "./LoginStyles.js"
 import { useEffect, useState, useContext } from "react";
 import { getAuthorization, getLogin, getToken } from "../../api.js";
 import Context from "../../contexts.jsx";
+import { currentUserToken, currentUser } from "../../store/slices/user.js";
+import { useDispatch } from "react-redux";
 
 
 export function Login() {
+  const dispatch = useDispatch();
+
   const [error, setError] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,9 +47,11 @@ export function Login() {
         }
         setUser(user)
         addLogin(email)
+        dispatch(currentUser({user}))
         getToken({ email, password })
           .then((token) => {
             console.log(token)
+            dispatch(currentUserToken(token))
           })
         navigate("/");
 

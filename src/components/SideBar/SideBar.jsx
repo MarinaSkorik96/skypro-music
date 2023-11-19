@@ -3,10 +3,15 @@ import PlayList from "../PlayList/PlayList";
 import * as S from "./SideBarStyles"
 import { useContext } from 'react';
 import Context from '../../contexts';
+import { getFreshToken } from "../../store/slices/user";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const SideBar = () => {
 
+  const dispatch = useDispatch();
+  const refresh = useSelector(state => state.user.refresh)
+  console.log(refresh)
   const { user, handleLogOut, isMainPage } = useContext(Context)
 
   return (
@@ -19,8 +24,9 @@ const SideBar = () => {
           </svg>
         </S.SidebarIcon>
       </S.SidebarPersonal>
-      <S.SidebarBlock  $display={isMainPage}>
+      <S.SidebarBlock $display={isMainPage}>
         <PlayList />
+        <button onClick={()=> {dispatch(getFreshToken(refresh))}}> Обнови токен</button>
       </S.SidebarBlock>
     </S.MainSidebar>
   );
