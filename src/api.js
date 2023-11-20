@@ -62,7 +62,7 @@ export async function getToken({ email, password }) {
       "content-type": "application/json",
     },
   })
-  
+
   const token = await response.json();
   return token
 }
@@ -72,7 +72,7 @@ export async function getFreshToken(refreshToken) {
     method: "POST",
     body: JSON.stringify({
       refresh: `${refreshToken}`,
-        }),
+    }),
     headers: {
       // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
       "content-type": "application/json",
@@ -83,3 +83,18 @@ export async function getFreshToken(refreshToken) {
   return accessToken
 }
 
+
+export async function getFT() {
+  const accessToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwNTA2NTI4LCJpYXQiOjE3MDA1MDYwNTMsImp0aSI6ImJiMWFiOTJjNzgwNzQzY2JhN2E2ZGQzYzIwZDIwMzY3IiwidXNlcl9pZCI6MjUxN30.poOAwN7VU0Mjr2ji_Ckhv3huLkw9NfbJKXp_gUp9e_g";
+
+  const response = await fetch("https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+  const allFT = await response.json();
+  console.log(allFT)
+  return allFT
+}

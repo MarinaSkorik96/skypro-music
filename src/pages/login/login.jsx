@@ -51,6 +51,7 @@ export function Login() {
         getToken({ email, password })
           .then((token) => {
             console.log(token)
+            localStorage.setItem('token', token.refresh);
             dispatch(currentUserToken(token))
           })
         navigate("/");

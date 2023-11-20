@@ -2,20 +2,31 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getFreshToken = createAsyncThunk(
   'user/getFreshToken',
-  async function (refresh) {
-    const response = await fetch('https://skypro-music-api.skyeng.tech/user/token/refresh/', {
-      method: "POST",
-      body: JSON.stringify({
-        refresh: refresh,
-      }),
-      headers: {
-        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
-        "content-type": "application/json",
-      },
-      
-    });
-    const accessToken = await response.json();
-    return accessToken
+  async function (refresh, { rejectWithValue }) {
+    try {
+      const response = await fetch('https://skypro-music-api.skyeng.tech/user/token/refresh/', {
+        method: "POST",
+        body: JSON.stringify({
+          refresh: refresh,
+        }),
+        headers: {
+          "content-type": "application/json",
+        },
+
+      });
+      if (!response.ok) {
+        if (response.status === 400) {
+          throw new Error(response.statusText);
+
+        }
+        throw new Error('Error server');
+      }
+      const accessToken = await response.json();
+      return accessToken
+
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
   }
 )
 
@@ -45,8 +56,11 @@ const getUserSlace = createSlice({
   extraReducers: {
     [getFreshToken.fulfilled]: (state, action) => {
       state.access = action.payload.access;
+      console.log(state.access)
     },
-    // [fetchTodos.rejected]: setError,
+    [getFreshToken.rejected]: (state, action) => {
+      console.log(action.payload)
+    }
   }
 });
 
