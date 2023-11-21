@@ -1,4 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import { getFreshToken } from "../../store/slices/user";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetFavoritesTracksQuery } from "../../query/tracks";
 
 export const getFreshToken = createAsyncThunk(
   'user/getFreshToken',
