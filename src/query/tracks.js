@@ -1,40 +1,25 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
-const accessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90e…UxN30.Q39p8f2af5fU9EerFeD0UbOtwdpJIqOj_gDw8JMKaPI";
+// const accessToken =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90e…UxN30.Q39p8f2af5fU9EerFeD0UbOtwdpJIqOj_gDw8JMKaPI";
 
 export const tracksApi = createApi({
   reducerPath: "tracksApi",
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://skypro-music-api.skyeng.tech/catalog/',
-    // prepareHeaders: (headers) => {
-
-    //   // if (accessToken) {
-    //   //   console.log(accessToken)
-    //   // }
-    //   headers.set('authorization', `Bearer ${accessToken}`)
-    //   console.log(accessToken)
-    //   console.log("u")
-
-    //   return headers
-    // },
+    // headers: { authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwNTY0MzMwLCJpYXQiOjE3MDA1MDc5MDYsImp0aSI6ImQyNjA5MTg5YTBhZTQ1ZWU4ODdlNzljZDZmNTdmMjI2IiwidXNlcl9pZCI6MjUxN30.NOQS3JqepdyrEhByH0XVSfQMu9x0w3k8JCkzUkn15-Y` }
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().user.access
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+      return headers
+    },
 
   }),
   endpoints: (build) => ({
     getFavoritesTracks: build.query({
       query: () => 'track/favorite/all/',
-      // headers: { authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwNTA1NjI2LCJpYXQiOjE3MDA0OTIxMDcsImp0aSI6IjUzZGJkZTk0ZWVkZjRmODM5MTAyNmUxNzY4MjgyYzlmIiwidXNlcl9pZCI6MjUxN30.vNQ82tPdbyBosYw-c_-tmkas6xPUxC7-umnkShrTFYM` }
-
-      prepareHeaders: (headers, { getState }) => {
-        const token = getState().user.access;
-        console.log(token)
-        // console.log("accessToken", token);
-
-        if (token) {
-          headers.set("authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90e…UxN30.fDL6QjZShFgRecH9Nd0ICnGYcZEgAAzTARAwYZppkNU`);
-        }
-        return headers;
-      },
     })
   }),
 })
