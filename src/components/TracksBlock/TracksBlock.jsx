@@ -3,7 +3,7 @@ import Track from "../Track/Track";
 import * as S from "./TracksBlockStyles"
 
 
-const TracksBlock = ({playList}) => {
+const TracksBlock = ({page}) => {
 
 
   return (
@@ -19,7 +19,7 @@ const TracksBlock = ({playList}) => {
         </S.Col04>
       </S.ContentTitle>
       <S.ContentPlaylist>
-        <Track playList={playList}/>
+        <Track page={page}/>
       </S.ContentPlaylist>
     </S.CenterblockContent>
   );

@@ -8,7 +8,8 @@ import { getIsPlaing } from "../../store/slices/track";
 import Context from "../../contexts";
 
 
-const Track = ({ playList }) => {
+const Track = ({ page }) => {
+  console.log(page)
   // console.log(playList)
   const dispatch = useDispatch();
 
@@ -19,6 +20,15 @@ const Track = ({ playList }) => {
 
   const { loadings, addTracksError } = useContext(Context)
   console.log(favTr)
+  console.log(allTracks)
+  // const allTrackss =
+  //  if (page === 'favorites') {
+  //   allTrackss = [...favTr]
+  // } else {
+  //   allTrackss = [...allTracks]
+  // }
+  const arreyAllTracks = page && favTr ? favTr : allTracks
+
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''
@@ -30,7 +40,7 @@ const Track = ({ playList }) => {
     <>
       {loadings ? <TrackSkeleton /> : null}
       {addTracksError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
-      {allTracks.map((track) => {
+      {loadings? null : arreyAllTracks.map((track) => {
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
