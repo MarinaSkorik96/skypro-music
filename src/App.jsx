@@ -80,6 +80,7 @@ function App() {
   const [loadings, setLoadings] = useState(true)
   const [addTracksError, setAddTracksError] = useState(null)
   const [isMainPage, setIsMainPage] = useState(true)
+  const favTr = useSelector(state => state.track.favoriteTracks)
 
   useEffect(() => {
     getTodos()

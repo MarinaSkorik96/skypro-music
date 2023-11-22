@@ -4,7 +4,7 @@ import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
 import { useContext } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentTrack } from "../../store/slices/track";
-import { getIsPlaing } from "../../store/slices/track";
+import { getIsPlaing, getAllTracks } from "../../store/slices/track";
 import Context from "../../contexts";
 
 
@@ -27,8 +27,16 @@ const Track = ({ page }) => {
   // } else {
   //   allTrackss = [...allTracks]
   // }
-  const arreyAllTracks = page && favTr ? favTr : allTracks
+  const arreyAllTracks = page === 'favorites' && favTr ? favTr : allTracks
+  // const getNextTrack = () => {
+  //   dispatch(getAllTracks({ favTr }));
+  // }
+  // if (page && favTr) {
+  //   dispatch(getAllTracks({ favTr }));
 
+  // }
+
+  // page && favTr ? dispatch(getAllTracks(favTr)): null
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''
@@ -40,13 +48,15 @@ const Track = ({ page }) => {
     <>
       {loadings ? <TrackSkeleton /> : null}
       {addTracksError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
-      {loadings? null : arreyAllTracks.map((track) => {
+      {loadings ? null : arreyAllTracks.map((track) => {
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
               <S.TrackTitle onClick={() => {
                 dispatch(getCurrentTrack(track));
                 dispatch(getIsPlaing(true));
+                // dispatch(getAllTracks(arreyAllTracks))
+                console.log(arreyAllTracks)
               }}>
                 <S.TrackTitleImage>
                   {isPlaing && track === curTrack && <S.BlinkingDot></S.BlinkingDot>}

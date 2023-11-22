@@ -8,6 +8,7 @@ const initialState = {
   shuffle: false,
   shuffleAllTracks: [],
   favoriteTracks: [],
+  currentPage: "",
 };
 
 
@@ -67,11 +68,24 @@ const getCurrentTrackSlace = createSlice({
     },
     getFavoriteTracks(state, action) {
       state.favoriteTracks = action.payload;
+    },
+    getCurrentPage(state, action) {
+      state.currentPage = action.payload;
     }
   }
 });
 
 
-export const { getAllTracks, getCurrentTrack, getIsPlaing, nextTrack, prevTrack, getShuffle, resetCurrentTrack, getFavoriteTracks } = getCurrentTrackSlace.actions;
+export const {
+  getAllTracks,
+  getCurrentTrack,
+  getIsPlaing,
+  nextTrack,
+  prevTrack,
+  getShuffle,
+  resetCurrentTrack,
+  getFavoriteTracks,
+  getCurrentPage
+} = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

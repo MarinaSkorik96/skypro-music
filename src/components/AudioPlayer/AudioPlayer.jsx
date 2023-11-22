@@ -16,7 +16,10 @@ const AudioPlayer = () => {
   const allTracks = useSelector(state => state.track.allTracks)
   const shuffle = useSelector(state => state.track.shuffle)
   const shuffleAllTracks = useSelector(state => state.track.shuffleAllTracks)
+  const currentPage = useSelector(state => state.track.currentPage)
 
+  console.log(currentPage)
+  // const currentPageTracks = 
   const arreyAllTracks = shuffle ? shuffleAllTracks : allTracks
 
   const { loading } = useContext(Context)
