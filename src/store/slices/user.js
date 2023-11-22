@@ -3,14 +3,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFavoritesTracksQuery } from "../../query/tracks";
 
+const tokenR = localStorage.getItem('token');
+
+
 export const getFreshToken = createAsyncThunk(
   'user/getFreshToken',
-  async function (refresh, { rejectWithValue }) {
+  async function (_, { rejectWithValue }) {
     try {
       const response = await fetch('https://skypro-music-api.skyeng.tech/user/token/refresh/', {
         method: "POST",
         body: JSON.stringify({
-          refresh: refresh,
+          refresh: tokenR,
         }),
         headers: {
           "content-type": "application/json",

@@ -1,24 +1,45 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { getFreshToken } from "../store/slices/user"
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: 'https://skypro-music-api.skyeng.tech',
+  prepareHeaders: (headers, { getState }) => {
+
+    const token = getState().user.access
+    if (token) {
+      console.log(token)
+      headers.set('authorization', `Bearer ${token}`)
+    }
+    return headers
+  },
+})
+
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions)
+  if (result.error && result.error.status === 401) {
+    const refreshResult = await api.dispatch(getFreshToken())
+    if (refreshResult.data) {
+      // Возможно обработка ошибок
+      // api.dispatch( getFreshToken())
+      // retry the initial query
+      //   result = await baseQuery(args, api, extraOptions)
+    } else {
+      result = await baseQuery(args, api, extraOptions)
+    }
+  }
+  return result
+}
+
+
 export const tracksApi = createApi({
 
   reducerPath: "tracksApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://skypro-music-api.skyeng.tech/catalog/',
-    // headers: { authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwNTY0MzMwLCJpYXQiOjE3MDA1MDc5MDYsImp0aSI6ImQyNjA5MTg5YTBhZTQ1ZWU4ODdlNzljZDZmNTdmMjI2IiwidXNlcl9pZCI6MjUxN30.NOQS3JqepdyrEhByH0XVSfQMu9x0w3k8JCkzUkn15-Y` }
-    prepareHeaders: (headers, { getState }) => {
-
-      const token = getState().user.access
-      if (token) {
-        console.log(token)
-        headers.set('authorization', `Bearer ${token}`)
-      }
-      return headers
-    },
-
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
     getFavoritesTracks: build.query({
-      query: () => 'track/favorite/all/',
+      query: () => '/catalog/track/favorite/all/',
+
     })
   }),
 })

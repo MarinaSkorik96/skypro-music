@@ -67,21 +67,21 @@ export async function getToken({ email, password }) {
   return token
 }
 
-export async function getFreshToken(refreshToken) {
-  const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/", {
-    method: "POST",
-    body: JSON.stringify({
-      refresh: `${refreshToken}`,
-    }),
-    headers: {
-      // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
-      "content-type": "application/json",
-    },
-  })
+// export async function getFreshToken(refreshToken) {
+//   const response = await fetch("https://skypro-music-api.skyeng.tech/user/token/", {
+//     method: "POST",
+//     body: JSON.stringify({
+//       refresh: `${refreshToken}`,
+//     }),
+//     headers: {
+//       // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+//       "content-type": "application/json",
+//     },
+//   })
 
-  const accessToken = await response.json();
-  return accessToken
-}
+//   const accessToken = await response.json();
+//   return accessToken
+// }
 
 
 export async function getFT() {

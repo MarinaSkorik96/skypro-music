@@ -7,19 +7,14 @@ import { getFreshToken } from "../../store/slices/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFavoritesTracksQuery } from "../../query/tracks";
 
-
 export const MyPlaylist = () => {
-  // const [getFavoritesTracks] = useGetFavoritesTracksQuery();
-  const [getFavoritesTracks] = useGetFavoritesTracksQuery();
+
   const { setIsMainPage } = useContext(Context)
   setIsMainPage(false);
 
-  // console.log([useGetFavoritesTracksQuery] )
-  console.log(getFavoritesTracks)
-  const dispatch = useDispatch();
-  const tokenR = localStorage.getItem('token');
-  // const access = useSelector(state =>  state.user.access);
-  dispatch(getFreshToken(tokenR))
+  const { data } = useGetFavoritesTracksQuery();
+  console.log(data)
+  
 
   return (
     <div>

@@ -8,13 +8,21 @@ import { getIsPlaing } from "../../store/slices/track";
 import Context from "../../contexts";
 
 
-const Track = () => {
+const Track = ({ playList }) => {
+  // console.log(playList)
   const dispatch = useDispatch();
 
   const curTrack = useSelector(state => state.track.currentTrack)
   const isPlaing = useSelector(state => state.track.isPlaying)
   const allTracks = useSelector(state => state.track.allTracks)
   const { loadings, addTracksError } = useContext(Context)
+
+  // const allTracks = []
+  // if (playList) {
+  //   allTracks = playList
+  // } else {
+  //   allTracks = allTrackss
+  // }
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''
@@ -26,7 +34,7 @@ const Track = () => {
     <>
       {loadings ? <TrackSkeleton /> : null}
       {addTracksError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
-      { allTracks.map((track) => {
+      {allTracks.map((track) => {
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
@@ -35,7 +43,7 @@ const Track = () => {
                 dispatch(getIsPlaing(true));
               }}>
                 <S.TrackTitleImage>
-                  { isPlaing && track === curTrack  && <S.BlinkingDot></S.BlinkingDot>}
+                  {isPlaing && track === curTrack && <S.BlinkingDot></S.BlinkingDot>}
                   <S.TrackTitleSvg alt="music">
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>
