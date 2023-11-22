@@ -15,14 +15,10 @@ const Track = ({ playList }) => {
   const curTrack = useSelector(state => state.track.currentTrack)
   const isPlaing = useSelector(state => state.track.isPlaying)
   const allTracks = useSelector(state => state.track.allTracks)
-  const { loadings, addTracksError } = useContext(Context)
+  const favTr = useSelector(state => state.track.favoriteTracks)
 
-  // const allTracks = []
-  // if (playList) {
-  //   allTracks = playList
-  // } else {
-  //   allTracks = allTrackss
-  // }
+  const { loadings, addTracksError } = useContext(Context)
+  console.log(favTr)
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''

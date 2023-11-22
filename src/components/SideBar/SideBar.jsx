@@ -10,7 +10,6 @@ import {getFT} from "../../api.js"
 const SideBar = () => {
 
   const dispatch = useDispatch();
-  const tokenR = localStorage.getItem('token');
   const { user, handleLogOut, isMainPage } = useContext(Context)
 
   return (
@@ -25,7 +24,7 @@ const SideBar = () => {
       </S.SidebarPersonal>
       <S.SidebarBlock $display={isMainPage}>
         <PlayList />
-        <button onClick={()=> {dispatch(getFreshToken(tokenR))}}> Обнови токен</button>
+        <button onClick={()=> {dispatch(getFreshToken())}}> Обнови токен</button>
         <button onClick={()=>{getFT()}}>Получить любимые треки</button>
       </S.SidebarBlock>
     </S.MainSidebar>
