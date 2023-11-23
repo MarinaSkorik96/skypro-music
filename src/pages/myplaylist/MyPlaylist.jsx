@@ -10,13 +10,11 @@ import { getFavoriteTracks} from "../../store/slices/track";
 
 export const MyPlaylist = () => {
   const dispatch = useDispatch();
-  // dispatch(getCurrentPage('favorites'))
 
   const { setIsMainPage } = useContext(Context)
   setIsMainPage(false);
 
   const { data, isLoading } = useGetFavoritesTracksQuery();
-  console.log(isLoading)
   dispatch(getFavoriteTracks(data))
 
   return (

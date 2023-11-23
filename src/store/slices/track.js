@@ -25,10 +25,6 @@ const getCurrentTrackSlace = createSlice({
     getCurrentTrack(state, action) {
       state.currentTrack = action.payload;
       state.indexCurrentTrack = action.payload.id
-
-      // if (action.payload !== null) {
-      //   state.indexCurrentTrack = action.payload.id
-      // }
     },
 
     getIsPlaing(state, action) {
@@ -72,11 +68,9 @@ const getCurrentTrackSlace = createSlice({
     },
     getCurrentPlayList(state, action) {
       state.currentPlayList = action.payload;
-      console.log(state.currentPlayList)
     },
     getCurrentPage(state, action) {
       state.currentPage = action.payload;
-      console.log(state.currentPage)
     }
   }
 });

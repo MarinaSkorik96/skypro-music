@@ -9,8 +9,6 @@ import Context from "../../contexts";
 
 
 const Track = ({ page }) => {
-  console.log(page)
-  // console.log(playList)
   const dispatch = useDispatch();
 
   const curTrack = useSelector(state => state.track.currentTrack)
@@ -18,30 +16,13 @@ const Track = ({ page }) => {
   const allTracks = useSelector(state => state.track.allTracks)
   const favTr = useSelector(state => state.track.favoriteTracks)
   const currentPage = useSelector(state => state.track.currentPage)
-  const currentPlayList = useSelector(state => state.track.PlayList)
 
-  console.log(currentPage)
-  const [arreyAllTrack, setArreyAllTrack] = useState([allTracks])
+  console.log(curTrack)
 
   const { loadings, addTracksError } = useContext(Context)
-  console.log(favTr)
-  console.log(allTracks)
 
   const arreyAllTracks = page === 'favorites' && favTr ? favTr : allTracks
 
-  // const allTrackss =
-  //  if (page === 'favorites') {
-  //   setArreyAllTrack(arreyAllTracks)
-  // } else {
-  //   // allTrackss = [...allTracks]
-  // }
-  // const getNextTrack = () => {
-  //   dispatch(getAllTracks({ favTr }));
-  // }
-  // if (page && favTr) {
-  //   dispatch(getAllTracks({ favTr }));
-
-  // }
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
       dispatch(getCurrentPlayList(favTr))
@@ -50,8 +31,6 @@ const Track = ({ page }) => {
 
     }
   }
-
-  // page && favTr ? dispatch(getAllTracks(favTr)): null
 
   function sToStr(s) {
     let m = Math.trunc(s / 60) + ''
@@ -74,7 +53,8 @@ const Track = ({ page }) => {
                 console.log(arreyAllTracks)
               }}>
                 <S.TrackTitleImage>
-                  {isPlaing && track === curTrack && <S.BlinkingDot></S.BlinkingDot>}
+                  {isPlaing && curTrack.id === track.id && <S.BlinkingDot></S.BlinkingDot>}
+                  {/* {isPlaing && track === curTrack && <S.BlinkingDot></S.BlinkingDot>} */}
                   <S.TrackTitleSvg alt="music">
                     <use xlinkHref="img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>

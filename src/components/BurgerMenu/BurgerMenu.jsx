@@ -21,11 +21,6 @@ const BurgerMenu = () => {
 
   const {  handleLogOut } = useContext(Context)
 
-
-  // const handleLogOut = () => {
-  //   localStorage.removeItem('login')
-  // }
-
   return (
     <>
       <S.NavBurger onClick={toggleVisibility}>
