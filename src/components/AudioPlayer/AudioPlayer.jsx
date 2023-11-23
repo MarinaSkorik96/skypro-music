@@ -17,10 +17,10 @@ const AudioPlayer = () => {
   const shuffle = useSelector(state => state.track.shuffle)
   const shuffleAllTracks = useSelector(state => state.track.shuffleAllTracks)
   const currentPage = useSelector(state => state.track.currentPage)
+  const currentPlayList = useSelector(state => state.track.currentPlayList)
 
   console.log(currentPage)
-  // const currentPageTracks = 
-  const arreyAllTracks = shuffle ? shuffleAllTracks : allTracks
+  const arreyAllTracks = shuffle ? shuffleAllTracks : currentPlayList
 
   const { loading } = useContext(Context)
   const [isPlaying, setPlaying] = useState(false);

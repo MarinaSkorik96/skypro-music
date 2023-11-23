@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import * as S from "./TrackStyles"
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentTrack } from "../../store/slices/track";
-import { getIsPlaing, getAllTracks } from "../../store/slices/track";
+import { getIsPlaing, getCurrentPlayList } from "../../store/slices/track";
 import Context from "../../contexts";
 
 
@@ -17,17 +17,24 @@ const Track = ({ page }) => {
   const isPlaing = useSelector(state => state.track.isPlaying)
   const allTracks = useSelector(state => state.track.allTracks)
   const favTr = useSelector(state => state.track.favoriteTracks)
+  const currentPage = useSelector(state => state.track.currentPage)
+  const currentPlayList = useSelector(state => state.track.PlayList)
+
+  console.log(currentPage)
+  const [arreyAllTrack, setArreyAllTrack] = useState([allTracks])
 
   const { loadings, addTracksError } = useContext(Context)
   console.log(favTr)
   console.log(allTracks)
+
+  const arreyAllTracks = page === 'favorites' && favTr ? favTr : allTracks
+
   // const allTrackss =
   //  if (page === 'favorites') {
-  //   allTrackss = [...favTr]
+  //   setArreyAllTrack(arreyAllTracks)
   // } else {
-  //   allTrackss = [...allTracks]
+  //   // allTrackss = [...allTracks]
   // }
-  const arreyAllTracks = page === 'favorites' && favTr ? favTr : allTracks
   // const getNextTrack = () => {
   //   dispatch(getAllTracks({ favTr }));
   // }
@@ -35,6 +42,14 @@ const Track = ({ page }) => {
   //   dispatch(getAllTracks({ favTr }));
 
   // }
+  const currentAudioPlayerPlaylist = () => {
+    if (currentPage === 'favorites') {
+      dispatch(getCurrentPlayList(favTr))
+    } else if (currentPage === 'main') {
+      dispatch(getCurrentPlayList(allTracks))
+
+    }
+  }
 
   // page && favTr ? dispatch(getAllTracks(favTr)): null
 
@@ -55,7 +70,7 @@ const Track = ({ page }) => {
               <S.TrackTitle onClick={() => {
                 dispatch(getCurrentTrack(track));
                 dispatch(getIsPlaing(true));
-                // dispatch(getAllTracks(arreyAllTracks))
+                currentAudioPlayerPlaylist()
                 console.log(arreyAllTracks)
               }}>
                 <S.TrackTitleImage>

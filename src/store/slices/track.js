@@ -8,6 +8,7 @@ const initialState = {
   shuffle: false,
   shuffleAllTracks: [],
   favoriteTracks: [],
+  currentPlayList: [],
   currentPage: "",
 };
 
@@ -58,7 +59,7 @@ const getCurrentTrackSlace = createSlice({
 
     getShuffle(state, action) {
       state.shuffle = action.payload;
-      const shuffleArray = new Array(...state.allTracks)
+      const shuffleArray = new Array(...state.currentPlayList)
       shuffleArray.sort(() => Math.random() - 0.5)
       state.shuffleAllTracks = state.shuffle && shuffleArray
     },
@@ -69,8 +70,13 @@ const getCurrentTrackSlace = createSlice({
     getFavoriteTracks(state, action) {
       state.favoriteTracks = action.payload;
     },
+    getCurrentPlayList(state, action) {
+      state.currentPlayList = action.payload;
+      console.log(state.currentPlayList)
+    },
     getCurrentPage(state, action) {
       state.currentPage = action.payload;
+      console.log(state.currentPage)
     }
   }
 });
@@ -85,6 +91,7 @@ export const {
   getShuffle,
   resetCurrentTrack,
   getFavoriteTracks,
+  getCurrentPlayList,
   getCurrentPage
 } = getCurrentTrackSlace.actions;
 

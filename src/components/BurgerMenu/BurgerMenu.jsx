@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import * as S from "./BurgerMenuStyles"
 import { useContext } from 'react';
 import Context from '../../contexts';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentPage } from "../../store/slices/track";
 
 
 const { useState } = React;
@@ -10,6 +12,8 @@ const { useState } = React;
 
 
 const BurgerMenu = () => {
+  const dispatch = useDispatch();
+
 
   const [visible, setVisible] = useState(false);
 
@@ -38,7 +42,9 @@ const BurgerMenu = () => {
               </S.MenuLink>
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink to="/MyPlaylist">
+              <S.MenuLink 
+              onClick={()=> {dispatch(getCurrentPage('favorites'))}}
+              to="/MyPlaylist">
                 Мой плейлист
               </S.MenuLink>
             </S.MenuItem>
