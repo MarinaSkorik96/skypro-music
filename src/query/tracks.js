@@ -39,7 +39,6 @@ export const tracksApi = createApi({
   endpoints: (build) => ({
     getFavoritesTracks: build.query({
       query: () => '/catalog/track/favorite/all/',
-
     })
   }),
 })

@@ -47,11 +47,14 @@ export function Login() {
         }
         setUser(user)
         addLogin(email)
-        dispatch(currentUser({user}))
+        dispatch(currentUser({ user }))
+        localStorage.setItem('id', user.id);
+
         getToken({ email, password })
           .then((token) => {
             console.log(token)
             localStorage.setItem('token', token.refresh);
+
             dispatch(currentUserToken(token))
           })
         navigate("/");

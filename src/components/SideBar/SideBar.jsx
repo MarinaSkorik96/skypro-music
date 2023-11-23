@@ -5,7 +5,8 @@ import { useContext } from 'react';
 import Context from '../../contexts';
 import { getFreshToken } from "../../store/slices/user";
 import { useDispatch, useSelector } from "react-redux";
-import {getFT} from "../../api.js"
+import {getFT, postLike} from "../../api.js"
+// import { getLikes } from "../../store/slices/track.js";
 
 const SideBar = () => {
 
@@ -26,6 +27,8 @@ const SideBar = () => {
         <PlayList />
         <button onClick={()=> {dispatch(getFreshToken())}}> Обнови токен</button>
         <button onClick={()=>{getFT()}}>Получить любимые треки</button>
+        <button onClick={()=>{postLike()}}>Получить трек</button>
+
       </S.SidebarBlock>
     </S.MainSidebar>
   );

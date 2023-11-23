@@ -17,7 +17,7 @@ const Track = ({ page }) => {
   const favTr = useSelector(state => state.track.favoriteTracks)
   const currentPage = useSelector(state => state.track.currentPage)
 
-  console.log(curTrack)
+  const [isLiked, setIsLiked] = useState(false)
 
   const { loadings, addTracksError } = useContext(Context)
 
@@ -37,6 +37,17 @@ const Track = ({ page }) => {
     s = (s % 60) + ''
     return m.padStart(2, 0) + ':' + s.padStart(2, 0)
   }
+
+  const addToFavorites = ({ id }) => {
+    if (isLiked) {
+      setIsLiked(false)
+      console.log(isLiked)
+    } else (
+      setIsLiked(true)
+      // console.log(isLiked)
+    )
+  }
+  console.log(arreyAllTracks)
 
   return (
     <>

@@ -25,6 +25,8 @@ export const getFreshToken = createAsyncThunk(
           throw new Error(response.statusText);
 
         }
+        console.log(response)
+
         throw new Error('Error server');
       }
       const accessToken = await response.json();
@@ -65,7 +67,7 @@ const getUserSlace = createSlice({
       console.log(state.access)
     },
     [getFreshToken.rejected]: (state, action) => {
-      console.log(action.payload)
+      console.log(action)
     }
   }
 });

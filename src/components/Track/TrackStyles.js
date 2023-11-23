@@ -99,6 +99,10 @@ export const TrackTimeSvg = styled.svg`
   margin-right: 17px;
   fill: transparent;
   stroke: #696969;
+  &:hover {
+    stroke: #acacac;
+    cursor: pointer;
+  }
 `
 export const TrackTimeText = styled.span`
   font-style: normal;

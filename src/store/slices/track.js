@@ -1,4 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+
+
+
+// export const getLikes = createAsyncThunk(
+//   'user/getFreshToken',
+//   async function (_, { rejectWithValue }) {
+//     const access = useSelector(state => state.track.access)
+
+//     // try {
+//       const response = await fetch('https://skypro-music-api.skyeng.tech/catalog/track/16/favorite/', {
+//         method: "POST",
+//         body: JSON.stringify({
+//           refresh: access,
+//         }),
+//         headers: {
+//           "content-type": "application/json",
+//         },
+//     })
+//       // if (!response.ok) {
+//       //   if (response.status === 400) {
+//       //     throw new Error(response.statusText);
+
+//       //   }
+//       //   throw new Error('Error server');
+//       // }
+//       const likes = await response.json();
+//       return likes
+
+//     // } catch (error) {
+//     //   return rejectWithValue(error.message)
+//     // }
+//   }
+// )
 
 const initialState = {
   allTracks: [],
@@ -72,7 +106,15 @@ const getCurrentTrackSlace = createSlice({
     getCurrentPage(state, action) {
       state.currentPage = action.payload;
     }
-  }
+  },
+  // extraReducers: {
+  //   [getLikes.fulfilled]: (state, action) => {
+  //     console.log(action.payload)
+  //   },
+  //   [getLikes.rejected]: (state, action) => {
+  //     console.log(action.payload)
+  //   }
+  // }
 });
 
 

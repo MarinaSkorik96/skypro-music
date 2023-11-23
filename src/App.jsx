@@ -76,12 +76,12 @@ function App() {
     dispatch(resetCurrentTrack(null))
   }
 
-  const currentTrackS = useSelector(state => state.track.currentTrack)
+  const userId = useSelector(state => state.user.id)
   const [loadings, setLoadings] = useState(true)
   const [addTracksError, setAddTracksError] = useState(null)
   const [isMainPage, setIsMainPage] = useState(true)
   const favTr = useSelector(state => state.track.favoriteTracks)
-
+  console.log(userId)
   useEffect(() => {
     getTodos()
       .then((tracks) => {
