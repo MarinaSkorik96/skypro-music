@@ -35,12 +35,27 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const tracksApi = createApi({
 
   reducerPath: "tracksApi",
+  tagTypes: [ "Favorites"],
   baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
     getFavoritesTracks: build.query({
       query: () => '/catalog/track/favorite/all/',
+      providesTags: (result) =>
+      result
+        ? [
+            ...result.map(({ id }) => ({ type: 'Favorites', id })),
+            { type: 'Favorites', id: 'LIST' },
+          ]
+        : [{ type: 'Favorites', id: 'LIST' }],
+    }),
+    setLike: build.mutation({
+      query: (id) => ({
+        url: `/catalog/track/${id}/favorite/`,
+        method: 'POST',
+      }),
+      invalidatesTags: [{type: 'Favorites', id: 'LIST'}]
     })
   }),
 })
 
-export const { useGetFavoritesTracksQuery } = tracksApi
+export const { useGetFavoritesTracksQuery, useSetLikeMutation } = tracksApi
