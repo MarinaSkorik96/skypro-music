@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentTrack } from "../../store/slices/track";
 import { getIsPlaing, getCurrentPlayList } from "../../store/slices/track";
 import Context from "../../contexts";
-import { useSetLikeMutation } from "../../query/tracks";
+import { useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
 
 const Track = ({ page }) => {
   const dispatch = useDispatch();
@@ -17,12 +17,11 @@ const Track = ({ page }) => {
   const favTr = useSelector(state => state.track.favoriteTracks)
   const currentPage = useSelector(state => state.track.currentPage)
 
-  const [isLiked, setIsLiked] = useState(false)
-
   const { loadings, addTracksError } = useContext(Context)
 
   const [setLike] = useSetLikeMutation()
-  // console.log(setLike)
+  const [setDisLike] = useSetDisLikeMutation()
+
   const arreyAllTracks = page === 'favorites' && favTr ? favTr : allTracks
 
   const currentAudioPlayerPlaylist = () => {
@@ -40,39 +39,19 @@ const Track = ({ page }) => {
     return m.padStart(2, 0) + ':' + s.padStart(2, 0)
   }
 
-  const addToFavorites = ({ id }) => {
-    if (isLiked) {
-      setIsLiked(false)
-      console.log(isLiked)
-    } else (
-      setIsLiked(true)
-      // console.log(isLiked)
-    )
-  }
   console.log(arreyAllTracks)
-
 
   const activeLike = ({ track }) => {
     if (currentPage === 'main') {
       const ollUsersLikes = track.stared_user
-      const userId = 2517
-      // console.log(ollUsersLikes)
-      const like = ollUsersLikes.find(user => user.id === userId)
+      const userId = localStorage.getItem('id'); //Надо преобразовать в число
+      const like = ollUsersLikes.find(user => user.id == userId)
       if (like) {
         console.log(true)
         return (true)
       }
       console.log(false)
-
       return (false)
-      // console.log(isLiked)
-      // if (track.stared_user) {
-
-      // // }
-      // let cities = [{ id: 121, name: 'г. Урюпинск' }, { id: 122, name: 'г. Париж' }, { id: 123, name: 'г. Москва' }, { id: 124, name: 'г. Штормград' }];
-      // let searchTerm = 'г. Москва';
-      // let cityId = cities.find(city => city.name === searchTerm).id
-      // console.log(cityId);
     }
   }
 
@@ -115,27 +94,15 @@ const Track = ({ page }) => {
                 </S.TrackAlbumLink>
               </S.TrackAlbum>
               <div>
-              {
-                  activeLike({ track }) ? 
-                  <S.TrackTimeSvgLike 
-
-                  // $fill={like} 
-                  alt="time">
-                    <use xlinkHref="img/icon/sprite.svg#icon-like" />
-                  </S.TrackTimeSvgLike>
-                  :
-                  <S.TrackTimeSvg 
-
-                  // $fill={like} 
-                  alt="time">
-                    <use xlinkHref="img/icon/sprite.svg#icon-like" />
-                  </S.TrackTimeSvg>
-
-  
-                    // console.log("f")
-                    // const like = true
-                  
-          
+                {
+                  activeLike({ track }) ?
+                    <S.TrackTimeSvgLike onClick={() => { setDisLike(track.id) }} alt="time">
+                      <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                    </S.TrackTimeSvgLike>
+                    :
+                    <S.TrackTimeSvg onClick={() => { setLike(track.id) }} alt="time">
+                      <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                    </S.TrackTimeSvg>
                 }
                 <S.TrackTimeText>{sToStr(track.duration_in_seconds)}
                 </S.TrackTimeText>

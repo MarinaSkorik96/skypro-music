@@ -35,27 +35,51 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const tracksApi = createApi({
 
   reducerPath: "tracksApi",
-  tagTypes: [ "Favorites"],
+  tagTypes: ["Favorites", 'AllTracks'],
   baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
+    getAllTracks: build.query({
+      query: () => '/catalog/track/all/',
+      providesTags: (result) =>
+        result
+          ? [
+            ...result.map(({ id }) => ({ type: 'AllTracks', id })),
+            { type: 'AllTracks', id: 'LIST' },
+          ]
+          : [{ type: 'AllTracks', id: 'LIST' }],
+    }),
     getFavoritesTracks: build.query({
       query: () => '/catalog/track/favorite/all/',
       providesTags: (result) =>
-      result
-        ? [
+        result
+          ? [
             ...result.map(({ id }) => ({ type: 'Favorites', id })),
             { type: 'Favorites', id: 'LIST' },
           ]
-        : [{ type: 'Favorites', id: 'LIST' }],
+          : [{ type: 'Favorites', id: 'LIST' }],
     }),
     setLike: build.mutation({
       query: (id) => ({
         url: `/catalog/track/${id}/favorite/`,
         method: 'POST',
       }),
-      invalidatesTags: [{type: 'Favorites', id: 'LIST'}]
-    })
+      invalidatesTags: [
+        { type: 'Favorites', id: 'LIST' },
+        { type: 'AllTracks', id: 'LIST' }
+      ]
+    }),
+    setDisLike: build.mutation({
+      query: (id) => ({
+        url: `/catalog/track/${id}/favorite/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [
+        { type: 'Favorites', id: 'LIST' },
+        { type: 'AllTracks', id: 'LIST' }
+      ]
+    }),
+
   }),
 })
 
-export const { useGetFavoritesTracksQuery, useSetLikeMutation } = tracksApi
+export const { useGetAllTracksQuery, useGetFavoritesTracksQuery, useSetLikeMutation, useSetDisLikeMutation } = tracksApi
