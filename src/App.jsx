@@ -77,28 +77,26 @@ function App() {
   }
 
   const userId = useSelector(state => state.user.id)
-  const [loadings, setLoadings] = useState(true)
-  const [addTracksError, setAddTracksError] = useState(null)
   const [isMainPage, setIsMainPage] = useState(true)
-  const favTr = useSelector(state => state.track.favoriteTracks)
   console.log(userId)
-  useEffect(() => {
-    getTodos()
-      .then((tracks) => {
-        dispatch(getAllTracks(tracks))
-        // setTracks(tracks);
-      }).catch(() => {
-        setAddTracksError(true);
-      }).finally(() => {
-        setLoadings(false);
-      })
-  }, [])
+  // useEffect(() => {
+  //   getTodos()
+  //     .then((tracks) => {
+  //       console.log("eeee")
+  //       // dispatch(getAllTracks(tracks))
+  //       // setTracks(tracks);
+  //     }).catch(() => {
+  //       setAddTracksError(true);
+  //     }).finally(() => {
+  //       setLoadings(false);
+  //     })
+  // }, [])
 
 
   return (
     <>
       <Context.Provider
-        value={{ handleLogin, user, setUser, addLogin, handleLogOut, loadings, addTracksError, isMainPage, setIsMainPage }}>
+        value={{ handleLogin, user, setUser, addLogin, handleLogOut, isMainPage, setIsMainPage }}>
         <GlobalStyle />
         <S.Wrapper>
           <S.Container>

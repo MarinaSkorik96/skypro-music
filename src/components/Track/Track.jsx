@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import * as S from "./TrackStyles"
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
-import { useContext, useState } from 'react';
+// import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentTrack } from "../../store/slices/track";
+import { getAllTracks, getCurrentTrack } from "../../store/slices/track";
 import { getIsPlaing, getCurrentPlayList } from "../../store/slices/track";
-import Context from "../../contexts";
-import { useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
+// import Context from "../../contexts";
+import { useGetAllTracksQuery, useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
 
-const Track = ({ page }) => {
+const Track = ({isLoadingM}) => {
   const dispatch = useDispatch();
+  const { data, isError, isLoading } = useGetAllTracksQuery()
+  console.log(useGetAllTracksQuery())
+  console.log(data)
+  console.log(isError)
+  dispatch(getAllTracks(data))
+
 
   const curTrack = useSelector(state => state.track.currentTrack)
   const isPlaing = useSelector(state => state.track.isPlaying)
@@ -17,12 +23,11 @@ const Track = ({ page }) => {
   const favTr = useSelector(state => state.track.favoriteTracks)
   const currentPage = useSelector(state => state.track.currentPage)
 
-  const { loadings, addTracksError } = useContext(Context)
 
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-  const arreyAllTracks = page === 'favorites' && favTr ? favTr : allTracks
+  const arreyAllTracks = currentPage === 'favorites' && favTr ? favTr : allTracks
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -57,9 +62,9 @@ const Track = ({ page }) => {
 
   return (
     <>
-      {loadings ? <TrackSkeleton /> : null}
-      {addTracksError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
-      {loadings ? null : arreyAllTracks.map((track) => {
+      {isLoading ? <TrackSkeleton /> : null}
+      {isError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
+      {isLoading || isLoadingM ? null : arreyAllTracks.map((track) => {
         // activeLike({ track })
         return (
           <S.PlaylistItem key={track.id}>
@@ -68,7 +73,7 @@ const Track = ({ page }) => {
                 dispatch(getCurrentTrack(track));
                 dispatch(getIsPlaing(true));
                 currentAudioPlayerPlaylist()
-                console.log(track.stared_user)
+                // console.log(track.stared_user)
               }}>
                 <S.TrackTitleImage>
                   {isPlaing && curTrack.id === track.id && <S.BlinkingDot></S.BlinkingDot>}
@@ -95,7 +100,7 @@ const Track = ({ page }) => {
               </S.TrackAlbum>
               <div>
                 {
-                  activeLike({ track }) ?
+                  activeLike({ track }) || currentPage === 'favorites' ?
                     <S.TrackTimeSvgLike onClick={() => { setDisLike(track.id) }} alt="time">
                       <use xlinkHref="img/icon/sprite.svg#icon-like" />
                     </S.TrackTimeSvgLike>

@@ -66,33 +66,3 @@ export async function getToken({ email, password }) {
   const token = await response.json();
   return token
 }
-
-export async function postLike(refreshToken) {
-  const response = await fetch("https://skypro-music-api.skyeng.tech/catalog/track/16/favorite/", {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwNzQ5MjgxLCJpYXQiOjE3MDA3NDIyNjksImp0aSI6IjcyMDU1ZDVkNTc3NDQyMTI4ZmEzYmZjYzNjOWNlMmE3IiwidXNlcl9pZCI6MjUxN30.wv8hyrnL1E-ivLp4CklVfVaqmu0uliaMokEa_pUz-r8`,
-    },
-  })
-
-  const accessToken = await response.json();
-  console.log(accessToken)
-
-  return accessToken
-}
-
-
-export async function getFT() {
-  const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAwNTA4NDk1LCJpYXQiOjE3MDA1MDc5MDYsImp0aSI6ImVmZmZkZWI1NWFkYTQxMjU4MDcxY2YxNGI4ZmUwNDM2IiwidXNlcl9pZCI6MjUxN30.wnNvabNAySHX_bWJ34RP0MHQYyuLT9h-3H6GjSFvNZw";
-
-  const response = await fetch("https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  const allFT = await response.json();
-  console.log(allFT)
-  return allFT
-}

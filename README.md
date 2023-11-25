@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 
-План 15 факт 12
+План 21 факт 24

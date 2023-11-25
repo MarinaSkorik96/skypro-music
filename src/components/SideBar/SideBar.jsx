@@ -4,9 +4,7 @@ import * as S from "./SideBarStyles"
 import { useContext } from 'react';
 import Context from '../../contexts';
 import { getFreshToken } from "../../store/slices/user";
-import { useDispatch, useSelector } from "react-redux";
-import {getFT, postLike} from "../../api.js"
-// import { getLikes } from "../../store/slices/track.js";
+import { useDispatch } from "react-redux";
 
 const SideBar = () => {
 
@@ -25,9 +23,7 @@ const SideBar = () => {
       </S.SidebarPersonal>
       <S.SidebarBlock $display={isMainPage}>
         <PlayList />
-        <button onClick={()=> {dispatch(getFreshToken())}}> Обнови токен</button>
-        <button onClick={()=>{getFT()}}>Получить любимые треки</button>
-        <button onClick={()=>{postLike()}}>Получить трек</button>
+        {/* <button onClick={()=> {dispatch(getFreshToken())}}> Обнови токен</button> */}
 
       </S.SidebarBlock>
     </S.MainSidebar>
