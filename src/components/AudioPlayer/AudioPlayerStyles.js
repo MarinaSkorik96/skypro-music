@@ -160,6 +160,7 @@ export const TrackPlayLikeDis = styled.div`
   flex-direction: row;
   align-items: center;
   margin-left: 26%;
+  display: none;
 `
 
 
