@@ -55,7 +55,7 @@ const Track = ({ isLoadingM }) => {
   // console.log(arreyAllTracks)
 
   const activeLike = ({ track }) => {
-    if (currentPage === 'main') {
+    if (currentPage === 'main' || currentPage === 'category' ) {
       const ollUsersLikes = track.stared_user
       const userId = localStorage.getItem('id'); //Надо преобразовать в число
       const like = ollUsersLikes.find(user => user.id == userId)

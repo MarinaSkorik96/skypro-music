@@ -50,13 +50,13 @@ export const tracksApi = createApi({
     }),
     getCategoryTracks: build.query({
       query: () => '/catalog/selection/',
-      // providesTags: (result) =>
-      //   result
-      //     ? [
-      //       ...result.map(({ id }) => ({ type: 'AllTracks', id })),
-      //       { type: 'AllTracks', id: 'LIST' },
-      //     ]
-      //     : [{ type: 'AllTracks', id: 'LIST' }],
+      providesTags: (result) =>
+        result
+          ? [
+            ...result.map(({ id }) => ({ type: 'Category', id })),
+            { type: 'Category', id: 'LIST' },
+          ]
+          : [{ type: 'Category', id: 'LIST' }],
     }),
     getFavoritesTracks: build.query({
       query: () => '/catalog/track/favorite/all/',
@@ -75,7 +75,8 @@ export const tracksApi = createApi({
       }),
       invalidatesTags: [
         { type: 'Favorites', id: 'LIST' },
-        { type: 'AllTracks', id: 'LIST' }
+        { type: 'AllTracks', id: 'LIST' },
+        { type: 'Category', id: 'LIST' }
       ]
     }),
     setDisLike: build.mutation({
@@ -85,7 +86,8 @@ export const tracksApi = createApi({
       }),
       invalidatesTags: [
         { type: 'Favorites', id: 'LIST' },
-        { type: 'AllTracks', id: 'LIST' }
+        { type: 'AllTracks', id: 'LIST' },
+        { type: 'Category', id: 'LIST' }
       ]
     }),
 
