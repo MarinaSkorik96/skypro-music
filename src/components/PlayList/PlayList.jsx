@@ -1,12 +1,9 @@
 import React from "react";
 import * as S from "./PlayListStyles"
 import { playLists } from "../../PlayListsArr.js"
-import { useContext } from 'react';
-import Context from '../../contexts';
 
 
 const PlayList = () => {
-  const { isMainPage } = useContext(Context)
 
   return (
     <>

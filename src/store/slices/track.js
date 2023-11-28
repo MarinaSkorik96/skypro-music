@@ -9,6 +9,7 @@ const initialState = {
   shuffle: false,
   shuffleAllTracks: [],
   favoriteTracks: [],
+  categoryTracks:[],
   currentPlayList: [],
   currentPage: "",
 };
@@ -71,7 +72,10 @@ const getCurrentTrackSlace = createSlice({
     },
     getCurrentPage(state, action) {
       state.currentPage = action.payload;
-    }
+    }, 
+    getCategoryTracks(state, action) {
+      state.categoryTracks = action.payload;
+    }, 
   },
   // extraReducers: {
   //   [getLikes.fulfilled]: (state, action) => {
@@ -94,7 +98,8 @@ export const {
   resetCurrentTrack,
   getFavoriteTracks,
   getCurrentPlayList,
-  getCurrentPage
+  getCurrentPage,
+  getCategoryTracks
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

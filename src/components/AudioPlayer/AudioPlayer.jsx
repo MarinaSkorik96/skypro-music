@@ -103,7 +103,7 @@ const AudioPlayer = () => {
               <S.PlayerControls>
                 <S.PlayerBtnPrev>
                   <S.PlayerBtnPrevSvg onClick={() => { dispatch(prevTrack({ arreyAllTracks, currentTrack })) }} alt="prev">
-                    <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
                 {isPlaying ?
@@ -124,33 +124,33 @@ const AudioPlayer = () => {
                     dispatch(getIsPlaing(true));
                   }}>
                     <S.PlayerBtnPlaySvg as="svg" alt="play">
-                      <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
                     </S.PlayerBtnPlaySvg>
                   </S.PlayerBtnPlay>
                 }
                 <S.PlayerBtnNext>
                   <S.PlayerBtnNextSvg onClick={() => { dispatch(nextTrack({ arreyAllTracks, currentTrack })) }
                   } alt="next">
-                    <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                   </S.PlayerBtnNextSvg>
                 </S.PlayerBtnNext>
                 {isRepeat ?
                   <S.PlayerBtnRepeat onClick={handleRepeat}>
                     <S.PlayerBtnRepeatActiveSvg alt="repeat">
-                      <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                     </S.PlayerBtnRepeatActiveSvg>
                   </S.PlayerBtnRepeat>
 
                   :
                   <S.PlayerBtnRepeat onClick={handleRepeat}>
                     <S.PlayerBtnRepeatSvg alt="repeat">
-                      <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                     </S.PlayerBtnRepeatSvg>
                   </S.PlayerBtnRepeat>
                 }
                 <S.PlayerBtnShuffle onClick={() => { dispatch(getShuffle(!shuffle)) }}>
                   <S.PlayerBtnShuffleSvg alt="shuffle" $stroke={shuffle} >
-                    <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                   </S.PlayerBtnShuffleSvg>
                 </S.PlayerBtnShuffle>
               </S.PlayerControls>
@@ -161,7 +161,7 @@ const AudioPlayer = () => {
                   <S.TrackPlayContain>
                     <S.TrackPlayImage>
                       <S.TrackPlaySvg alt="music">
-                        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
                       </S.TrackPlaySvg>
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
@@ -179,12 +179,12 @@ const AudioPlayer = () => {
                 <S.TrackPlayLikeDis>
                   <S.TrackPlayLike onClick={awaitImplementation}>
                     <S.TrackPlayLikeSvg alt="like">
-                      <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
                     </S.TrackPlayLikeSvg>
                   </S.TrackPlayLike>
                   <S.TrackPlayDislike onClick={awaitImplementation}>
                     <S.TrackPlayDislikeSvg alt="dislike">
-                      <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
                     </S.TrackPlayDislikeSvg>
                   </S.TrackPlayDislike>
                 </S.TrackPlayLikeDis>
@@ -194,7 +194,7 @@ const AudioPlayer = () => {
               <S.VolumeContent>
                 <S.VolumeImage>
                   <S.VolumeSvg alt="volume">
-                    <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>

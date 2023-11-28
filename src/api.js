@@ -11,6 +11,18 @@ export async function getTodos() {
   return tracks
 }
 
+export async function getCatigories() {
+  const response = await fetch('https://skypro-music-api.skyeng.tech/catalog/selection/');
+
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера")
+  }
+
+  const catigories = await response.json();
+  return catigories
+}
+
 export async function getAuthorization({ email, password }) {
   const response = await fetch("https://skypro-music-api.skyeng.tech/user/signup/", {
     method: "POST",

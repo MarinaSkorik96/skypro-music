@@ -78,7 +78,7 @@ function App() {
 
   const userId = useSelector(state => state.user.id)
   const [isMainPage, setIsMainPage] = useState(true)
-  console.log(userId)
+  // console.log(userId)
   // useEffect(() => {
   //   getTodos()
   //     .then((tracks) => {
@@ -98,11 +98,11 @@ function App() {
       <Context.Provider
         value={{ handleLogin, user, setUser, addLogin, handleLogOut, isMainPage, setIsMainPage }}>
         <GlobalStyle />
-        <S.Wrapper>
-          <S.Container>
+        {/* <S.Wrapper> */}
+          {/* <S.Container> */}
             <AppRoutes />
-          </S.Container>
-        </S.Wrapper>
+          {/* </S.Container> */}
+        {/* </S.Wrapper> */}
       </Context.Provider>
     </>
   );

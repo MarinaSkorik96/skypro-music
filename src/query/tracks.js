@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
-  console.log(result)
+  // console.log(result)
   if (result.error && result.error.status === 401) {
     const refreshResult = await api.dispatch(getFreshToken())
     if (refreshResult.data) {
@@ -47,6 +47,16 @@ export const tracksApi = createApi({
             { type: 'AllTracks', id: 'LIST' },
           ]
           : [{ type: 'AllTracks', id: 'LIST' }],
+    }),
+    getCategoryTracks: build.query({
+      query: () => '/catalog/selection/',
+      // providesTags: (result) =>
+      //   result
+      //     ? [
+      //       ...result.map(({ id }) => ({ type: 'AllTracks', id })),
+      //       { type: 'AllTracks', id: 'LIST' },
+      //     ]
+      //     : [{ type: 'AllTracks', id: 'LIST' }],
     }),
     getFavoritesTracks: build.query({
       query: () => '/catalog/track/favorite/all/',
@@ -82,4 +92,4 @@ export const tracksApi = createApi({
   }),
 })
 
-export const { useGetAllTracksQuery, useGetFavoritesTracksQuery, useSetLikeMutation, useSetDisLikeMutation } = tracksApi
+export const { useGetAllTracksQuery, useGetFavoritesTracksQuery, useSetLikeMutation, useSetDisLikeMutation, useGetCategoryTracksQuery } = tracksApi

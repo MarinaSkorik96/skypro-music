@@ -8,12 +8,12 @@ import { getIsPlaing, getCurrentPlayList } from "../../store/slices/track";
 // import Context from "../../contexts";
 import { useGetAllTracksQuery, useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
 
-const Track = ({isLoadingM}) => {
+const Track = ({ isLoadingM }) => {
   const dispatch = useDispatch();
   const { data, isError, isLoading } = useGetAllTracksQuery()
-  console.log(useGetAllTracksQuery())
-  console.log(data)
-  console.log(isError)
+  // console.log(useGetAllTracksQuery())
+  // console.log(data)
+  // console.log(isError)
   dispatch(getAllTracks(data))
 
 
@@ -22,12 +22,19 @@ const Track = ({isLoadingM}) => {
   const allTracks = useSelector(state => state.track.allTracks)
   const favTr = useSelector(state => state.track.favoriteTracks)
   const currentPage = useSelector(state => state.track.currentPage)
+  const categoryTracks = useSelector(state => state.track.categoryTracks)
+  // console.log(categoryTracks)
 
+  console.log(currentPage)
+
+  useEffect(() => {
+    console.log(categoryTracks)
+  }, [{ categoryTracks }])
 
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-  const arreyAllTracks = currentPage === 'favorites' && favTr ? favTr : allTracks
+  const arreyAllTracks = currentPage === 'favorites' && favTr ? favTr : currentPage === 'category' && categoryTracks ? categoryTracks :allTracks
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -44,7 +51,7 @@ const Track = ({isLoadingM}) => {
     return m.padStart(2, 0) + ':' + s.padStart(2, 0)
   }
 
-  console.log(arreyAllTracks)
+  // console.log(arreyAllTracks)
 
   const activeLike = ({ track }) => {
     if (currentPage === 'main') {
@@ -52,10 +59,10 @@ const Track = ({isLoadingM}) => {
       const userId = localStorage.getItem('id'); //Надо преобразовать в число
       const like = ollUsersLikes.find(user => user.id == userId)
       if (like) {
-        console.log(true)
+        // console.log(true)
         return (true)
       }
-      console.log(false)
+      // console.log(false)
       return (false)
     }
   }
@@ -79,7 +86,7 @@ const Track = ({isLoadingM}) => {
                   {isPlaing && curTrack.id === track.id && <S.BlinkingDot></S.BlinkingDot>}
                   {/* {isPlaing && track === curTrack && <S.BlinkingDot></S.BlinkingDot>} */}
                   <S.TrackTitleSvg alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note" />
+                    <use xlinkHref="/img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>
                 </S.TrackTitleImage>
                 <div>
@@ -102,11 +109,11 @@ const Track = ({isLoadingM}) => {
                 {
                   activeLike({ track }) || currentPage === 'favorites' ?
                     <S.TrackTimeSvgLike onClick={() => { setDisLike(track.id) }} alt="time">
-                      <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                      <use xlinkHref="/img/icon/sprite.svg#icon-like" />
                     </S.TrackTimeSvgLike>
                     :
                     <S.TrackTimeSvg onClick={() => { setLike(track.id) }} alt="time">
-                      <use xlinkHref="img/icon/sprite.svg#icon-like" />
+                      <use xlinkHref="/img/icon/sprite.svg#icon-like" />
                     </S.TrackTimeSvg>
                 }
                 <S.TrackTimeText>{sToStr(track.duration_in_seconds)}

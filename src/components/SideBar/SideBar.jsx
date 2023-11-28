@@ -17,7 +17,7 @@ const SideBar = () => {
         <S.SidebarPersonalName>{user}</S.SidebarPersonalName>
         <S.SidebarIcon onClick={handleLogOut} to="./login">
           <svg alt="logout">
-            <use xlinkHref="img/icon/sprite.svg#logout" />
+            <use xlinkHref="/img/icon/sprite.svg#logout" />
           </svg>
         </S.SidebarIcon>
       </S.SidebarPersonal>

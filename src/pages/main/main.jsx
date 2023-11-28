@@ -17,7 +17,7 @@ export function Main() {
 
     <div>
       <S.Wrapper>
-        <S.Container>
+         <S.Container>
           <S.Main className="main">
             <NavMenu />
             <S.MainCenterblock>
@@ -30,7 +30,7 @@ export function Main() {
           
           <footer className="footer" />
         </S.Container>
-      </S.Wrapper>
+       </S.Wrapper>
     </div>
   );
 }
