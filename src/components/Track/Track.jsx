@@ -41,7 +41,8 @@ const Track = ({ isLoadingM }) => {
       dispatch(getCurrentPlayList(favTr))
     } else if (currentPage === 'main') {
       dispatch(getCurrentPlayList(allTracks))
-
+    } else if (currentPage === 'category') {
+      dispatch(getCurrentPlayList(categoryTracks))
     }
   }
 
