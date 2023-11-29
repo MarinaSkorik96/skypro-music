@@ -14,7 +14,14 @@ const Track = ({ isLoadingM }) => {
   // console.log(useGetAllTracksQuery())
   // console.log(data)
   // console.log(isError)
-  dispatch(getAllTracks(data))
+  // console.log(isLoading)
+  useEffect(() => {
+    if (data) {
+      dispatch(getAllTracks(data))
+    }
+
+  }, [{ isLoading }])
+  // dispatch(getAllTracks(data))
 
 
   const curTrack = useSelector(state => state.track.currentTrack)
@@ -24,17 +31,17 @@ const Track = ({ isLoadingM }) => {
   const currentPage = useSelector(state => state.track.currentPage)
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   // console.log(categoryTracks)
-
-  console.log(currentPage)
+  // console.log(allTracks)
+  // console.log(currentPage)
 
   useEffect(() => {
-    console.log(categoryTracks)
+    // console.log(categoryTracks)
   }, [{ categoryTracks }])
 
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-  const arreyAllTracks = currentPage === 'favorites' && favTr ? favTr : currentPage === 'category' && categoryTracks ? categoryTracks :allTracks
+  const arreyAllTracks = currentPage === 'favorites' && favTr ? favTr : currentPage === 'category' && categoryTracks ? categoryTracks : allTracks
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -55,7 +62,7 @@ const Track = ({ isLoadingM }) => {
   // console.log(arreyAllTracks)
 
   const activeLike = ({ track }) => {
-    if (currentPage === 'main' || currentPage === 'category' ) {
+    if (currentPage === 'main' || currentPage === 'category') {
       const ollUsersLikes = track.stared_user
       const userId = localStorage.getItem('id'); //Надо преобразовать в число
       const like = ollUsersLikes.find(user => user.id == userId)

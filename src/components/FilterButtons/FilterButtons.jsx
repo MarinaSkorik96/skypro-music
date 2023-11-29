@@ -1,11 +1,25 @@
 import React from "react";
 import * as S from "./FilterButtonsStyles"
+import { useDispatch, useSelector } from "react-redux";
 
 
 const { useState } = React;
 
 
 const FilterButtons = () => {
+  const authors = useSelector(state => state.track.authors)
+  console.log(authors)
+
+  // const getAuthors = () => {
+  //   const allAuthors = [];
+  //   for (let track of allTracks) {
+  //     allAuthors.push(track.author)
+  //   }
+  //   console.log(allAuthors)
+  //   const authorss = [...new Set(allAuthors)]
+  //   console.log(authorss)
+  // }
+  // getAuthors()
 
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)

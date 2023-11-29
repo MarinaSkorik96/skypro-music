@@ -9,9 +9,10 @@ const initialState = {
   shuffle: false,
   shuffleAllTracks: [],
   favoriteTracks: [],
-  categoryTracks:[],
+  categoryTracks: [],
   currentPlayList: [],
   currentPage: "",
+  authors: [],
 };
 
 const getCurrentTrackSlace = createSlice({
@@ -21,6 +22,19 @@ const getCurrentTrackSlace = createSlice({
 
     getAllTracks(state, action) {
       state.allTracks = action.payload;
+      // console.log(state.allTracks)
+      const allTracks = new Array(...state.allTracks);
+      // console.log(allTracks)
+      const allAuthors = [];
+      if(allTracks ) {
+        for (let track of allTracks) {
+          allAuthors.push(track.author)
+        }
+        // console.log(allAuthors)
+        state.authors = [...new Set(allAuthors)]
+        // console.log(state.authors)
+
+      }
     },
 
     getCurrentTrack(state, action) {
@@ -72,10 +86,13 @@ const getCurrentTrackSlace = createSlice({
     },
     getCurrentPage(state, action) {
       state.currentPage = action.payload;
-    }, 
+    },
     getCategoryTracks(state, action) {
       state.categoryTracks = action.payload;
-    }, 
+    },
+    getAuthors(state, action) {
+      // state.authors = 
+    }
   },
   // extraReducers: {
   //   [getLikes.fulfilled]: (state, action) => {
