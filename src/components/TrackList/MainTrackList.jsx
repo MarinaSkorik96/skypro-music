@@ -21,8 +21,10 @@ const MainTrackList = () => {
     <>
         <S.CenterblockH2>Треки</S.CenterblockH2>
         <S.CenterblockFilter>
-          <S.FilterTitle>Искать по:</S.FilterTitle>
+          {/* <S.FilterTitle>Искать по:</S.FilterTitle> */}
           <FilterButtons />
+          {/* <S.FilterTitle>Сортировка:</S.FilterTitle> */}
+
         </S.CenterblockFilter>
         <TracksBlock />
     </>

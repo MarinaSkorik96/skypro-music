@@ -31,7 +31,7 @@ const Track = ({ isLoadingM }) => {
   const currentPage = useSelector(state => state.track.currentPage)
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   // console.log(categoryTracks)
-  // console.log(allTracks)
+  console.log(allTracks)
   // console.log(currentPage)
 
   useEffect(() => {

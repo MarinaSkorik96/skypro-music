@@ -13,6 +13,7 @@ const initialState = {
   currentPlayList: [],
   currentPage: "",
   authors: [],
+  genres:[],
 };
 
 const getCurrentTrackSlace = createSlice({
@@ -26,14 +27,17 @@ const getCurrentTrackSlace = createSlice({
       const allTracks = new Array(...state.allTracks);
       // console.log(allTracks)
       const allAuthors = [];
+      const denres = [];
       if(allTracks ) {
         for (let track of allTracks) {
           allAuthors.push(track.author)
+          denres.push(track.genre)
         }
         // console.log(allAuthors)
-        state.authors = [...new Set(allAuthors)]
-        // console.log(state.authors)
+        state.authors = [...new Set(allAuthors)].sort()
+        state.genres = [...new Set(denres)].sort()
 
+        // console.log(state.authors)
       }
     },
 

@@ -8,7 +8,11 @@ const { useState } = React;
 
 const FilterButtons = () => {
   const authors = useSelector(state => state.track.authors)
-  console.log(authors)
+  const genres = useSelector(state => state.track.genres)
+
+  // console.log(authors)
+  // console.log(genres)
+
 
   // const getAuthors = () => {
   //   const allAuthors = [];
@@ -24,6 +28,12 @@ const FilterButtons = () => {
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
   const [visibleGenre, setVisibleGenre] = useState(false)
+  const [defaultSort, setDefaultSort] = useState(true)
+  const [newFerst, setNewFerst] = useState(false)
+  const [oldFerst, setOldFerst] = useState(false)
+  const [sortTitle, setSortTitle] = useState("По умолчанию")
+  const [filterNameArr, setFilterNameArr] = useState([])
+  const [filterGenreArr, setFilterGenreArr] = useState([])
 
   const toggleVisibilityAuthor = () => {
     setVisibleAuthor(!visibleAuthor)
@@ -43,64 +53,134 @@ const FilterButtons = () => {
     setVisibleYear(false)
   }
 
+  const sortTime = (filtr) => {
+    if (filtr === "newF") {
+      console.log('new')
+      setDefaultSort(false);
+      setNewFerst(true);
+      setOldFerst(false)
+      setSortTitle("Сначала новые")
+
+    } else if (filtr === "oldF") {
+      console.log('old')
+      setDefaultSort(false);
+      setNewFerst(false);
+      setOldFerst(true)
+      setSortTitle("Сначала старые")
+
+    } else if (filtr === "defaultS") {
+      setDefaultSort(true);
+      setNewFerst(false);
+      setOldFerst(false)
+      setSortTitle("По умолчанию")
+    }
+  }
+
+  // const filterNameArr = [];
+
+
+  const filterName = (filter, name, tipe ) => {
+    console.log(filter)
+    console.log(name)
+    console.log(tipe)
+
+
+    if (filter.includes(name)) {
+      if(tipe === "автор") {
+        setFilterNameArr(filter.filter((filter) => filter !== name))
+      } else if (tipe === "жанр"){
+        setFilterGenreArr(filter.filter((filter) => filter !== name))
+      }
+    } else {
+      if(tipe === "автор") {
+        setFilterNameArr([...filter, name])
+      } else if (tipe === "жанр"){
+        setFilterGenreArr([...filter, name])
+      }
+
+      // setFilterNameArr([...filter, name])
+    }
+  }
+  console.log(filterNameArr)
+  console.log(filterGenreArr)
+
+
   return (
     <>
-      <S.FilterButtonBox onClick={toggleVisibilityAuthor} >
-        <S.FilterButton $props={visibleAuthor}>
-          исполнителю
-        </S.FilterButton>
-        {visibleAuthor &&
-          (<S.FilterBox>
-            <S.FilterList>
-              <S.FilterItem>Исполнитель 1</S.FilterItem>
-              <S.FilterItem>Исполнитель 2</S.FilterItem>
-              <S.FilterItem>Исполнитель 3</S.FilterItem>
-              <S.FilterItem>Исполнитель 4</S.FilterItem>
-              <S.FilterItem>Исполнитель 5</S.FilterItem>
-              <S.FilterItem>Исполнитель 6</S.FilterItem>
-              <S.FilterItem>Исполнитель 7</S.FilterItem>
-              <S.FilterItem>Исполнитель 8</S.FilterItem>
-            </S.FilterList>
-          </S.FilterBox>)}
-      </S.FilterButtonBox>
+      <S.FilterDiv>
+        <S.FilterTitle>Искать по:</S.FilterTitle>
+        <S.FilterButtonBox  >
+          <S.FilterButtonAuthor $props={visibleAuthor} onClick={toggleVisibilityAuthor}>
+            исполнителю
+          </S.FilterButtonAuthor>
+          {filterNameArr.length !== 0 ? <S.CounterAuthor>{`${filterNameArr.length}`}</S.CounterAuthor> : null}
 
-      <S.FilterButtonBox onClick={toggleVisibilityYear}>
-        <S.FilterButton $props={visibleYear}>
-          году выпуска
-        </S.FilterButton>
-        {visibleYear &&
-          (<S.FilterBox>
-            <S.FilterList>
-              <S.FilterItem>2016</S.FilterItem>
-              <S.FilterItem>2017</S.FilterItem>
-              <S.FilterItem>2018</S.FilterItem>
-              <S.FilterItem>2019</S.FilterItem>
-              <S.FilterItem>2020</S.FilterItem>
-              <S.FilterItem>2021</S.FilterItem>
-              <S.FilterItem>2022</S.FilterItem>
-              <S.FilterItem>2023</S.FilterItem>
-            </S.FilterList>
-          </S.FilterBox>)}
-      </S.FilterButtonBox>
+          {visibleAuthor &&
+            (<S.FilterBox>
+              <S.FilterList>
+                {authors.map((author) => {
+                  if (filterNameArr.includes(author)) {
+                    return (
+                      // {filterNameArrL.includes((author)=> {} )}
+                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, "автор") }} $props={true} >{author}</S.FilterItem>
+                    )
+                  } else {
+                    return (
+                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, "автор") }} $props={false} >{author}</S.FilterItem>
+                    )
+                  }
+                })
+                }
+              </S.FilterList>
+            </S.FilterBox>)}
+        </S.FilterButtonBox>
 
-      <S.FilterButtonBox onClick={toggleVisibilityGenre}>
-        <S.FilterButton $props={visibleGenre}>
-          жанру
-        </S.FilterButton>
-        {visibleGenre && (
-          <S.FilterBox>
-            <S.FilterList>
-              <S.FilterItem>Жанр 1</S.FilterItem>
-              <S.FilterItem>Жанр 2</S.FilterItem>
-              <S.FilterItem>Жанр 3</S.FilterItem>
-              <S.FilterItem>Жанр 4</S.FilterItem>
-              <S.FilterItem>Жанр 5</S.FilterItem>
-              <S.FilterItem>Жанр 6</S.FilterItem>
-              <S.FilterItem>Жанр 7</S.FilterItem>
-              <S.FilterItem>Жанр 8</S.FilterItem>
-            </S.FilterList>
-          </S.FilterBox>)}
-      </S.FilterButtonBox>
+        <S.FilterButtonBox >
+          <S.FilterButton onClick={toggleVisibilityGenre} $props={visibleGenre} >
+            жанру
+          </S.FilterButton>
+          {filterGenreArr.length !== 0 ? <S.CounterGenre>{`${filterGenreArr.length}`}</S.CounterGenre> : null}
+
+          {visibleGenre && (
+            <S.FilterBox>
+              <S.FilterListGenre>
+                {genres.map((genre) => {
+                  if (filterGenreArr.includes(genre)) {
+                    return (
+                      // {filterNameArrL.includes((author)=> {} )}
+                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, "жанр") }} $props={true} >{genre}</S.FilterItem>
+                    )
+                  } else {
+                    return (
+                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, "жанр") }} $props={false} >{genre}</S.FilterItem>
+                    )
+                  }
+
+                })
+                }
+              </S.FilterListGenre>
+            </S.FilterBox>)}
+        </S.FilterButtonBox>
+      </S.FilterDiv>
+
+      <S.FilterDiv>
+        <S.FilterTitle>Сортировка:</S.FilterTitle>
+        <S.FilterButtonBox>
+          <S.FilterButtonTime $props={visibleYear} onClick={toggleVisibilityYear} >
+            {sortTitle}
+          </S.FilterButtonTime>
+          {oldFerst || newFerst ? <S.Counter>1</S.Counter> : null}
+          {visibleYear &&
+            (<S.FilterBoxTime >
+              <S.FilterListGenre >
+                <S.FilterItem $props={defaultSort} onClick={() => { sortTime("defaultS") }}>По умолчанию</S.FilterItem>
+                <S.FilterItem $props={oldFerst} onClick={() => { sortTime("oldF") }}>Сначала старые</S.FilterItem>
+                <S.FilterItem $props={newFerst} onClick={() => { sortTime("newF") }}>Сначала новые</S.FilterItem>
+              </S.FilterListGenre>
+            </S.FilterBoxTime>)}
+        </S.FilterButtonBox>
+      </S.FilterDiv>
+
     </>
   );
 };
