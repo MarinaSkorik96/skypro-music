@@ -13,7 +13,9 @@ const initialState = {
   currentPlayList: [],
   currentPage: "",
   authors: [],
-  genres:[],
+  genres: [],
+  filteredTracks: [],
+  filretsActive: false,
 };
 
 const getCurrentTrackSlace = createSlice({
@@ -23,21 +25,16 @@ const getCurrentTrackSlace = createSlice({
 
     getAllTracks(state, action) {
       state.allTracks = action.payload;
-      // console.log(state.allTracks)
       const allTracks = new Array(...state.allTracks);
-      // console.log(allTracks)
       const allAuthors = [];
       const denres = [];
-      if(allTracks ) {
+      if (allTracks) {
         for (let track of allTracks) {
           allAuthors.push(track.author)
           denres.push(track.genre)
         }
-        // console.log(allAuthors)
         state.authors = [...new Set(allAuthors)].sort()
         state.genres = [...new Set(denres)].sort()
-
-        // console.log(state.authors)
       }
     },
 
@@ -82,20 +79,27 @@ const getCurrentTrackSlace = createSlice({
     resetCurrentTrack(state, action) {
       state.currentTrack = action.payload;
     },
+
     getFavoriteTracks(state, action) {
       state.favoriteTracks = action.payload;
     },
+
     getCurrentPlayList(state, action) {
       state.currentPlayList = action.payload;
     },
+
     getCurrentPage(state, action) {
       state.currentPage = action.payload;
     },
+
     getCategoryTracks(state, action) {
       state.categoryTracks = action.payload;
     },
-    getAuthors(state, action) {
-      // state.authors = 
+
+    getFilters(state, action) {
+      console.log(state.allTracks);
+      state.filteredTracks = action.payload
+      state.filretsActive = true;
     }
   },
   // extraReducers: {
@@ -120,7 +124,8 @@ export const {
   getFavoriteTracks,
   getCurrentPlayList,
   getCurrentPage,
-  getCategoryTracks
+  getCategoryTracks,
+  getFilters
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

@@ -1,30 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-
+import { getFilters } from "../../store/slices/track";
 
 const { useState } = React;
 
 
 const FilterButtons = () => {
+  const dispatch = useDispatch();
   const authors = useSelector(state => state.track.authors)
   const genres = useSelector(state => state.track.genres)
-
-  // console.log(authors)
-  // console.log(genres)
-
-
-  // const getAuthors = () => {
-  //   const allAuthors = [];
-  //   for (let track of allTracks) {
-  //     allAuthors.push(track.author)
-  //   }
-  //   console.log(allAuthors)
-  //   const authorss = [...new Set(allAuthors)]
-  //   console.log(authorss)
-  // }
-  // getAuthors()
-
+  const allTracks = useSelector(state => state.track.allTracks)
+  // console.log(allTracks)
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
   const [visibleGenre, setVisibleGenre] = useState(false)
@@ -40,13 +27,11 @@ const FilterButtons = () => {
     setVisibleGenre(false)
     setVisibleYear(false)
   }
-
   const toggleVisibilityYear = () => {
     setVisibleAuthor(false)
     setVisibleGenre(false)
     setVisibleYear(!visibleYear)
   }
-
   const toggleVisibilityGenre = () => {
     setVisibleAuthor(false)
     setVisibleGenre(!visibleGenre)
@@ -54,55 +39,79 @@ const FilterButtons = () => {
   }
 
   const sortTime = (filtr) => {
-    if (filtr === "newF") {
-      console.log('new')
-      setDefaultSort(false);
-      setNewFerst(true);
-      setOldFerst(false)
-      setSortTitle("Сначала новые")
-
-    } else if (filtr === "oldF") {
-      console.log('old')
-      setDefaultSort(false);
-      setNewFerst(false);
-      setOldFerst(true)
-      setSortTitle("Сначала старые")
-
-    } else if (filtr === "defaultS") {
+    if (filtr === "defaultS") {
       setDefaultSort(true);
       setNewFerst(false);
       setOldFerst(false)
       setSortTitle("По умолчанию")
+      dispatch(getFilters(allTracks))
+    } else {
+      const tracksWithDate = [];
+      const tracksWithoutDate = [];
+      let sortedByDate = [];
+      allTracks.map((track) => {
+        if (track.release_date) {
+          tracksWithDate.push(track)
+        } else (
+          tracksWithoutDate.push(track)
+        )
+      })
+      if (filtr === "newF") {
+        setDefaultSort(false);
+        setNewFerst(true);
+        setOldFerst(false)
+        setSortTitle("Сначала новые")
+        sortedByDate = tracksWithDate.sort(function (a, b) {
+          return new Date(b.release_date) - new Date(a.release_date)
+        })
+
+      } else if (filtr === "oldF") {
+        setDefaultSort(false);
+        setNewFerst(false);
+        setOldFerst(true)
+        setSortTitle("Сначала старые")
+        sortedByDate = tracksWithDate.sort(function (a, b) {
+          return new Date(a.release_date) - new Date(b.release_date)
+        })
+
+      } else if (filtr === "defaultS") {
+        setDefaultSort(true);
+        setNewFerst(false);
+        setOldFerst(false)
+        setSortTitle("По умолчанию")
+      }
+      const ollTracksSortedByDate = [...sortedByDate, ...tracksWithoutDate]
+      dispatch(getFilters(ollTracksSortedByDate))
     }
   }
 
-  // const filterNameArr = [];
+  // console.log(allTracks)
 
-
-  const filterName = (filter, name, tipe ) => {
-    console.log(filter)
-    console.log(name)
-    console.log(tipe)
-
-
+  const filterName = (filter, name, tipe) => {
     if (filter.includes(name)) {
-      if(tipe === "автор") {
+      if (tipe === "автор") {
         setFilterNameArr(filter.filter((filter) => filter !== name))
-      } else if (tipe === "жанр"){
+      } else if (tipe === "жанр") {
         setFilterGenreArr(filter.filter((filter) => filter !== name))
       }
     } else {
-      if(tipe === "автор") {
+      if (tipe === "автор") {
         setFilterNameArr([...filter, name])
-      } else if (tipe === "жанр"){
+      } else if (tipe === "жанр") {
         setFilterGenreArr([...filter, name])
       }
-
-      // setFilterNameArr([...filter, name])
     }
+    // dispatch(getFilters({filterNameArr, filterGenreArr, sortTitle}))
+    // console.log(filterNameArr);
+    // console.log(filterGenreArr);
+    // console.log(sortTitle);
+
   }
-  console.log(filterNameArr)
-  console.log(filterGenreArr)
+
+  useEffect(() => {
+
+    // dispatch(getFilters({ filterNameArr, filterGenreArr, sortTitle }))
+  }, [filterNameArr, filterGenreArr, sortTitle])
 
 
   return (

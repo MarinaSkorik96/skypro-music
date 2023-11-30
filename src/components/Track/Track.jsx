@@ -17,10 +17,12 @@ const Track = ({ isLoadingM }) => {
   // console.log(isLoading)
   useEffect(() => {
     if (data) {
+      console.log(isLoading)
+      console.log(12)
       dispatch(getAllTracks(data))
     }
 
-  }, [{ isLoading }])
+  }, [isLoading]) // При работе с фильтрами убрала фигарные скобки вокруг isLoading
   // dispatch(getAllTracks(data))
 
 
@@ -30,6 +32,9 @@ const Track = ({ isLoadingM }) => {
   const favTr = useSelector(state => state.track.favoriteTracks)
   const currentPage = useSelector(state => state.track.currentPage)
   const categoryTracks = useSelector(state => state.track.categoryTracks)
+  const filretsActive = useSelector(state => state.track.filretsActive)
+  const filteredTracks = useSelector(state => state.track.filteredTracks)
+
   // console.log(categoryTracks)
   console.log(allTracks)
   // console.log(currentPage)
@@ -41,7 +46,21 @@ const Track = ({ isLoadingM }) => {
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-  const arreyAllTracks = currentPage === 'favorites' && favTr ? favTr : currentPage === 'category' && categoryTracks ? categoryTracks : allTracks
+  const arreyAllTracks = currentPage === 'favorites' && favTr ?
+    favTr : currentPage === 'category' && categoryTracks ?
+      categoryTracks : filretsActive ? filteredTracks : allTracks
+
+  // const arreyAllTracks = 
+  //   if (currentPage === 'favorites' && favTr) {
+  //     favTr
+  //   } else if (currentPage === 'category' && categoryTracks) {
+  //     categoryTracks
+  //   } else {
+  //     allTracks
+  //   }  
+  
+
+
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -79,6 +98,7 @@ const Track = ({ isLoadingM }) => {
     <>
       {isLoading ? <TrackSkeleton /> : null}
       {isError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
+      {/* {arreyAllTracks.lenпth===0 ? null : <p>В этом плейлисте нет треков</p>} */}
       {isLoading || isLoadingM ? null : arreyAllTracks.map((track) => {
         // activeLike({ track })
         return (

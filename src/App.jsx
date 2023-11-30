@@ -98,11 +98,11 @@ function App() {
       <Context.Provider
         value={{ handleLogin, user, setUser, addLogin, handleLogOut, isMainPage, setIsMainPage }}>
         <GlobalStyle />
-        {/* <S.Wrapper> */}
-          {/* <S.Container> */}
+        <S.Wrapper>
+          <S.Container>
             <AppRoutes />
-          {/* </S.Container> */}
-        {/* </S.Wrapper> */}
+          </S.Container>
+        </S.Wrapper>
       </Context.Provider>
     </>
   );
