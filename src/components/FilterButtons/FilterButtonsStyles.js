@@ -122,7 +122,7 @@ export const FilterButtonAuthor = styled(FilterButton)`
   margin-right: 10px;
 `
 export const FilterButtonTime = styled(FilterButton)`
-  width: 165px;
+  width: 166px;
 `
 
 export const FilterDiv = styled.div`

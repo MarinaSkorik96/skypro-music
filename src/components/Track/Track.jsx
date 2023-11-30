@@ -34,7 +34,7 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-
+console.log(filteredTracks)
   // console.log(categoryTracks)
   console.log(allTracks)
   // console.log(currentPage)
@@ -50,6 +50,7 @@ const Track = ({ isLoadingM }) => {
     favTr : currentPage === 'category' && categoryTracks ?
       categoryTracks : filretsActive ? filteredTracks : allTracks
 
+      console.log(arreyAllTracks)
   // const arreyAllTracks = 
   //   if (currentPage === 'favorites' && favTr) {
   //     favTr

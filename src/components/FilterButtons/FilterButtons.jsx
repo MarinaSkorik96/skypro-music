@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters } from "../../store/slices/track";
+import { getFilters, getFiltersAuthore } from "../../store/slices/track";
 
 const { useState } = React;
 
@@ -11,6 +11,9 @@ const FilterButtons = () => {
   const authors = useSelector(state => state.track.authors)
   const genres = useSelector(state => state.track.genres)
   const allTracks = useSelector(state => state.track.allTracks)
+  const filretsActive = useSelector(state => state.track.filretsActive)
+  const filteredTracks = useSelector(state => state.track.filteredTracks)
+
   // console.log(allTracks)
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
@@ -39,6 +42,7 @@ const FilterButtons = () => {
   }
 
   const sortTime = (filtr) => {
+    const filterableArray = filretsActive ? filteredTracks : allTracks
     if (filtr === "defaultS") {
       setDefaultSort(true);
       setNewFerst(false);
@@ -49,7 +53,7 @@ const FilterButtons = () => {
       const tracksWithDate = [];
       const tracksWithoutDate = [];
       let sortedByDate = [];
-      allTracks.map((track) => {
+      filterableArray.map((track) => {
         if (track.release_date) {
           tracksWithDate.push(track)
         } else (
@@ -84,34 +88,29 @@ const FilterButtons = () => {
       dispatch(getFilters(ollTracksSortedByDate))
     }
   }
+  const filtredNameTracs = [];
 
-  // console.log(allTracks)
 
   const filterName = (filter, name, tipe) => {
     if (filter.includes(name)) {
-      if (tipe === "автор") {
-        setFilterNameArr(filter.filter((filter) => filter !== name))
-      } else if (tipe === "жанр") {
-        setFilterGenreArr(filter.filter((filter) => filter !== name))
-      }
+      tipe(filter.filter((filter) => filter !== name))
     } else {
-      if (tipe === "автор") {
-        setFilterNameArr([...filter, name])
-      } else if (tipe === "жанр") {
-        setFilterGenreArr([...filter, name])
-      }
+      tipe([...filter, name])
     }
-    // dispatch(getFilters({filterNameArr, filterGenreArr, sortTitle}))
-    // console.log(filterNameArr);
-    // console.log(filterGenreArr);
-    // console.log(sortTitle);
+    allTracks.map((track) => {
+      // console.log(track)
+      // console.log(name)
+      if (track.author === name) {
+        dispatch(getFiltersAuthore(track))
 
+        // filtredNameTracs.push(track)
+      }
+    })
+    // dispatch(getFilters(ollTracksSortedByDate))
+
+    console.log(filtredNameTracs)
   }
 
-  useEffect(() => {
-
-    // dispatch(getFilters({ filterNameArr, filterGenreArr, sortTitle }))
-  }, [filterNameArr, filterGenreArr, sortTitle])
 
 
   return (
@@ -131,11 +130,11 @@ const FilterButtons = () => {
                   if (filterNameArr.includes(author)) {
                     return (
                       // {filterNameArrL.includes((author)=> {} )}
-                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, "автор") }} $props={true} >{author}</S.FilterItem>
+                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={true} >{author}</S.FilterItem>
                     )
                   } else {
                     return (
-                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, "автор") }} $props={false} >{author}</S.FilterItem>
+                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={false} >{author}</S.FilterItem>
                     )
                   }
                 })
@@ -157,11 +156,11 @@ const FilterButtons = () => {
                   if (filterGenreArr.includes(genre)) {
                     return (
                       // {filterNameArrL.includes((author)=> {} )}
-                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, "жанр") }} $props={true} >{genre}</S.FilterItem>
+                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={true} >{genre}</S.FilterItem>
                     )
                   } else {
                     return (
-                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, "жанр") }} $props={false} >{genre}</S.FilterItem>
+                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={false} >{genre}</S.FilterItem>
                     )
                   }
 

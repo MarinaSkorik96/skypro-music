@@ -100,6 +100,15 @@ const getCurrentTrackSlace = createSlice({
       console.log(state.allTracks);
       state.filteredTracks = action.payload
       state.filretsActive = true;
+    },
+    
+    getFiltersAuthore(state, action) {
+      console.log(action.payload)
+      state.filteredTracks = [...state.filteredTracks, action.payload].sort((function(a,b){
+        return a.id - b.id
+      }))
+      state.filretsActive = true;
+
     }
   },
   // extraReducers: {
@@ -125,7 +134,8 @@ export const {
   getCurrentPlayList,
   getCurrentPage,
   getCategoryTracks,
-  getFilters
+  getFilters,
+  getFiltersAuthore
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;
