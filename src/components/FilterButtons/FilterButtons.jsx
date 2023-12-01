@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, getFiltersAuthore, getFiltersOff } from "../../store/slices/track";
+import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore } from "../../store/slices/track";
 
 const { useState } = React;
 
@@ -14,7 +14,7 @@ const FilterButtons = () => {
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
 
-  // console.log(allTracks)
+  console.log(filteredTracks)
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
   const [visibleGenre, setVisibleGenre] = useState(false)
@@ -48,7 +48,17 @@ const FilterButtons = () => {
       setNewFerst(false);
       setOldFerst(false)
       setSortTitle("По умолчанию")
-      dispatch(getFilters(allTracks))
+      // console.log(filretsActive)
+      if (filretsActive) {
+        console.log(33)
+        console.log(filterableArray)
+        const defaultFilterableArray = [...filterableArray].sort(function (a, b) {
+          return a.id - b.id
+        })
+        dispatch(getFilters(defaultFilterableArray))
+      } else {
+        dispatch(getFilters(allTracks))
+      }
     } else {
       const tracksWithDate = [];
       const tracksWithoutDate = [];
@@ -56,6 +66,7 @@ const FilterButtons = () => {
       filterableArray.map((track) => {
         if (track.release_date) {
           tracksWithDate.push(track)
+          console.log(tracksWithDate)
         } else (
           tracksWithoutDate.push(track)
         )
@@ -65,9 +76,12 @@ const FilterButtons = () => {
         setNewFerst(true);
         setOldFerst(false)
         setSortTitle("Сначала новые")
+        console.log(tracksWithDate)
         sortedByDate = tracksWithDate.sort(function (a, b) {
+          // console.log(tracksWithDate)
           return new Date(b.release_date) - new Date(a.release_date)
         })
+        console.log(sortedByDate)
 
       } else if (filtr === "oldF") {
         setDefaultSort(false);
@@ -78,11 +92,6 @@ const FilterButtons = () => {
           return new Date(a.release_date) - new Date(b.release_date)
         })
 
-      } else if (filtr === "defaultS") {
-        setDefaultSort(true);
-        setNewFerst(false);
-        setOldFerst(false)
-        setSortTitle("По умолчанию")
       }
       const ollTracksSortedByDate = [...sortedByDate, ...tracksWithoutDate]
       dispatch(getFilters(ollTracksSortedByDate))
@@ -103,8 +112,14 @@ const FilterButtons = () => {
       if (track.author === name) {
         if (filteredTracks.includes(track)) {
           console.log('уже есть в списке')
+          let newArr = [];
+
+          newArr = filteredTracks.filter((track) => track.author !== name)
+          console.log(newArr)
+          dispatch(getDaleteFiltersAuthore(newArr))
+
         } else {
-          dispatch(getFiltersAuthore(track))
+          dispatch(getAddFiltersAuthore(track))
 
         }
 

@@ -102,23 +102,31 @@ const getCurrentTrackSlace = createSlice({
       state.filretsActive = true;
     },
 
-    getFiltersAuthore(state, action) {
+    getAddFiltersAuthore(state, action) {
+
+      console.log(state.filteredTracks)
+      console.log(action.payload)
+      console.log(1)
+      state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
+        return a.id - b.id
+      }))
+      state.filretsActive = true;
 
       // state.filteredTracks.map((track) => {
-        if (state.filteredTracks === action.payload) {
-          console.log(0)
-          const newTracks = [];
-          newTracks.push(action.payload)
-          state.filteredTracks = newTracks
-        } else {
-          console.log(state.filteredTracks)
-          console.log(action.payload)
-          console.log(1)
-          state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
-            return a.id - b.id
-          }))
-          state.filretsActive = true;
-        }
+      // if (state.filteredTracks === action.payload) {
+      //   console.log(0)
+      //   const newTracks = [];
+      //   newTracks.push(action.payload)
+      //   state.filteredTracks = newTracks
+      // } else {
+      //   console.log(state.filteredTracks)
+      //   console.log(action.payload)
+      //   console.log(1)
+      //   state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
+      //     return a.id - b.id
+      //   }))
+      //   state.filretsActive = true;
+      // }
       // })
 
 
@@ -143,6 +151,13 @@ const getCurrentTrackSlace = createSlice({
       state.filretsActive = false;
       console.log('Фильтры пустые')
 
+    },
+    getDaleteFiltersAuthore(state, action) {
+      // let newArr = [];
+
+      // newArr = state.filteredTracks.filter((track) => track !== action.payload)
+      // console.log(newArr)
+      state.filteredTracks = action.payload
     }
   },
   // extraReducers: {
@@ -169,8 +184,9 @@ export const {
   getCurrentPage,
   getCategoryTracks,
   getFilters,
-  getFiltersAuthore,
-  getFiltersOff
+  getAddFiltersAuthore,
+  getFiltersOff,
+  getDaleteFiltersAuthore
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;
