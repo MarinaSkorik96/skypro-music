@@ -17,12 +17,12 @@ const Track = ({ isLoadingM }) => {
   // console.log(isLoading)
   useEffect(() => {
     if (data) {
-      console.log(isLoading)
-      console.log(12)
+      // console.log(isLoading)
+      // console.log(12)
       dispatch(getAllTracks(data))
     }
 
-  }, [isLoading]) // При работе с фильтрами убрала фигарные скобки вокруг isLoading
+  }, [{isLoading}])
   // dispatch(getAllTracks(data))
 
 
@@ -34,9 +34,9 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-console.log(filteredTracks)
+// console.log(filteredTracks)
   // console.log(categoryTracks)
-  console.log(allTracks)
+  // console.log(allTracks)
   // console.log(currentPage)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ console.log(filteredTracks)
     favTr : currentPage === 'category' && categoryTracks ?
       categoryTracks : filretsActive ? filteredTracks : allTracks
 
-      console.log(arreyAllTracks)
+      // console.log(arreyAllTracks)
   // const arreyAllTracks = 
   //   if (currentPage === 'favorites' && favTr) {
   //     favTr

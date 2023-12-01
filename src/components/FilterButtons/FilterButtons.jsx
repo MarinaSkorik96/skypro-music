@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, getFiltersAuthore } from "../../store/slices/track";
+import { getFilters, getFiltersAuthore, getFiltersOff } from "../../store/slices/track";
 
 const { useState } = React;
 
@@ -101,7 +101,12 @@ const FilterButtons = () => {
       // console.log(track)
       // console.log(name)
       if (track.author === name) {
-        dispatch(getFiltersAuthore(track))
+        if (filteredTracks.includes(track)) {
+          console.log('уже есть в списке')
+        } else {
+          dispatch(getFiltersAuthore(track))
+
+        }
 
         // filtredNameTracs.push(track)
       }
@@ -111,6 +116,17 @@ const FilterButtons = () => {
     console.log(filtredNameTracs)
   }
 
+  useEffect(() => {
+    console.log(filterNameArr)
+    console.log(filterGenreArr)
+    console.log(sortTitle)
+
+    if (filterNameArr.length === 0 && filterGenreArr.length === 0 && sortTitle === 'По умолчанию') {
+      // console.log('Фильтры пустые')
+      dispatch(getFiltersOff())
+    }
+
+  }, [filterNameArr, filterGenreArr, sortTitle])
 
 
   return (

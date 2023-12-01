@@ -101,13 +101,47 @@ const getCurrentTrackSlace = createSlice({
       state.filteredTracks = action.payload
       state.filretsActive = true;
     },
-    
+
     getFiltersAuthore(state, action) {
-      console.log(action.payload)
-      state.filteredTracks = [...state.filteredTracks, action.payload].sort((function(a,b){
-        return a.id - b.id
-      }))
-      state.filretsActive = true;
+
+      // state.filteredTracks.map((track) => {
+        if (state.filteredTracks === action.payload) {
+          console.log(0)
+          const newTracks = [];
+          newTracks.push(action.payload)
+          state.filteredTracks = newTracks
+        } else {
+          console.log(state.filteredTracks)
+          console.log(action.payload)
+          console.log(1)
+          state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
+            return a.id - b.id
+          }))
+          state.filretsActive = true;
+        }
+      // })
+
+
+      // console.log(action.payload)
+      // if (state.filteredTracks.includes(action.payload)) {
+      //   console.log(333)
+      //   const newTracks = [];
+      //   state.filteredTracks.map((track) => {
+      //     if (track !== action.payload) {
+      //       newTracks.push(track)
+      //     }
+      //   })
+      //   state.filteredTracks = newTracks
+      // } else {
+      //   state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
+      //     return a.id - b.id
+      //   }))
+      //   state.filretsActive = true;
+      // }
+    },
+    getFiltersOff(state, action) {
+      state.filretsActive = false;
+      console.log('Фильтры пустые')
 
     }
   },
@@ -135,7 +169,8 @@ export const {
   getCurrentPage,
   getCategoryTracks,
   getFilters,
-  getFiltersAuthore
+  getFiltersAuthore,
+  getFiltersOff
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;
