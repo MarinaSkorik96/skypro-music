@@ -22,7 +22,7 @@ const Track = ({ isLoadingM }) => {
       dispatch(getAllTracks(data))
     }
 
-  }, [{isLoading}])
+  }, [{ isLoading }])
   // dispatch(getAllTracks(data))
 
 
@@ -34,7 +34,11 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-// console.log(filteredTracks)
+  const filterSortDate = useSelector(state => state.track.filterSortDate)
+  const filterSortDateTracks = useSelector(state => state.track.filterSortDateTracks)
+  const filterAuthor = useSelector(state => state.track.filterAuthor)
+
+
   // console.log(categoryTracks)
   // console.log(allTracks)
   // console.log(currentPage)
@@ -48,9 +52,16 @@ const Track = ({ isLoadingM }) => {
 
   const arreyAllTracks = currentPage === 'favorites' && favTr ?
     favTr : currentPage === 'category' && categoryTracks ?
-      categoryTracks : filretsActive ? filteredTracks : allTracks
+      categoryTracks : filretsActive  ?
+      // filteredTracks: filterSortDate ?
+      // filteredTracks : filretsActive ?
+          filteredTracks : allTracks
 
-      // console.log(arreyAllTracks)
+          console.log(filteredTracks)
+          console.log(filterSortDate)
+          console.log(filterAuthor)
+
+  // console.log(arreyAllTracks)
   // const arreyAllTracks = 
   //   if (currentPage === 'favorites' && favTr) {
   //     favTr
@@ -59,7 +70,7 @@ const Track = ({ isLoadingM }) => {
   //   } else {
   //     allTracks
   //   }  
-  
+
 
 
 

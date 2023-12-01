@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore } from "../../store/slices/track";
+import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore, getSortDateFilter, getSortDateFilterOff } from "../../store/slices/track";
 
 const { useState } = React;
 
@@ -20,10 +20,7 @@ const FilterButtons = () => {
   const filterGenreTracks = useSelector(state => state.track.filterGenreTracks)
   const filterGenre = useSelector(state => state.track.filterGenre)
 
- 
- 
- 
-  console.log(filteredTracks)
+  // console.log(filteredTracks)
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
   const [visibleGenre, setVisibleGenre] = useState(false)
@@ -58,6 +55,13 @@ const FilterButtons = () => {
       setOldFerst(false)
       setSortTitle("По умолчанию")
       if (filterAuthor || filterGenre) {
+        //не уверена в этом куске, проработать позже
+        const defaultFilterableArray = [...filteredTracks].sort(function (a, b) {
+          return a.id - b.id
+        })
+        dispatch(getSortDateFilter(defaultFilterableArray))
+      } else {
+        dispatch(getSortDateFilterOff(allTracks))
 
       }
       // console.log(filretsActive)
@@ -72,6 +76,13 @@ const FilterButtons = () => {
       //   dispatch(getFilters(allTracks))
       // }
     } else {
+      let filterableArray = [];
+      console.log(filterableArray)
+      if (filterAuthor || filterGenre) {
+        filterableArray = [...filteredTracks]
+      } else {
+        filterableArray = [...allTracks]
+      }
       const tracksWithDate = [];
       const tracksWithoutDate = [];
       let sortedByDate = [];
@@ -103,36 +114,59 @@ const FilterButtons = () => {
         sortedByDate = tracksWithDate.sort(function (a, b) {
           return new Date(a.release_date) - new Date(b.release_date)
         })
-
       }
       const ollTracksSortedByDate = [...sortedByDate, ...tracksWithoutDate]
-      dispatch(getFilters(ollTracksSortedByDate))
+      dispatch(getSortDateFilter(ollTracksSortedByDate))
     }
   }
   const filtredNameTracs = [];
 
 
   const filterName = (filter, name, tipe) => {
+    console.log(name)
+    console.log(filter)
+
     if (filter.includes(name)) {
       tipe(filter.filter((filter) => filter !== name))
     } else {
       tipe([...filter, name])
     }
-    allTracks.map((track) => {
+    allTracks.map((track) => { //allTracks потом поменять на массив фильтруемых треков
+      // console.log(12)
       // console.log(track)
       // console.log(name)
       if (track.author === name) {
+        console.log(name)
+        console.log(track.author)
         console.log(filteredTracks)
-        if (filteredTracks.includes(track)) {
-          console.log('уже есть в списке')
-          let newArr = [];
+        if (filterSortDate) {
+          console.log(22222)
+          if (filteredTracks.includes(track)) {
+            dispatch(getAddFiltersAuthore(track))
 
-          newArr = filteredTracks.filter((track) => track.author !== name)
-          console.log(newArr)
-          dispatch(getDaleteFiltersAuthore(newArr))
+          } else {
+            console.log('уже есть в списке')
+            let newArr = [];
+
+            newArr = filteredTracks.filter((track) => track.author !== name)
+            console.log(newArr)
+            dispatch(getDaleteFiltersAuthore(newArr))
+
+          }
 
         } else {
-          dispatch(getAddFiltersAuthore(track))
+          if (filteredTracks.includes(track)) {
+            console.log('уже есть в списке')
+            let newArr = [];
+
+            newArr = filteredTracks.filter((track) => track.author !== name)
+            console.log(newArr)
+            dispatch(getDaleteFiltersAuthore(newArr))
+
+          } else {
+            dispatch(getAddFiltersAuthore(track))
+
+          }
 
         }
 
@@ -144,17 +178,17 @@ const FilterButtons = () => {
     console.log(filtredNameTracs)
   }
 
-  useEffect(() => {
-    console.log(filterNameArr)
-    console.log(filterGenreArr)
-    console.log(sortTitle)
+  // useEffect(() => {
+  //   // console.log(filterNameArr)
+  //   // console.log(filterGenreArr)
+  //   // console.log(sortTitle)
 
-    if (filterNameArr.length === 0 && filterGenreArr.length === 0 && sortTitle === 'По умолчанию') {
-      // console.log('Фильтры пустые')
-      dispatch(getFiltersOff())
-    }
+  //   if (filterNameArr.length === 0 && filterGenreArr.length === 0 && sortTitle === 'По умолчанию') {
+  //     // console.log('Фильтры пустые')
+  //     dispatch(getFiltersOff())
+  //   }
 
-  }, [filterNameArr, filterGenreArr, sortTitle])
+  // }, [filterNameArr, filterGenreArr, sortTitle])
 
 
   return (
@@ -171,9 +205,10 @@ const FilterButtons = () => {
             (<S.FilterBox>
               <S.FilterList>
                 {authors.map((author) => {
-                    return (
-                      <S.FilterItem key={author} onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={filterNameArr.includes(author)} >{author}</S.FilterItem>
-                    )
+                  // console.log(author)
+                  return (
+                    <S.FilterItem key={author} onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={filterNameArr.includes(author)} >{author}</S.FilterItem>
+                  )
                 })
                 }
               </S.FilterList>
@@ -190,9 +225,9 @@ const FilterButtons = () => {
             <S.FilterBox>
               <S.FilterListGenre>
                 {genres.map((genre) => {
-                    return (
-                      <S.FilterItem key={genre} onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={filterGenreArr.includes(genre)} >{genre}</S.FilterItem>
-                    )
+                  return (
+                    <S.FilterItem key={genre} onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={filterGenreArr.includes(genre)} >{genre}</S.FilterItem>
+                  )
                 })
                 }
               </S.FilterListGenre>

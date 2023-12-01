@@ -113,10 +113,19 @@ const getCurrentTrackSlace = createSlice({
       console.log(state.filteredTracks)
       console.log(action.payload)
       console.log(1)
-      state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
-        return a.id - b.id
-      }))
+      if (state.filterSortDate) {
+        // let arr = [];
+        let arr = state.filteredTracks.filter((track) => track.author === action.payload)
+        console.log(arr)
+        state.filteredTracks = [...arr]
+      } else {
+        state.filteredTracks = [...state.filteredTracks, action.payload].sort((function (a, b) {
+          return a.id - b.id
+        }))
+
+      }
       state.filretsActive = true;
+      state.filterAuthor = true;
 
       // state.filteredTracks.map((track) => {
       // if (state.filteredTracks === action.payload) {
@@ -164,7 +173,20 @@ const getCurrentTrackSlace = createSlice({
       // newArr = state.filteredTracks.filter((track) => track !== action.payload)
       // console.log(newArr)
       state.filteredTracks = action.payload
-    }
+    },
+    getSortDateFilter(state, action) {
+      // state.filteredTracks = action.payload
+      state.filteredTracks = action.payload
+
+      state.filretsActive = true;
+      state.filterSortDate = true;
+    },
+    getSortDateFilterOff(state, action) {
+      // state.filteredTracks = action.payload
+      state.filteredTracks = action.payload
+      state.filretsActive = false;
+    },
+
   },
   // extraReducers: {
   //   [getLikes.fulfilled]: (state, action) => {
@@ -192,7 +214,9 @@ export const {
   getFilters,
   getAddFiltersAuthore,
   getFiltersOff,
-  getDaleteFiltersAuthore
+  getDaleteFiltersAuthore,
+  getSortDateFilter,
+  getSortDateFilterOff
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;
