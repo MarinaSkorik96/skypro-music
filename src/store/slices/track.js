@@ -16,6 +16,12 @@ const initialState = {
   genres: [],
   filteredTracks: [],
   filretsActive: false,
+  filterSortDateTracks: [],
+  filterSortDate: false,
+  filterAuthorTracks: [],
+  filterAuthor: false,
+  filterGenreTracks: [],
+  filterGenre: false,
 };
 
 const getCurrentTrackSlace = createSlice({

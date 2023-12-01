@@ -13,7 +13,16 @@ const FilterButtons = () => {
   const allTracks = useSelector(state => state.track.allTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
+  const filterSortDateTracks = useSelector(state => state.track.filterSortDateTracks)
+  const filterSortDate = useSelector(state => state.track.filterSortDate)
+  const filterAuthorTracks = useSelector(state => state.track.filterAuthorTracks)
+  const filterAuthor = useSelector(state => state.track.filterAuthor)
+  const filterGenreTracks = useSelector(state => state.track.filterGenreTracks)
+  const filterGenre = useSelector(state => state.track.filterGenre)
 
+ 
+ 
+ 
   console.log(filteredTracks)
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
@@ -48,17 +57,20 @@ const FilterButtons = () => {
       setNewFerst(false);
       setOldFerst(false)
       setSortTitle("По умолчанию")
-      // console.log(filretsActive)
-      if (filretsActive) {
-        console.log(33)
-        console.log(filterableArray)
-        const defaultFilterableArray = [...filterableArray].sort(function (a, b) {
-          return a.id - b.id
-        })
-        dispatch(getFilters(defaultFilterableArray))
-      } else {
-        dispatch(getFilters(allTracks))
+      if (filterAuthor || filterGenre) {
+
       }
+      // console.log(filretsActive)
+      // if (filretsActive) {
+      //   console.log(33)
+      //   console.log(filterableArray)
+      //   const defaultFilterableArray = [...filterableArray].sort(function (a, b) {
+      //     return a.id - b.id
+      //   })
+      //   dispatch(getFilters(defaultFilterableArray))
+      // } else {
+      //   dispatch(getFilters(allTracks))
+      // }
     } else {
       const tracksWithDate = [];
       const tracksWithoutDate = [];
@@ -110,6 +122,7 @@ const FilterButtons = () => {
       // console.log(track)
       // console.log(name)
       if (track.author === name) {
+        console.log(filteredTracks)
         if (filteredTracks.includes(track)) {
           console.log('уже есть в списке')
           let newArr = [];
@@ -158,16 +171,9 @@ const FilterButtons = () => {
             (<S.FilterBox>
               <S.FilterList>
                 {authors.map((author) => {
-                  if (filterNameArr.includes(author)) {
                     return (
-                      // {filterNameArrL.includes((author)=> {} )}
-                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={true} >{author}</S.FilterItem>
+                      <S.FilterItem key={author} onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={filterNameArr.includes(author)} >{author}</S.FilterItem>
                     )
-                  } else {
-                    return (
-                      <S.FilterItem onClick={() => { filterName(filterNameArr, author, setFilterNameArr) }} $props={false} >{author}</S.FilterItem>
-                    )
-                  }
                 })
                 }
               </S.FilterList>
@@ -184,17 +190,9 @@ const FilterButtons = () => {
             <S.FilterBox>
               <S.FilterListGenre>
                 {genres.map((genre) => {
-                  if (filterGenreArr.includes(genre)) {
                     return (
-                      // {filterNameArrL.includes((author)=> {} )}
-                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={true} >{genre}</S.FilterItem>
+                      <S.FilterItem key={genre} onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={filterGenreArr.includes(genre)} >{genre}</S.FilterItem>
                     )
-                  } else {
-                    return (
-                      <S.FilterItem onClick={() => { filterName(filterGenreArr, genre, setFilterGenreArr) }} $props={false} >{genre}</S.FilterItem>
-                    )
-                  }
-
                 })
                 }
               </S.FilterListGenre>
