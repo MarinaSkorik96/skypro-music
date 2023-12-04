@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore, getSortDateFilter, getSortDateFilterOff, getDaleteFiltersGenre, getAddFiltersGenre } from "../../store/slices/track";
+import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore, getSortDateFilter, getSortDateFilterOff, getDaleteFiltersGenre, getAddFiltersGenre, getFilterAuthorArr, getFilterGenreArr } from "../../store/slices/track";
 
 const { useState } = React;
 
@@ -90,7 +90,6 @@ const FilterButtons = () => {
         setSortTitle("Сначала новые")
         console.log(tracksWithDate)
         sortedByDate = tracksWithDate.sort(function (a, b) {
-          // console.log(tracksWithDate)
           return new Date(b.release_date) - new Date(a.release_date)
         })
         console.log(sortedByDate)
@@ -112,113 +111,25 @@ const FilterButtons = () => {
 
 
   const filterName = (filter, name, tipe) => {
-    console.log(name)
-    console.log(filter)
+    // console.log(name)
+    // console.log(filter)
 
     if (filter.includes(name)) {
       tipe(filter.filter((filter) => filter !== name))
     } else {
       tipe([...filter, name])
-    } 
-    // if (filterSortDate) {
-    //   const filtredTracks = [...]
-    // }
-    allTracks.map((track) => { //allTracks потом поменять на массив фильтруемых треков
-      // console.log(12)
-      // console.log(track)
-      // console.log(name)
-      if (track.author === name) {
-        console.log(name)
-        console.log(track.author)
-        console.log(filteredTracks)
-        // if (filterSortDate) {
-        //   console.log(22222)
-        //   if (filteredTracks.includes(track)) {
-        //     dispatch(getAddFiltersAuthore(track))
-
-        //   } else {
-        //     console.log('уже есть в списке')
-        //     let newArr = [];
-
-        //     newArr = filteredTracks.filter((track) => track.author !== name)
-        //     console.log(newArr)
-        //     dispatch(getDaleteFiltersAuthore(newArr))
-
-        //   }
-
-        // } else {
-
-// работающий кусок
-          // if (filteredTracks.includes(track)) {
-          //   console.log('уже есть в списке')
-          //   let newArr = [];
-
-          //   newArr = filteredTracks.filter((track) => track.author !== name)
-          //   console.log(newArr)
-          //   dispatch(getDaleteFiltersAuthore(newArr))
-
-          // } else {
-          //   dispatch(getAddFiltersAuthore(track))
-
-          // }
+    }
 
 
-          if (filterAuthorTracks.includes(track)) {
-            console.log('уже есть в списке')
-            let newArr = [];
-
-            newArr = filterAuthorTracks.filter((track) => track.author !== name)
-            console.log(newArr)
-            dispatch(getDaleteFiltersAuthore(newArr))
-
-          } else {
-            console.log(54545)
-            dispatch(getAddFiltersAuthore(track))
-
-          }
-
-
-        // }
-
-        // filtredNameTracs.push(track)
-      }
-      if (track.genre === name ) {
-        if (filterAuthor) {
-
-
-          
-        }
-        if (filterGenreTracks.includes(track)) {
-          console.log('уже есть в списке')
-          let newArr = [];
-
-          newArr = filterGenreTracks.filter((track) => track.genre !== name)
-          console.log(newArr)
-          dispatch(getDaleteFiltersGenre(newArr))
-
-        } else {
-          console.log(54545)
-          dispatch(getAddFiltersGenre(track))
-        }
-
-      }
-    })
-    // dispatch(getFilters(ollTracksSortedByDate))
-
-    console.log(filtredNameTracs)
   }
+  useEffect(() => {
+    dispatch(getFilterAuthorArr(filterNameArr))
+    dispatch(getFilterGenreArr(filterGenreArr))
 
-  // useEffect(() => {
-  //   // console.log(filterNameArr)
-  //   // console.log(filterGenreArr)
-  //   // console.log(sortTitle)
+  }, [filterNameArr, filterGenreArr])
 
-  //   if (filterNameArr.length === 0 && filterGenreArr.length === 0 && sortTitle === 'По умолчанию') {
-  //     // console.log('Фильтры пустые')
-  //     dispatch(getFiltersOff())
-  //   }
-
-  // }, [filterNameArr, filterGenreArr, sortTitle])
+  // console.log(filterNameArr)
+  // console.log(filterGenreArr)
 
 
   return (

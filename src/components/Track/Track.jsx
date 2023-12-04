@@ -34,52 +34,18 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-  const filterSortDate = useSelector(state => state.track.filterSortDate)
-  const filterSortDateTracks = useSelector(state => state.track.filterSortDateTracks)
-  const filterAuthor = useSelector(state => state.track.filterAuthor)
-  const filterByDate = useSelector(state => state.track.filterByDate)
-  console.log(filterByDate)
+  const authorsFilterArr = useSelector(state => state.track.authorsFilterArr)
+  const genriesFilterArr = useSelector(state => state.track.genriesFilterArr)
+  // console.log(authorsFilterArr)
+  // console.log(genriesFilterArr)
 
+  useEffect(() => {
 
-
+  }, [authorsFilterArr, genriesFilterArr])
 
   console.log(filteredTracks)
   // console.log(categoryTracks)
-  console.log(allTracks)
-  // console.log(currentPage)
-
-
-  // let filtredTracksAll = []
-  // useEffect(() => {
-
-  //   const tracksWithDate = [];
-  //   const tracksWithoutDate = [];
-  //   let sortedByDate = [];
-  //   filteredTracks.map((track) => {
-  //     if (track.release_date) {
-  //       tracksWithDate.push(track)
-  //       // console.log(tracksWithDate)
-  //     } else (
-  //       tracksWithoutDate.push(track)
-  //     )
-  //   })
-  
-  //    filtredTracksAll =
-
-  //   filterByDate === "Сначала новые" ?
-  //     tracksWithDate.sort(function (a, b) {
-  //       // console.log(tracksWithDate)
-  //       return new Date(b.release_date) - new Date(a.release_date)
-  //     }) : filterByDate === "Сначала старые" ?
-  //       tracksWithDate.sort(function (a, b) {
-  //         // console.log(tracksWithDate)
-  //         return new Date(a.release_date) - new Date(b.release_date)
-  //       }) :
-  //       filteredTracks
-
-  //   // console.log(categoryTracks)
-  // }, [{ filterByDate }])
-
+  // console.log(allTracks)
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
@@ -91,21 +57,8 @@ const Track = ({ isLoadingM }) => {
         filteredTracks : allTracks
 
   // console.log(filteredTracks)
-  console.log(filterSortDate)
-  console.log(filterAuthor)
-
-  // console.log(arreyAllTracks)
-  // const arreyAllTracks = 
-  //   if (currentPage === 'favorites' && favTr) {
-  //     favTr
-  //   } else if (currentPage === 'category' && categoryTracks) {
-  //     categoryTracks
-  //   } else {
-  //     allTracks
-  //   }  
-
-
-
+  // console.log(filterSortDate)
+  // console.log(filterAuthor)
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {

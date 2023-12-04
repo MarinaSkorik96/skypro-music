@@ -14,6 +14,9 @@ const initialState = {
   currentPage: "",
   authors: [],
   genres: [],
+  authorsFilterArr: [],
+  genriesFilterArr: [],
+
   filteredTracks: [],
   filretsActive: false,
   filterSortDateTracks: [],
@@ -101,53 +104,31 @@ const getCurrentTrackSlace = createSlice({
     getCategoryTracks(state, action) {
       state.categoryTracks = action.payload;
     },
+    getFilterAuthorArr(state, action) {
+      state.authorsFilterArr = action.payload
+      if (state.authorsFilterArr.length > 0) {
+        state.filterAuthor = true;
+        state.filretsActive = true;
 
-    getFilters(state, action) {
-      console.log(state.allTracks);
-      state.filteredTracks = action.payload
-      state.filretsActive = true;
+        state.filteredTracks = state.allTracks.filter((track) =>
+          state.authorsFilterArr.includes(track.author)
+        );
+      }
+    },
+    getFilterGenreArr(state, action) {
+      state.authorsGenreArr = action.payload
+      if (state.authorsGenreArr.length > 0) {
+        state.filterGenre = true;
+        state.filretsActive = true;
+
+        state.filteredTracks = state.allTracks.filter((track) =>
+          state.authorsGenreArr.includes(track.genre)
+        );
+      }
+
     },
 
-    getAddFiltersAuthore(state, action) {
-      
-      state.filteredTracks = [...state.filterAuthorTracks, action.payload]
-      state.filterAuthorTracks = [...state.filterAuthorTracks, action.payload].sort((function (a, b) {
-        return a.id - b.id
-      }))
-      state.filretsActive = true;
-      state.filterAuthor = true;
-    },    
-    getAddFiltersGenre(state, action) {
-      
-      state.filteredTracks = [...state.filterGenreTracks, action.payload]
-      state.filterGenreTracks = [...state.filterGenreTracks, action.payload].sort((function (a, b) {
-        return a.id - b.id
-      }))
-      state.filretsActive = true;
-      state.filretsGenre = true;
-    },
 
-    getFiltersOff(state, action) {
-      state.filretsActive = false;
-      console.log('Фильтры пустые')
-
-    },
-    getDaleteFiltersAuthore(state, action) {
-      // let newArr = [];
-
-      // newArr = state.filteredTracks.filter((track) => track !== action.payload)
-      // console.log(newArr)
-      state.filteredTracks = action.payload
-      state.filterAuthorTracks = action.payload
-    },
-    getDaleteFiltersGenre(state, action) {
-      // let newArr = [];
-
-      // newArr = state.filteredTracks.filter((track) => track !== action.payload)
-      // console.log(newArr)
-      state.filteredTracks = action.payload
-      state.filterGenreTracks = action.payload
-    },
     getSortDateFilter(state, action) {
       // state.filteredTracks = action.payload
       state.filteredTracks = action.payload
@@ -192,7 +173,9 @@ export const {
   getSortDateFilter,
   getSortDateFilterOff,
   getAddFiltersGenre,
-  getDaleteFiltersGenre
+  getDaleteFiltersGenre,
+  getFilterAuthorArr,
+  getFilterGenreArr
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;
