@@ -105,7 +105,44 @@ const getCurrentTrackSlace = createSlice({
       state.categoryTracks = action.payload;
     },
     getFilterAuthorArr(state, action) {
-      state.authorsFilterArr = action.payload
+      console.log(action.payload)
+      const { filterNameArr, filterGenreArr } = action.payload
+      console.log(filterNameArr)
+      console.log(filterGenreArr)
+
+      state.authorsFilterArr = filterNameArr
+      state.genriesFilterArr = filterGenreArr
+
+      if (state.authorsFilterArr.length > 0 && state.genriesFilterArr.length > 0) {
+        state.filterAuthor = true;
+        state.filretsActive = true;
+        state.filterGenre = true;
+        console.log('все')
+
+        state.filterAuthorTracks = state.allTracks.filter((track) =>
+          state.authorsFilterArr.includes(track.author)
+        )
+
+        state.filterGenreTracks = state.allTracks.filter((track) =>
+          state.genriesFilterArr.includes(track.genre)
+        )
+
+        state.filteredTracks = [...state.filterAuthorTracks.filter((x => state.filterGenreTracks.includes(x)))]
+        console.log(state.filteredTracks)
+        // state.filteredTracks = arr
+        // state.filteredTracks = state.allTracks.filter((track) =>
+        //   state.authorsFilterArr.includes(track.author) &&
+        //   state.genriesFilterArr.includes(track.genre)
+        // );
+      }
+      if (state.genriesFilterArr.length > 0) {
+        state.filterGenre = true;
+        state.filretsActive = true;
+
+        state.filteredTracks = state.allTracks.filter((track) =>
+          state.genriesFilterArr.includes(track.genre)
+        );
+      }
       if (state.authorsFilterArr.length > 0) {
         state.filterAuthor = true;
         state.filretsActive = true;
@@ -114,6 +151,8 @@ const getCurrentTrackSlace = createSlice({
           state.authorsFilterArr.includes(track.author)
         );
       }
+
+
     },
     getFilterGenreArr(state, action) {
       state.authorsGenreArr = action.payload

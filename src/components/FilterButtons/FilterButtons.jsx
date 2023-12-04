@@ -123,8 +123,8 @@ const FilterButtons = () => {
 
   }
   useEffect(() => {
-    dispatch(getFilterAuthorArr(filterNameArr))
-    dispatch(getFilterGenreArr(filterGenreArr))
+    dispatch(getFilterAuthorArr({filterNameArr, filterGenreArr}))
+    // dispatch(getFilterGenreArr(filterGenreArr))
 
   }, [filterNameArr, filterGenreArr])
 

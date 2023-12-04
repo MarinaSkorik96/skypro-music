@@ -36,14 +36,18 @@ const Track = ({ isLoadingM }) => {
   const filteredTracks = useSelector(state => state.track.filteredTracks)
   const authorsFilterArr = useSelector(state => state.track.authorsFilterArr)
   const genriesFilterArr = useSelector(state => state.track.genriesFilterArr)
-  // console.log(authorsFilterArr)
-  // console.log(genriesFilterArr)
+  const filterAuthorTracks = useSelector(state => state.track.filterAuthorTracks)
+  const filterGenreTracks = useSelector(state => state.track.filterGenreTracks)
 
+  // console.log(filterAuthorTracks)
+  console.log(filteredTracks)
+  const arr = filterAuthorTracks.filter((x => filterGenreTracks.includes(x)))
+  console.log(arr)
   useEffect(() => {
 
   }, [authorsFilterArr, genriesFilterArr])
 
-  console.log(filteredTracks)
+  // console.log(filteredTracks)
   // console.log(categoryTracks)
   // console.log(allTracks)
   const [setLike] = useSetLikeMutation()
