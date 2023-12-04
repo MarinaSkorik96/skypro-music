@@ -38,11 +38,17 @@ const Track = ({ isLoadingM }) => {
   const genriesFilterArr = useSelector(state => state.track.genriesFilterArr)
   const filterAuthorTracks = useSelector(state => state.track.filterAuthorTracks)
   const filterGenreTracks = useSelector(state => state.track.filterGenreTracks)
+  const filterAuthor = useSelector(state => state.track.filterAuthor)
+  const filterGenre = useSelector(state => state.track.filterGenre)
 
+
+  // if (filterAuthor) {
+
+  // }
   // console.log(filterAuthorTracks)
   console.log(filteredTracks)
-  const arr = filterAuthorTracks.filter((x => filterGenreTracks.includes(x)))
-  console.log(arr)
+  // const arr = filterAuthorTracks.filter((x => filterGenreTracks.includes(x)))
+  // console.log(arr)
   useEffect(() => {
 
   }, [authorsFilterArr, genriesFilterArr])

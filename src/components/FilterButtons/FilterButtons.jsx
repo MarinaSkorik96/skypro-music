@@ -54,57 +54,23 @@ const FilterButtons = () => {
       setNewFerst(false);
       setOldFerst(false)
       setSortTitle("По умолчанию")
-      if (filterAuthor || filterGenre) {
-        //не уверена в этом куске, проработать позже
-        const defaultFilterableArray = [...filteredTracks].sort(function (a, b) {
-          return a.id - b.id
-        })
-        dispatch(getSortDateFilter(defaultFilterableArray))
-      } else {
-        dispatch(getSortDateFilterOff(allTracks))
+      dispatch(getFilterAuthorArr({sts:"По умолчанию"}))
 
-      }
     } else {
-      let filterableArray = [];
-      console.log(filterableArray)
-      if (filterAuthor || filterGenre) {
-        filterableArray = [...filteredTracks]
-      } else {
-        filterableArray = [...allTracks]
-      }
-      const tracksWithDate = [];
-      const tracksWithoutDate = [];
-      let sortedByDate = [];
-      filterableArray.map((track) => {
-        if (track.release_date) {
-          tracksWithDate.push(track)
-          console.log(tracksWithDate)
-        } else (
-          tracksWithoutDate.push(track)
-        )
-      })
       if (filtr === "newF") {
         setDefaultSort(false);
         setNewFerst(true);
         setOldFerst(false)
         setSortTitle("Сначала новые")
-        console.log(tracksWithDate)
-        sortedByDate = tracksWithDate.sort(function (a, b) {
-          return new Date(b.release_date) - new Date(a.release_date)
-        })
-        console.log(sortedByDate)
+        dispatch(getFilterAuthorArr({sts:"Сначала новые"}))
 
       } else if (filtr === "oldF") {
         setDefaultSort(false);
         setNewFerst(false);
         setOldFerst(true)
         setSortTitle("Сначала старые")
-        sortedByDate = tracksWithDate.sort(function (a, b) {
-          return new Date(a.release_date) - new Date(b.release_date)
-        })
+        dispatch(getFilterAuthorArr({sts:"Сначала старые"}))
       }
-      const ollTracksSortedByDate = [...sortedByDate, ...tracksWithoutDate]
-      dispatch(getSortDateFilter(ollTracksSortedByDate))
     }
   }
   const filtredNameTracs = [];

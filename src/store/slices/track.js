@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-
+import { current } from "@reduxjs/toolkit";
 const initialState = {
   allTracks: [],
   currentTrack: null,
@@ -106,52 +106,64 @@ const getCurrentTrackSlace = createSlice({
     },
     getFilterAuthorArr(state, action) {
       console.log(action.payload)
-      const { filterNameArr, filterGenreArr } = action.payload
-      console.log(filterNameArr)
-      console.log(filterGenreArr)
+      const { filterNameArr, filterGenreArr, sts } = action.payload
 
       state.authorsFilterArr = filterNameArr
       state.genriesFilterArr = filterGenreArr
 
-      if (state.authorsFilterArr.length > 0 && state.genriesFilterArr.length > 0) {
-        state.filterAuthor = true;
-        state.filretsActive = true;
-        state.filterGenre = true;
-        console.log('все')
+      let filteredTracks = state.allTracks
 
-        state.filterAuthorTracks = state.allTracks.filter((track) =>
-          state.authorsFilterArr.includes(track.author)
-        )
 
-        state.filterGenreTracks = state.allTracks.filter((track) =>
-          state.genriesFilterArr.includes(track.genre)
-        )
+      if (state.authorsFilterArr || state.genriesFilterArr) {
+        if (state.genriesFilterArr.length > 0) {
+          state.filterGenre = true;
+          state.filretsActive = true;
 
-        state.filteredTracks = [...state.filterAuthorTracks.filter((x => state.filterGenreTracks.includes(x)))]
-        console.log(state.filteredTracks)
-        // state.filteredTracks = arr
-        // state.filteredTracks = state.allTracks.filter((track) =>
-        //   state.authorsFilterArr.includes(track.author) &&
-        //   state.genriesFilterArr.includes(track.genre)
-        // );
-      }
-      if (state.genriesFilterArr.length > 0) {
-        state.filterGenre = true;
-        state.filretsActive = true;
+          filteredTracks = filteredTracks.filter((track) =>
+            state.genriesFilterArr.includes(track.genre)
+          );
+          console.log(current(state.allTracks))
+        }
+        if (state.authorsFilterArr.length > 0) {
+          state.filterAuthor = true;
+          state.filretsActive = true;
 
-        state.filteredTracks = state.allTracks.filter((track) =>
-          state.genriesFilterArr.includes(track.genre)
-        );
-      }
-      if (state.authorsFilterArr.length > 0) {
-        state.filterAuthor = true;
-        state.filretsActive = true;
-
-        state.filteredTracks = state.allTracks.filter((track) =>
-          state.authorsFilterArr.includes(track.author)
-        );
+          filteredTracks = filteredTracks.filter((track) =>
+            state.authorsFilterArr.includes(track.author)
+          );
+        }
       }
 
+      if (sts) {
+        state.filretsActive = true;
+
+        const tracksWithDate = [];
+        const tracksWithoutDate = [];
+        let sortedByDate = [];
+        filteredTracks.map((track) => {
+          if (track.release_date) {
+            tracksWithDate.push(track)
+          } else (
+            tracksWithoutDate.push(track)
+          )
+        })
+        if (sts === 'Сначала новые') {
+          sortedByDate = tracksWithDate.sort(function (a, b) {
+            return new Date(b.release_date) - new Date(a.release_date)
+          })
+        } else if (sts === 'Сначала старые') {
+          sortedByDate = tracksWithDate.sort(function (a, b) {
+            return new Date(a.release_date) - new Date(b.release_date)
+          })
+        } else {
+
+        }
+        filteredTracks = [...sortedByDate, ...tracksWithoutDate]
+
+      }
+
+
+      state.filteredTracks = filteredTracks
 
     },
     getFilterGenreArr(state, action) {
