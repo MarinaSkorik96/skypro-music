@@ -37,29 +37,62 @@ const Track = ({ isLoadingM }) => {
   const filterSortDate = useSelector(state => state.track.filterSortDate)
   const filterSortDateTracks = useSelector(state => state.track.filterSortDateTracks)
   const filterAuthor = useSelector(state => state.track.filterAuthor)
+  const filterByDate = useSelector(state => state.track.filterByDate)
+  console.log(filterByDate)
 
 
+
+
+  console.log(filteredTracks)
   // console.log(categoryTracks)
-  // console.log(allTracks)
+  console.log(allTracks)
   // console.log(currentPage)
 
-  useEffect(() => {
-    // console.log(categoryTracks)
-  }, [{ categoryTracks }])
+
+  // let filtredTracksAll = []
+  // useEffect(() => {
+
+  //   const tracksWithDate = [];
+  //   const tracksWithoutDate = [];
+  //   let sortedByDate = [];
+  //   filteredTracks.map((track) => {
+  //     if (track.release_date) {
+  //       tracksWithDate.push(track)
+  //       // console.log(tracksWithDate)
+  //     } else (
+  //       tracksWithoutDate.push(track)
+  //     )
+  //   })
+  
+  //    filtredTracksAll =
+
+  //   filterByDate === "Сначала новые" ?
+  //     tracksWithDate.sort(function (a, b) {
+  //       // console.log(tracksWithDate)
+  //       return new Date(b.release_date) - new Date(a.release_date)
+  //     }) : filterByDate === "Сначала старые" ?
+  //       tracksWithDate.sort(function (a, b) {
+  //         // console.log(tracksWithDate)
+  //         return new Date(a.release_date) - new Date(b.release_date)
+  //       }) :
+  //       filteredTracks
+
+  //   // console.log(categoryTracks)
+  // }, [{ filterByDate }])
 
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
   const arreyAllTracks = currentPage === 'favorites' && favTr ?
     favTr : currentPage === 'category' && categoryTracks ?
-      categoryTracks : filretsActive  ?
-      // filteredTracks: filterSortDate ?
-      // filteredTracks : filretsActive ?
-          filteredTracks : allTracks
+      categoryTracks : filretsActive ?
+        // filteredTracks: filterSortDate ?
+        // filteredTracks : filretsActive ?
+        filteredTracks : allTracks
 
-          console.log(filteredTracks)
-          console.log(filterSortDate)
-          console.log(filterAuthor)
+  // console.log(filteredTracks)
+  console.log(filterSortDate)
+  console.log(filterAuthor)
 
   // console.log(arreyAllTracks)
   // const arreyAllTracks = 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore, getSortDateFilter, getSortDateFilterOff } from "../../store/slices/track";
+import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore, getSortDateFilter, getSortDateFilterOff, getDaleteFiltersGenre, getAddFiltersGenre } from "../../store/slices/track";
 
 const { useState } = React;
 
@@ -64,17 +64,6 @@ const FilterButtons = () => {
         dispatch(getSortDateFilterOff(allTracks))
 
       }
-      // console.log(filretsActive)
-      // if (filretsActive) {
-      //   console.log(33)
-      //   console.log(filterableArray)
-      //   const defaultFilterableArray = [...filterableArray].sort(function (a, b) {
-      //     return a.id - b.id
-      //   })
-      //   dispatch(getFilters(defaultFilterableArray))
-      // } else {
-      //   dispatch(getFilters(allTracks))
-      // }
     } else {
       let filterableArray = [];
       console.log(filterableArray)
@@ -130,7 +119,10 @@ const FilterButtons = () => {
       tipe(filter.filter((filter) => filter !== name))
     } else {
       tipe([...filter, name])
-    }
+    } 
+    // if (filterSortDate) {
+    //   const filtredTracks = [...]
+    // }
     allTracks.map((track) => { //allTracks потом поменять на массив фильтруемых треков
       // console.log(12)
       // console.log(track)
@@ -139,38 +131,76 @@ const FilterButtons = () => {
         console.log(name)
         console.log(track.author)
         console.log(filteredTracks)
-        if (filterSortDate) {
-          console.log(22222)
-          if (filteredTracks.includes(track)) {
-            dispatch(getAddFiltersAuthore(track))
+        // if (filterSortDate) {
+        //   console.log(22222)
+        //   if (filteredTracks.includes(track)) {
+        //     dispatch(getAddFiltersAuthore(track))
 
-          } else {
+        //   } else {
+        //     console.log('уже есть в списке')
+        //     let newArr = [];
+
+        //     newArr = filteredTracks.filter((track) => track.author !== name)
+        //     console.log(newArr)
+        //     dispatch(getDaleteFiltersAuthore(newArr))
+
+        //   }
+
+        // } else {
+
+// работающий кусок
+          // if (filteredTracks.includes(track)) {
+          //   console.log('уже есть в списке')
+          //   let newArr = [];
+
+          //   newArr = filteredTracks.filter((track) => track.author !== name)
+          //   console.log(newArr)
+          //   dispatch(getDaleteFiltersAuthore(newArr))
+
+          // } else {
+          //   dispatch(getAddFiltersAuthore(track))
+
+          // }
+
+
+          if (filterAuthorTracks.includes(track)) {
             console.log('уже есть в списке')
             let newArr = [];
 
-            newArr = filteredTracks.filter((track) => track.author !== name)
-            console.log(newArr)
-            dispatch(getDaleteFiltersAuthore(newArr))
-
-          }
-
-        } else {
-          if (filteredTracks.includes(track)) {
-            console.log('уже есть в списке')
-            let newArr = [];
-
-            newArr = filteredTracks.filter((track) => track.author !== name)
+            newArr = filterAuthorTracks.filter((track) => track.author !== name)
             console.log(newArr)
             dispatch(getDaleteFiltersAuthore(newArr))
 
           } else {
+            console.log(54545)
             dispatch(getAddFiltersAuthore(track))
 
           }
 
-        }
+
+        // }
 
         // filtredNameTracs.push(track)
+      }
+      if (track.genre === name ) {
+        if (filterAuthor) {
+
+
+          
+        }
+        if (filterGenreTracks.includes(track)) {
+          console.log('уже есть в списке')
+          let newArr = [];
+
+          newArr = filterGenreTracks.filter((track) => track.genre !== name)
+          console.log(newArr)
+          dispatch(getDaleteFiltersGenre(newArr))
+
+        } else {
+          console.log(54545)
+          dispatch(getAddFiltersGenre(track))
+        }
+
       }
     })
     // dispatch(getFilters(ollTracksSortedByDate))
