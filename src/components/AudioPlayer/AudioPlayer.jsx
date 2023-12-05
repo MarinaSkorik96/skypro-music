@@ -214,16 +214,6 @@ const AudioPlayer = () => {
                       </S.TrackTimeSvg>
                   }
 
-                  {/* <S.TrackPlayLike onClick={awaitImplementation}>
-                    <S.TrackPlayLikeSvg alt="like">
-                      <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-                    </S.TrackPlayLikeSvg>
-                  </S.TrackPlayLike>
-                  <S.TrackPlayDislike onClick={awaitImplementation}>
-                    <S.TrackPlayDislikeSvg alt="dislike">
-                      <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
-                    </S.TrackPlayDislikeSvg>
-                  </S.TrackPlayDislike> */}
 
 
                 </S.TrackPlayLikeDis>
