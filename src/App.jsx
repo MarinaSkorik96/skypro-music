@@ -73,6 +73,9 @@ function App() {
 
   const handleLogOut = () => {
     localStorage.removeItem('login')
+    localStorage.removeItem('id')
+    localStorage.removeItem('token')
+
     dispatch(resetCurrentTrack(null))
   }
 
