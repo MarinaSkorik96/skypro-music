@@ -23,14 +23,15 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-  const arreyAllTracks = currentPage === 'favorites' && favTr ?
-    favTr : currentPage === 'category' && categoryTracks ?
-      categoryTracks : filretsActive ?
-        filteredTracks : allTracks
+  const arreyAllTracks = currentPage === 'favorites' && favTr && filretsActive ?
+    filteredTracks : currentPage === 'favorites' && favTr ?
+      favTr : currentPage === 'category' && categoryTracks && filretsActive ?
+        filteredTracks : currentPage === 'category' && categoryTracks ?
+          categoryTracks : filretsActive ?
+            filteredTracks : allTracks
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -53,20 +54,22 @@ const Track = ({ isLoadingM }) => {
   }
 
   const activeLike = ({ track }) => {
-    if (currentPage === 'main' || currentPage === 'category') {
-      const ollUsersLikes = track.stared_user
-      const userId = localStorage.getItem('id'); //Надо преобразовать в число
-      const like = ollUsersLikes.find(user => user.id == userId)
-      if (like) {
-        return (true)
+    if (track) {
+      if (currentPage === 'main' || currentPage === 'category') {
+        const ollUsersLikes = track.stared_user
+        const userId = localStorage.getItem('id'); //Надо преобразовать в число
+        const like = ollUsersLikes.find(user => user.id == userId)
+        if (like) {
+          return (true)
+        }
+        return (false)
       }
-      return (false)
     }
   }
 
   return (
     <>
-      {isLoading ||  isLoadingM ? <TrackSkeleton /> : null}
+      {isLoading || isLoadingM ? <TrackSkeleton /> : null}
       {isError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
       {isLoading || isLoadingM ? null : arreyAllTracks.map((track) => {
         return (

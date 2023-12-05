@@ -64,7 +64,6 @@ const getUserSlace = createSlice({
   extraReducers: {
     [getFreshToken.fulfilled]: (state, action) => {
       state.access = action.payload.access;
-      console.log(state.access)
     },
     [getFreshToken.rejected]: (state, action) => {
       console.log(action)

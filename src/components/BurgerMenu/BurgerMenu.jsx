@@ -4,7 +4,7 @@ import * as S from "./BurgerMenuStyles"
 import { useContext } from 'react';
 import Context from '../../contexts';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentPage } from "../../store/slices/track";
+import { getCurrentPage, getFilterOff } from "../../store/slices/track";
 
 
 const { useState } = React;
@@ -19,7 +19,7 @@ const BurgerMenu = () => {
 
   const toggleVisibility = () => setVisible(!visible);
 
-  const {  handleLogOut } = useContext(Context)
+  const { handleLogOut } = useContext(Context)
 
   return (
     <>
@@ -32,14 +32,19 @@ const BurgerMenu = () => {
         <S.NavMenu>
           <S.MenuList>
             <S.MenuItem>
-              <S.MenuLink to="/">
+              <S.MenuLink to="/" onClick={() => {
+                dispatch(getFilterOff())
+              }}>
                 Главное
               </S.MenuLink>
             </S.MenuItem>
             <S.MenuItem>
-              <S.MenuLink 
-              onClick={()=> {dispatch(getCurrentPage('favorites'))}}
-              to="/MyPlaylist">
+              <S.MenuLink
+                onClick={() => {
+                  dispatch(getCurrentPage('favorites'))
+                  dispatch(getFilterOff())
+                }}
+                to="/MyPlaylist">
                 Мой плейлист
               </S.MenuLink>
             </S.MenuItem>

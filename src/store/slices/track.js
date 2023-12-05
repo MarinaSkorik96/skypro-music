@@ -102,19 +102,27 @@ const getCurrentTrackSlace = createSlice({
 
     getFilterAuthorArr(state, action) {
       const { filterNameArr, filterGenreArr, sortTitle, searchInput } = action.payload
-      console.log(searchInput)
-      // console.log(search)
+
+
       if (filterNameArr && filterGenreArr) {
         state.authorsFilterArr = filterNameArr
         state.genriesFilterArr = filterGenreArr
       }
-      if (searchInput || searchInput=="" ) {
+      if (searchInput || searchInput == "") {
         state.search = searchInput;
       }
       // console.log((JSON.stringify(state.authorsFilterArr)))
       // console.log((JSON.stringify(state.genriesFilterArr)))
+      let filteredTracks = []
 
-      let filteredTracks = state.allTracks
+      if (state.currentPage === 'favorites') {
+        filteredTracks = state.favoriteTracks
+      } else if (state.currentPage === 'category') {
+
+        filteredTracks = state.categoryTracks
+      } else if (state.currentPage === 'main') {
+        filteredTracks = state.allTracks
+      }
 
       if (state.authorsFilterArr || state.genriesFilterArr) {
         if (state.genriesFilterArr.length > 0) {
@@ -136,6 +144,7 @@ const getCurrentTrackSlace = createSlice({
 
       if (state.search.length > 0) {
         state.filretsActive = true;
+
         filteredTracks = filteredTracks.filter((track) =>
           track.name.toLocaleLowerCase().includes(state.search.toLocaleLowerCase())
         )
@@ -158,6 +167,11 @@ const getCurrentTrackSlace = createSlice({
 
       state.filteredTracks = filteredTracks
     },
+    getFilterOff(state, action) {
+      state.filretsActive = false;
+
+    }
+
 
   },
   // extraReducers: {
@@ -184,6 +198,7 @@ export const {
   getCurrentPage,
   getCategoryTracks,
   getFilterAuthorArr,
+  getFilterOff
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;

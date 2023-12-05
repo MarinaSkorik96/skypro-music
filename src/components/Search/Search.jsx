@@ -28,7 +28,7 @@ const Layout = () => {
         placeholder="Поиск"
         name="search"
         $color={disableda}
-        disabled={disableda}
+        // disabled={disableda}
         onChange={(event) => {
           dispatch(getFilterAuthorArr({ searchInput: event.target.value }))
         }}
