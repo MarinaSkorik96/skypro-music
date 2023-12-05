@@ -10,6 +10,7 @@ const FilterButtons = () => {
   const dispatch = useDispatch();
   const authors = useSelector(state => state.track.authors)
   const genres = useSelector(state => state.track.genres)
+  const allTracks = useSelector(state => state.track.allTracks)
 
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
@@ -69,7 +70,7 @@ const FilterButtons = () => {
   useEffect(() => {
     dispatch(getFilterAuthorArr({ filterNameArr, filterGenreArr, sortTitle }))
 
-  }, [filterNameArr, filterGenreArr, sortTitle])
+  }, [filterNameArr, filterGenreArr, sortTitle, allTracks])
 
   return (
     <>

@@ -99,6 +99,7 @@ const getCurrentTrackSlace = createSlice({
     getCategoryTracks(state, action) {
       state.categoryTracks = action.payload;
     },
+    
     getFilterAuthorArr(state, action) {
       const { filterNameArr, filterGenreArr, sortTitle, searchInput } = action.payload
 

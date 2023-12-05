@@ -28,6 +28,10 @@ const Track = ({ isLoadingM }) => {
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
+useEffect(()=>{
+  console.log(filteredTracks)
+},[filteredTracks])
+
   const arreyAllTracks = currentPage === 'favorites' && favTr ?
     favTr : currentPage === 'category' && categoryTracks ?
       categoryTracks : filretsActive ?
