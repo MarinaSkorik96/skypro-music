@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./FilterButtonsStyles"
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, getAddFiltersAuthore, getFiltersOff, getDaleteFiltersAuthore, getSortDateFilter, getSortDateFilterOff, getDaleteFiltersGenre, getAddFiltersGenre, getFilterAuthorArr, getFilterGenreArr } from "../../store/slices/track";
+import {  getFilterAuthorArr } from "../../store/slices/track";
 
 const { useState } = React;
 

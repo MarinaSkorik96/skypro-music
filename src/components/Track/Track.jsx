@@ -54,18 +54,14 @@ const Track = ({ isLoadingM }) => {
     return m.padStart(2, 0) + ':' + s.padStart(2, 0)
   }
 
-  // console.log(arreyAllTracks)
-
   const activeLike = ({ track }) => {
     if (currentPage === 'main' || currentPage === 'category') {
       const ollUsersLikes = track.stared_user
       const userId = localStorage.getItem('id'); //Надо преобразовать в число
       const like = ollUsersLikes.find(user => user.id == userId)
       if (like) {
-        // console.log(true)
         return (true)
       }
-      // console.log(false)
       return (false)
     }
   }
@@ -74,9 +70,7 @@ const Track = ({ isLoadingM }) => {
     <>
       {isLoading ? <TrackSkeleton /> : null}
       {isError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
-      {/* {arreyAllTracks.lenпth===0 ? null : <p>В этом плейлисте нет треков</p>} */}
       {isLoading || isLoadingM ? null : arreyAllTracks.map((track) => {
-        // activeLike({ track })
         return (
           <S.PlaylistItem key={track.id}>
             <S.PlaylistTrack>
@@ -84,11 +78,9 @@ const Track = ({ isLoadingM }) => {
                 dispatch(getCurrentTrack(track));
                 dispatch(getIsPlaing(true));
                 currentAudioPlayerPlaylist()
-                // console.log(track.stared_user)
               }}>
                 <S.TrackTitleImage>
                   {isPlaing && curTrack.id === track.id && <S.BlinkingDot></S.BlinkingDot>}
-                  {/* {isPlaing && track === curTrack && <S.BlinkingDot></S.BlinkingDot>} */}
                   <S.TrackTitleSvg alt="music">
                     <use xlinkHref="/img/icon/sprite.svg#icon-note" />
                   </S.TrackTitleSvg>

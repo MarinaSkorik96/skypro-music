@@ -16,7 +16,7 @@ const initialState = {
   genres: [],
   authorsFilterArr: [],
   genriesFilterArr: [],
-  search:"",
+  search: "",
   filteredTracks: [],
   filretsActive: false,
 
@@ -103,7 +103,7 @@ const getCurrentTrackSlace = createSlice({
       const { filterNameArr, filterGenreArr, sortTitle, searchInput } = action.payload
 
       // console.log(search)
-      if (filterNameArr&& filterGenreArr) {
+      if (filterNameArr && filterGenreArr) {
         state.authorsFilterArr = filterNameArr
         state.genriesFilterArr = filterGenreArr
       }
@@ -111,7 +111,7 @@ const getCurrentTrackSlace = createSlice({
         state.search = searchInput;
 
       }
-      console.log((JSON.stringify(state.authorsFilterArr )))
+      console.log((JSON.stringify(state.authorsFilterArr)))
       console.log((JSON.stringify(state.genriesFilterArr)))
 
       let filteredTracks = state.allTracks
@@ -160,17 +160,6 @@ const getCurrentTrackSlace = createSlice({
       state.filteredTracks = filteredTracks
     },
 
-    getFilterGenreArr(state, action) {
-      state.authorsGenreArr = action.payload
-      if (state.authorsGenreArr.length > 0) {
-        state.filretsActive = true;
-
-        state.filteredTracks = state.allTracks.filter((track) =>
-          state.authorsGenreArr.includes(track.genre)
-        );
-      }
-
-    },
   },
   // extraReducers: {
   //   [getLikes.fulfilled]: (state, action) => {
@@ -195,16 +184,7 @@ export const {
   getCurrentPlayList,
   getCurrentPage,
   getCategoryTracks,
-  getFilters,
-  getAddFiltersAuthore,
-  getFiltersOff,
-  getDaleteFiltersAuthore,
-  getSortDateFilter,
-  getSortDateFilterOff,
-  getAddFiltersGenre,
-  getDaleteFiltersGenre,
   getFilterAuthorArr,
-  getFilterGenreArr
 } = getCurrentTrackSlace.actions;
 
 export default getCurrentTrackSlace.reducer;
