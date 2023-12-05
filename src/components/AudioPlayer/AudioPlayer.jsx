@@ -30,7 +30,7 @@ const AudioPlayer = () => {
   const [isRepeat, setIsRepeat] = useState(false);
 
   const { data, isError, isLoading } = useGetTrackQuery(currentTrack.id)
-  console.log(data)
+  // console.log(data)
   // const curTr = data
   // console.log(curTr.stared_user)
   const aRef = useRef(0);

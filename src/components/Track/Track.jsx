@@ -23,20 +23,14 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-  // console.log(filteredTracks)
 
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
-
-// useEffect(()=>{
-//   console.log(filteredTracks)
-// },[filteredTracks])
 
   const arreyAllTracks = currentPage === 'favorites' && favTr ?
     favTr : currentPage === 'category' && categoryTracks ?
       categoryTracks : filretsActive ?
         filteredTracks : allTracks
-
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -72,7 +66,7 @@ const Track = ({ isLoadingM }) => {
 
   return (
     <>
-      {isLoading ? <TrackSkeleton /> : null}
+      {isLoading ||  isLoadingM ? <TrackSkeleton /> : null}
       {isError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
       {isLoading || isLoadingM ? null : arreyAllTracks.map((track) => {
         return (

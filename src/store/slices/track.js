@@ -99,18 +99,17 @@ const getCurrentTrackSlace = createSlice({
     getCategoryTracks(state, action) {
       state.categoryTracks = action.payload;
     },
-    
+
     getFilterAuthorArr(state, action) {
       const { filterNameArr, filterGenreArr, sortTitle, searchInput } = action.payload
-
+      console.log(searchInput)
       // console.log(search)
       if (filterNameArr && filterGenreArr) {
         state.authorsFilterArr = filterNameArr
         state.genriesFilterArr = filterGenreArr
       }
-      if (searchInput) {
+      if (searchInput || searchInput=="" ) {
         state.search = searchInput;
-
       }
       // console.log((JSON.stringify(state.authorsFilterArr)))
       // console.log((JSON.stringify(state.genriesFilterArr)))
@@ -135,14 +134,13 @@ const getCurrentTrackSlace = createSlice({
         }
       }
 
-      if (state.search) {
+      if (state.search.length > 0) {
         state.filretsActive = true;
-        console.log(searchInput)
-        // console.log(current(filteredTracks))
         filteredTracks = filteredTracks.filter((track) =>
           track.name.toLocaleLowerCase().includes(state.search.toLocaleLowerCase())
         )
-
+      } else if (state.search.length === 0) {
+        filteredTracks = filteredTracks
       }
 
       if (sortTitle === 'Сначала новые') {
