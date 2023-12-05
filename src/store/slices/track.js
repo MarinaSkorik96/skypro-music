@@ -105,24 +105,20 @@ const getCurrentTrackSlace = createSlice({
       state.categoryTracks = action.payload;
     },
     getFilterAuthorArr(state, action) {
-      console.log(action.payload)
-      const { filterNameArr, filterGenreArr, sts } = action.payload
+      const { filterNameArr, filterGenreArr, sortTitle } = action.payload
 
       state.authorsFilterArr = filterNameArr
       state.genriesFilterArr = filterGenreArr
 
       let filteredTracks = state.allTracks
 
-
       if (state.authorsFilterArr || state.genriesFilterArr) {
         if (state.genriesFilterArr.length > 0) {
           state.filterGenre = true;
           state.filretsActive = true;
-
           filteredTracks = filteredTracks.filter((track) =>
             state.genriesFilterArr.includes(track.genre)
           );
-          console.log(current(state.allTracks))
         }
         if (state.authorsFilterArr.length > 0) {
           state.filterAuthor = true;
@@ -131,41 +127,26 @@ const getCurrentTrackSlace = createSlice({
           filteredTracks = filteredTracks.filter((track) =>
             state.authorsFilterArr.includes(track.author)
           );
+
         }
       }
 
-      if (sts) {
+      if (sortTitle === 'Сначала новые') {
         state.filretsActive = true;
 
-        const tracksWithDate = [];
-        const tracksWithoutDate = [];
-        let sortedByDate = [];
-        filteredTracks.map((track) => {
-          if (track.release_date) {
-            tracksWithDate.push(track)
-          } else (
-            tracksWithoutDate.push(track)
-          )
+        filteredTracks = filteredTracks.sort(function (a, b) {
+          return new Date(b.release_date) - new Date(a.release_date)
         })
-        if (sts === 'Сначала новые') {
-          sortedByDate = tracksWithDate.sort(function (a, b) {
-            return new Date(b.release_date) - new Date(a.release_date)
-          })
-        } else if (sts === 'Сначала старые') {
-          sortedByDate = tracksWithDate.sort(function (a, b) {
-            return new Date(a.release_date) - new Date(b.release_date)
-          })
-        } else {
-
-        }
-        filteredTracks = [...sortedByDate, ...tracksWithoutDate]
-
-      }
-
+      } else if (sortTitle === 'Сначала старые') {
+        filteredTracks = filteredTracks.sort(function (a, b) {
+          return new Date(a.release_date) - new Date(b.release_date)
+        })
+        state.filretsActive = true;
+      } 
 
       state.filteredTracks = filteredTracks
-
     },
+
     getFilterGenreArr(state, action) {
       state.authorsGenreArr = action.payload
       if (state.authorsGenreArr.length > 0) {
