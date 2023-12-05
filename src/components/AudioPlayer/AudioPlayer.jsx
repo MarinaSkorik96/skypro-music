@@ -6,7 +6,7 @@ import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/Progres
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsPlaing, nextTrack, prevTrack, getShuffle } from "../../store/slices/track";
 import Context from "../../contexts";
-import { useGetAllTracksQuery, useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
+import { useGetAllTracksQuery, useGetTrackQuery, useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
 
 
 const AudioPlayer = () => {
@@ -29,7 +29,10 @@ const AudioPlayer = () => {
   const [isPlaying, setPlaying] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
 
-
+  const { data, isError, isLoading } = useGetTrackQuery(currentTrack.id)
+  console.log(data)
+  // const curTr = data
+  // console.log(curTr.stared_user)
   const aRef = useRef(0);
 
   const handleStart = () => {
@@ -89,16 +92,19 @@ const AudioPlayer = () => {
     alert('Функционал еще не реализован');
   };
 
-  const activeLike = ({currentTrack }) => {
-   console.log(currentTrack)
-    if (currentPage === 'main' || currentPage === 'category') {
-      const ollUsersLikes = currentTrack.stared_user
-      const userId = localStorage.getItem('id'); //Надо преобразовать в число
-      const like = ollUsersLikes.find(user => user.id == userId)
-      if (like) {
-        return (true)
+  const activeLike = ({ data }) => {
+    // console.log(currentTrack)
+    if (data){
+      if (currentPage === 'main' || currentPage === 'category') {
+        const ollUsersLikes = data.stared_user
+        const userId = localStorage.getItem('id'); //Надо преобразовать в число
+        const like = ollUsersLikes.find(user => user.id == userId)
+        if (like) {
+          return (true)
+        }
+        return (false)
       }
-      return (false)
+  
     }
   }
 
@@ -194,16 +200,19 @@ const AudioPlayer = () => {
                   </S.TrackPlayContain>}
 
                 <S.TrackPlayLikeDis>
-                {
-                  activeLike({ currentTrack }) || currentPage === 'favorites' ?
-                    <S.TrackTimeSvgLike onClick={() => { setDisLike(currentTrack.id) }} alt="time">
-                      <use xlinkHref="/img/icon/sprite.svg#icon-like" />
-                    </S.TrackTimeSvgLike>
-                    :
-                    <S.TrackTimeSvg onClick={() => { setLike(currentTrack.id) }} alt="time">
-                      <use xlinkHref="/img/icon/sprite.svg#icon-like" />
-                    </S.TrackTimeSvg>
-                }
+                  {
+                    activeLike({ data }) || currentPage === 'favorites' ?
+                      <S.TrackTimeSvgLike onClick={
+                        () => { 
+                          setDisLike(currentTrack.id);
+                           }} alt="time">
+                        <use xlinkHref="/img/icon/sprite.svg#icon-like" />
+                      </S.TrackTimeSvgLike>
+                      :
+                      <S.TrackTimeSvg onClick={() => { setLike(currentTrack.id) }} alt="time">
+                        <use xlinkHref="/img/icon/sprite.svg#icon-like" />
+                      </S.TrackTimeSvg>
+                  }
 
                   {/* <S.TrackPlayLike onClick={awaitImplementation}>
                     <S.TrackPlayLikeSvg alt="like">

@@ -23,14 +23,14 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-  console.log(filteredTracks)
+  // console.log(filteredTracks)
 
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-useEffect(()=>{
-  console.log(filteredTracks)
-},[filteredTracks])
+// useEffect(()=>{
+//   console.log(filteredTracks)
+// },[filteredTracks])
 
   const arreyAllTracks = currentPage === 'favorites' && favTr ?
     favTr : currentPage === 'category' && categoryTracks ?

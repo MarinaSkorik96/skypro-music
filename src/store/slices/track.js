@@ -112,8 +112,8 @@ const getCurrentTrackSlace = createSlice({
         state.search = searchInput;
 
       }
-      console.log((JSON.stringify(state.authorsFilterArr)))
-      console.log((JSON.stringify(state.genriesFilterArr)))
+      // console.log((JSON.stringify(state.authorsFilterArr)))
+      // console.log((JSON.stringify(state.genriesFilterArr)))
 
       let filteredTracks = state.allTracks
 
