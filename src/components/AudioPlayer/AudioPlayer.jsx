@@ -6,9 +6,13 @@ import { ProgresInputTrack, ProgresInputVolume } from "../ProgressInputs/Progres
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsPlaing, nextTrack, prevTrack, getShuffle } from "../../store/slices/track";
 import Context from "../../contexts";
+import { useGetAllTracksQuery, useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
 
 
 const AudioPlayer = () => {
+  const [setLike] = useSetLikeMutation()
+  const [setDisLike] = useSetDisLikeMutation()
+
   const dispatch = useDispatch();
 
 
@@ -84,6 +88,19 @@ const AudioPlayer = () => {
   const awaitImplementation = () => {
     alert('Функционал еще не реализован');
   };
+
+  const activeLike = ({currentTrack }) => {
+   console.log(currentTrack)
+    if (currentPage === 'main' || currentPage === 'category') {
+      const ollUsersLikes = currentTrack.stared_user
+      const userId = localStorage.getItem('id'); //Надо преобразовать в число
+      const like = ollUsersLikes.find(user => user.id == userId)
+      if (like) {
+        return (true)
+      }
+      return (false)
+    }
+  }
 
   return (
     <>
@@ -177,7 +194,18 @@ const AudioPlayer = () => {
                   </S.TrackPlayContain>}
 
                 <S.TrackPlayLikeDis>
-                  <S.TrackPlayLike onClick={awaitImplementation}>
+                {
+                  activeLike({ currentTrack }) || currentPage === 'favorites' ?
+                    <S.TrackTimeSvgLike onClick={() => { setDisLike(currentTrack.id) }} alt="time">
+                      <use xlinkHref="/img/icon/sprite.svg#icon-like" />
+                    </S.TrackTimeSvgLike>
+                    :
+                    <S.TrackTimeSvg onClick={() => { setLike(currentTrack.id) }} alt="time">
+                      <use xlinkHref="/img/icon/sprite.svg#icon-like" />
+                    </S.TrackTimeSvg>
+                }
+
+                  {/* <S.TrackPlayLike onClick={awaitImplementation}>
                     <S.TrackPlayLikeSvg alt="like">
                       <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
                     </S.TrackPlayLikeSvg>
@@ -186,8 +214,13 @@ const AudioPlayer = () => {
                     <S.TrackPlayDislikeSvg alt="dislike">
                       <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
                     </S.TrackPlayDislikeSvg>
-                  </S.TrackPlayDislike>
+                  </S.TrackPlayDislike> */}
+
+
                 </S.TrackPlayLikeDis>
+
+
+
               </S.PlayerTrackPlay>
             </S.BarPlayer>
             <S.BarVolumeBlock>
