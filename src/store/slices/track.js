@@ -16,15 +16,10 @@ const initialState = {
   genres: [],
   authorsFilterArr: [],
   genriesFilterArr: [],
-
+  search:"",
   filteredTracks: [],
   filretsActive: false,
-  filterSortDateTracks: [],
-  filterSortDate: false,
-  filterAuthorTracks: [],
-  filterAuthor: false,
-  filterGenreTracks: [],
-  filterGenre: false,
+
 };
 
 const getCurrentTrackSlace = createSlice({
@@ -105,16 +100,24 @@ const getCurrentTrackSlace = createSlice({
       state.categoryTracks = action.payload;
     },
     getFilterAuthorArr(state, action) {
-      const { filterNameArr, filterGenreArr, sortTitle } = action.payload
+      const { filterNameArr, filterGenreArr, sortTitle, searchInput } = action.payload
 
-      state.authorsFilterArr = filterNameArr
-      state.genriesFilterArr = filterGenreArr
+      // console.log(search)
+      if (filterNameArr&& filterGenreArr) {
+        state.authorsFilterArr = filterNameArr
+        state.genriesFilterArr = filterGenreArr
+      }
+      if (searchInput) {
+        state.search = searchInput;
+
+      }
+      console.log((JSON.stringify(state.authorsFilterArr )))
+      console.log((JSON.stringify(state.genriesFilterArr)))
 
       let filteredTracks = state.allTracks
 
       if (state.authorsFilterArr || state.genriesFilterArr) {
         if (state.genriesFilterArr.length > 0) {
-          state.filterGenre = true;
           state.filretsActive = true;
           filteredTracks = filteredTracks.filter((track) =>
             state.genriesFilterArr.includes(track.genre)
@@ -131,6 +134,16 @@ const getCurrentTrackSlace = createSlice({
         }
       }
 
+      if (state.search) {
+        state.filretsActive = true;
+        console.log(searchInput)
+        // console.log(current(filteredTracks))
+        filteredTracks = filteredTracks.filter((track) =>
+          track.name.toLocaleLowerCase().includes(state.search.toLocaleLowerCase())
+        )
+
+      }
+
       if (sortTitle === 'Сначала новые') {
         state.filretsActive = true;
 
@@ -142,7 +155,7 @@ const getCurrentTrackSlace = createSlice({
           return new Date(a.release_date) - new Date(b.release_date)
         })
         state.filretsActive = true;
-      } 
+      }
 
       state.filteredTracks = filteredTracks
     },
@@ -150,7 +163,6 @@ const getCurrentTrackSlace = createSlice({
     getFilterGenreArr(state, action) {
       state.authorsGenreArr = action.payload
       if (state.authorsGenreArr.length > 0) {
-        state.filterGenre = true;
         state.filretsActive = true;
 
         state.filteredTracks = state.allTracks.filter((track) =>
@@ -159,21 +171,6 @@ const getCurrentTrackSlace = createSlice({
       }
 
     },
-
-
-    getSortDateFilter(state, action) {
-      // state.filteredTracks = action.payload
-      state.filteredTracks = action.payload
-
-      state.filretsActive = true;
-      state.filterSortDate = true;
-    },
-    getSortDateFilterOff(state, action) {
-      // state.filteredTracks = action.payload
-      state.filteredTracks = action.payload
-      state.filretsActive = false;
-    },
-
   },
   // extraReducers: {
   //   [getLikes.fulfilled]: (state, action) => {

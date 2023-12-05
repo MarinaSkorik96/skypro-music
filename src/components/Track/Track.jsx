@@ -1,30 +1,19 @@
 import React, { useEffect } from "react";
 import * as S from "./TrackStyles"
 import TrackSkeleton from "../TrackSkeleton/TrackSkeleton";
-// import { useContext, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTracks, getCurrentTrack } from "../../store/slices/track";
 import { getIsPlaing, getCurrentPlayList } from "../../store/slices/track";
-// import Context from "../../contexts";
 import { useGetAllTracksQuery, useSetDisLikeMutation, useSetLikeMutation } from "../../query/tracks";
 
 const Track = ({ isLoadingM }) => {
   const dispatch = useDispatch();
   const { data, isError, isLoading } = useGetAllTracksQuery()
-  // console.log(useGetAllTracksQuery())
-  // console.log(data)
-  // console.log(isError)
-  // console.log(isLoading)
   useEffect(() => {
     if (data) {
-      // console.log(isLoading)
-      // console.log(12)
       dispatch(getAllTracks(data))
     }
-
   }, [{ isLoading }])
-  // dispatch(getAllTracks(data))
-
 
   const curTrack = useSelector(state => state.track.currentTrack)
   const isPlaing = useSelector(state => state.track.isPlaying)
@@ -34,47 +23,26 @@ const Track = ({ isLoadingM }) => {
   const categoryTracks = useSelector(state => state.track.categoryTracks)
   const filretsActive = useSelector(state => state.track.filretsActive)
   const filteredTracks = useSelector(state => state.track.filteredTracks)
-  const authorsFilterArr = useSelector(state => state.track.authorsFilterArr)
-  const genriesFilterArr = useSelector(state => state.track.genriesFilterArr)
-  const filterAuthorTracks = useSelector(state => state.track.filterAuthorTracks)
-  const filterGenreTracks = useSelector(state => state.track.filterGenreTracks)
-  const filterAuthor = useSelector(state => state.track.filterAuthor)
-  const filterGenre = useSelector(state => state.track.filterGenre)
-
-
-  // if (filterAuthor) {
-
-  // }
-  // console.log(filterAuthorTracks)
   console.log(filteredTracks)
-  // const arr = filterAuthorTracks.filter((x => filterGenreTracks.includes(x)))
-  // console.log(arr)
-  useEffect(() => {
 
-  }, [authorsFilterArr, genriesFilterArr])
-
-  // console.log(filteredTracks)
-  // console.log(categoryTracks)
-  // console.log(allTracks)
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
   const arreyAllTracks = currentPage === 'favorites' && favTr ?
     favTr : currentPage === 'category' && categoryTracks ?
       categoryTracks : filretsActive ?
-        // filteredTracks: filterSortDate ?
-        // filteredTracks : filretsActive ?
         filteredTracks : allTracks
 
-  // console.log(filteredTracks)
-  // console.log(filterSortDate)
-  // console.log(filterAuthor)
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
       dispatch(getCurrentPlayList(favTr))
     } else if (currentPage === 'main') {
-      dispatch(getCurrentPlayList(allTracks))
+      if (filretsActive) {
+        dispatch(getCurrentPlayList(filteredTracks))
+      } else {
+        dispatch(getCurrentPlayList(allTracks))
+      }
     } else if (currentPage === 'category') {
       dispatch(getCurrentPlayList(categoryTracks))
     }

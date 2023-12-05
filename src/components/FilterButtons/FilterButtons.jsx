@@ -10,17 +10,7 @@ const FilterButtons = () => {
   const dispatch = useDispatch();
   const authors = useSelector(state => state.track.authors)
   const genres = useSelector(state => state.track.genres)
-  const allTracks = useSelector(state => state.track.allTracks)
-  const filretsActive = useSelector(state => state.track.filretsActive)
-  const filteredTracks = useSelector(state => state.track.filteredTracks)
-  const filterSortDateTracks = useSelector(state => state.track.filterSortDateTracks)
-  const filterSortDate = useSelector(state => state.track.filterSortDate)
-  const filterAuthorTracks = useSelector(state => state.track.filterAuthorTracks)
-  const filterAuthor = useSelector(state => state.track.filterAuthor)
-  const filterGenreTracks = useSelector(state => state.track.filterGenreTracks)
-  const filterGenre = useSelector(state => state.track.filterGenre)
 
-  // console.log(filteredTracks)
   const [visibleAuthor, setVisibleAuthor] = useState(false)
   const [visibleYear, setVisibleYear] = useState(false)
   const [visibleGenre, setVisibleGenre] = useState(false)
@@ -53,26 +43,20 @@ const FilterButtons = () => {
       setNewFerst(false);
       setOldFerst(false)
       setSortTitle("По умолчанию")
-      // dispatch(getFilterAuthorArr({ sts: "По умолчанию" }))
-
     } else {
       if (filtr === "newF") {
         setDefaultSort(false);
         setNewFerst(true);
         setOldFerst(false)
         setSortTitle("Сначала новые")
-        // dispatch(getFilterAuthorArr({ sts: "Сначала новые" }))
-
       } else if (filtr === "oldF") {
         setDefaultSort(false);
         setNewFerst(false);
         setOldFerst(true)
         setSortTitle("Сначала старые")
-        // dispatch(getFilterAuthorArr({ sts: "Сначала старые" }))
       }
     }
   }
-
 
   const filterName = (filter, name, tipe) => {
     if (filter.includes(name)) {
@@ -101,11 +85,9 @@ const FilterButtons = () => {
             (<S.FilterBox>
               <S.FilterList>
                 {authors.map((author) => {
-                  // console.log(author)
                   return (
                     <S.FilterItem key={author} onClick={() => {
                       filterName(filterNameArr, author, setFilterNameArr)
-                      // dispatch(getFilterAuthorArr({ filterNameArr, filterGenreArr }))
                     }} $props={filterNameArr.includes(author)} >{author}</S.FilterItem>
                   )
                 })
@@ -127,7 +109,6 @@ const FilterButtons = () => {
                   return (
                     <S.FilterItem key={genre} onClick={() => {
                       filterName(filterGenreArr, genre, setFilterGenreArr)
-                      // dispatch(getFilterAuthorArr({ filterNameArr, filterGenreArr }))
                     }} $props={filterGenreArr.includes(genre)} >{genre}</S.FilterItem>
                   )
                 })
