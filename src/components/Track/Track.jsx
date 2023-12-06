@@ -29,25 +29,36 @@ const Track = ({ isLoadingM }) => {
 
   const chooseAllTracks = () => {
     let arreyAllTracks = []
-    if (currentPage === 'favorites' && favTr) {
-      if (filretsActive) {
-        arreyAllTracks = filteredTracks
-      } else {
+    if (filretsActive) {
+      arreyAllTracks = filteredTracks
+    } else {
+      if (currentPage === 'favorites' && favTr) {
         arreyAllTracks = favTr
-      }
-    } else if (currentPage === 'category' && categoryTracks) {
-      if (filretsActive) {
-        arreyAllTracks = filteredTracks
-      } else {
+      } else if (currentPage === 'category' && categoryTracks) {
         arreyAllTracks = categoryTracks
-      }
-    } else if (currentPage === 'main') {
-      if (filretsActive) {
-        arreyAllTracks = filteredTracks
-      } else {
+      } else if (currentPage === 'main') {
         arreyAllTracks = allTracks
       }
     }
+    // if (currentPage === 'favorites' && favTr) {
+    //   if (filretsActive) {
+    //     arreyAllTracks = filteredTracks
+    //   } else {
+    //     arreyAllTracks = favTr
+    //   }
+    // } else if (currentPage === 'category' && categoryTracks) {
+    //   if (filretsActive) {
+    //     arreyAllTracks = filteredTracks
+    //   } else {
+    //     arreyAllTracks = categoryTracks
+    //   }
+    // } else if (currentPage === 'main') {
+    //   if (filretsActive) {
+    //     arreyAllTracks = filteredTracks
+    //   } else {
+    //     arreyAllTracks = allTracks
+    //   }
+    // }
     return arreyAllTracks
   }
 
