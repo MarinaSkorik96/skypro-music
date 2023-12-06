@@ -26,12 +26,39 @@ const Track = ({ isLoadingM }) => {
   const [setLike] = useSetLikeMutation()
   const [setDisLike] = useSetDisLikeMutation()
 
-  const arreyAllTracks = currentPage === 'favorites' && favTr && filretsActive ?
-    filteredTracks : currentPage === 'favorites' && favTr ?
-      favTr : currentPage === 'category' && categoryTracks && filretsActive ?
-        filteredTracks : currentPage === 'category' && categoryTracks ?
-          categoryTracks : filretsActive ?
-            filteredTracks : allTracks
+
+  const chooseAllTracks = () => {
+    let arreyAllTracks = []
+    if (currentPage === 'favorites' && favTr) {
+      if (filretsActive) {
+        arreyAllTracks = filteredTracks
+      } else {
+        arreyAllTracks = favTr
+      }
+    } else if (currentPage === 'category' && categoryTracks) {
+      if (filretsActive) {
+        arreyAllTracks = filteredTracks
+      } else {
+        arreyAllTracks = categoryTracks
+      }
+    } else if (currentPage === 'main') {
+      if (filretsActive) {
+        arreyAllTracks = filteredTracks
+      } else {
+        arreyAllTracks = allTracks
+      }
+    }
+    return arreyAllTracks
+  }
+
+
+  const arreyAllTracks = chooseAllTracks()
+  // const arreyAllTracks = currentPage === 'favorites' && favTr && filretsActive ?
+  //   filteredTracks : currentPage === 'favorites' && favTr ?
+  //     favTr : currentPage === 'category' && categoryTracks && filretsActive ?
+  //       filteredTracks : currentPage === 'category' && categoryTracks ?
+  //         categoryTracks : filretsActive ?
+  //           filteredTracks : allTracks
 
   const currentAudioPlayerPlaylist = () => {
     if (currentPage === 'favorites') {
@@ -70,6 +97,7 @@ const Track = ({ isLoadingM }) => {
   return (
     <>
       {isLoading || isLoadingM ? <TrackSkeleton /> : null}
+      {arreyAllTracks.length === 0 && isLoading === false ? <h3>Ничего не найдено * _ *</h3> : null}
       {isError ? <p>Не удалось загрузить плейлист, попробуйте позже</p> : null}
       {isLoading || isLoadingM ? null : arreyAllTracks.map((track) => {
         return (
